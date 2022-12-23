@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
             let prevMenu = res.data;
             prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
             this.menu = prevMenu;
+            console.log(this.menu);
             resolve(res);
           }
         },
