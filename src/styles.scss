@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "ngx-toastr/toastr";
+
+html * {
+  font-family: "Work Sans", Poppins-Regular, sans-serif, "FontAwesome" !important;
+}
+
+:root {
+  --principalColor: #ef5350;
+}
+
+.text-principal-500 {
+  --tw-text-opacity: 1;
+  color: var(--principalColor);
+}
+
+.toast-container .ngx-toastr {
+  background: none;
+  box-shadow: none;
+}
+
+.toast-container .ngx-toastr:hover {
+  box-shadow: none;
+}
+
+.focus\:ring-0:focus {
+  border-color: var(--principalColor) !important;
+}
+
+.peer:focus ~ .peer-focus\:text-blue-600 {
+  color: var(--principalColor) !important;
+}
+
+.swal2-styled.swal2-confirm {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity)) !important;
+}
+
+.swal2-loader {
+  border-color: var(--principalColor) rgba(0, 0, 0, 0) var(--principalColor)
+    rgba(0, 0, 0, 0) !important;
+}

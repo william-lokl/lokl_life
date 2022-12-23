@@ -1,0 +1,182 @@
+<app-navbar></app-navbar>
+
+<div class="min-h-screen">
+  <div>
+    <div id="services" class="section relative pt-5 pb-8 md:pt-7 md:pb-0 bg-white flex-grow">
+    <!-- Favs -->
+    <div class="container xl:max-w-6xl mx-auto px-4 ">
+      <div class="flex flex-wrap flex-row flex-row -mx-4 text-center place-items-center">
+        <!-- <div class="flex justify-center  -mx-4 text-center"> -->
+        <div *ngFor="let data of topfive" (click)="clickFav(data)" class="flex-shrink px-4 max-w-full w-full sm:w-1/5 lg:w-1/5 lg:px-4 wow fadeInUp " data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeInUp;">
+          <div class=" btn-accion border  rounded-2xl shadow-xl py-4 mb-6 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
+            <h3 class="leading-normal font-semibold text-white">{{data?.five.nombre}}</h3>
+            <div class="">
+              <p class="text-white">{{data?.five.descripcion}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4">
+          <div class="flex flex-wrap flex-row  text-center">
+            <!-- ITERATION -->
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccione un país</label>
+            <select  [(ngModel)]="paisSelected" (ngModelChange)="selectPais()" id="countries" class="select-opt bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option [ngValue]="null" selected disabled>Seleccionar País</option>
+              <option *ngFor="let country of paises" [ngValue]="country">{{country.PAIS_NOMBRE}}</option>
+            </select>
+          </div>
+
+          <div class="flex flex-wrap flex-row text-center mt-6">
+            <!-- ITERATION -->
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccione un proveedor</label>
+            <select  [(ngModel)]="productoSelected" (ngModelChange)="selectProducto()" id="products" class="select-opt bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option [ngValue]="null" selected disabled>Seleccionar Proveedor</option>
+              <option *ngFor="let product of productos" [ngValue]="product">{{product.name}}</option>
+            </select>
+          </div>
+
+          <div class="flex flex-wrap flex-row text-center mt-6">
+            <!-- ITERATION -->
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccione un producto</label>
+            <select  [(ngModel)]="servicioSelected" (ngModelChange)="selectService()" id="services" class="select-opt bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option [ngValue]="null" selected disabled>Seleccionar Producto</option>
+              <option *ngFor="let service of productoSelected?.productos" [ngValue]="service">{{service.nombre}}</option>
+            </select>
+          </div>
+
+          <div class="w-full  space-y-8">
+            <form  [formGroup]="recargaForm" class="mt-8 space-y-6" >
+              <input type="hidden" name="remember" value="true">
+              <div class="grid grid-cols-2">
+                <div class="relative">
+                  <input [(ngModel)]="recarga.numero" formControlName="numero" type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                  <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Número</label>
+                </div>
+                <div class="relative ml-4">
+                  <input  [(ngModel)]="recarga.cantidad" formControlName="cantidad" type="text" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                  <label for="floating_outlined-2" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Valor</label>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="sticky z-20">
+    <footer class="footer-div bg-white dark:bg-gray-900 fixed bottom-0 left-0 z-20 p-4 w-full bg-white border-t border-gray-200 ">
+      <div class="md:flex md:items-center md:justify-center">
+        <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
+          <div >
+            <div><span class="item-recarga">Valor de recarga</span></div>
+            <div *ngIf="recarga.cantidad" ><span  class="item-recarga-value">{{ recarga.cantidad   | currency:'USD' }}</span></div>
+            <div *ngIf="!recarga.cantidad" ><span  class="item-recarga-value">{{ '0.0'  | currency:'USD' }}</span></div>
+          </div>
+          <div>
+            <div><span class="item-recarga">Cargo de servicio</span></div>
+            <div><span class="item-recarga-value">{{fee | currency:'USD'}}</span></div>
+          </div>
+          <div>
+            <div style="text-align: right;"><span class="item-recarga">Valor total</span></div>
+            <div style="text-align: right;"><span class="item-recarga-value mx">{{totalPagar  | currency:'USD' }}</span></div>
+          </div>
+      </div>
+      </div>
+
+      <div class="pt-6 px-4 md:flex md:items-center md:justify-center ">
+        <button [disabled]="!recargaForm.valid" type="submit" (click)="clickRecarga()" class=" md:max-w-xl btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Continuar
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div *ngIf="showModal"  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-auto my-6 mx-auto max-w-3xl">
+    <!--content-->
+    <div style="min-width: 40vh !important" class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+        <h4 class="text-xl font-semibold">
+          Comprobante
+        </h4>
+        <button class="p-1 ml-auto bg-transparent border-0 text-black float-right text-xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleModal()">
+          x
+        </button>
+      </div>
+      <!--body-->
+      <div style = "padding: 1.5rem; flex: 1 1 auto; position: relative;"class="relative p-6 flex-auto">
+        <div class="zigzag" id="print-section">
+          <div style="text-align:center; border-bottom: 1px solid silver;">
+            <img style="width: auto;height: 4rem;margin-left: auto; margin-right: auto;" src="../../../assets/img/logo.png" alt="">
+            <p style="font-size:20px;margin-bottom: 5px;margin-top:5px">{{response.data[0].nomcome}}</p>
+            <p>{{response.data[0].telcome}}</p>
+            <p style="margin-bottom: 12px;">{{response.data[0].fechrec  | date: 'yyyy-MM-dd hh:mm:ss a'}}</p>
+          </div>
+          <div style="text-align:center">
+            <p style="font-size:18px;margin-bottom: 5px;margin-top:8px">
+              <b style="color: var(--itemColor);">{{response.data[0].numerorec}}</b> - {{response.data[0].prodrec}}
+            </p>
+          </div>
+          <div style="padding:0px 14px 0px 14px; margin-top: 10px;">
+            <table style="border-collapse:collapse;width: 100%;">
+              <tbody>
+                <tr>
+                  <td >Cantidad:</td>
+                  <td >{{response.data[0].valorrec  | currency:'USD' }}</td>
+                </tr>
+                <tr>
+                  <td >Impuestos:</td>
+                  <td >{{response.data[0].ivurec  | currency:'USD'}}</td>
+                </tr>
+                <tr>
+                  <td ><b>Total:</b></td>
+                  <td ><b>{{totalResponse  | currency:'USD' }}</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:0px 14px 0px 14px; margin-top: 10px;margin-bottom: 50px;">
+            <p style="float: left;text-align: left;">
+              <i>Recharge id: </i>
+              <i><b>{{response.data[0].idrec}}</b></i>
+            </p>
+            <!-- <p class="alignright"><i style="color: var(--ternaryColor);" ><b>{{response.data[0].idrec}}</b></i></p> -->
+          </div>
+        </div>
+      </div>
+      <!--footer-->
+      <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+        <!-- <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+          Close
+        </button> -->
+        <button printTitle="Comprabante"
+        printSectionId="print-section"
+        ngxPrint
+        class="bg-gray-900 text-white active:bg-gray-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+          Imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
+
+
+
+<!-- <input type="search" [ngModel]="paisSelected?.PAIS_NOMBRE" (ngModelChange)="setThresholds()"  class="form-control" placeholder="Search" id="listSearch" #search>
+    <div *ngIf="Show" (clickOutside)="closeList1()" class="absolute w-fit py-1 mt-2 border border-1 border-neutral-400 rounded-md cursor-pointer">
+      <div class="panel panel-default col-xs-12 col-sm-11" *ngFor="let lock of paises | filter:'PAIS_NOMBRE': search.value">
+        <input type="checkbox"  class="check" id="{{lock.PAIS_ID}}">
+        <label [for]="lock.PAIS_ID" class="check-label"></label>
+        <h3 class="card-text name">{{lock.PAIS_NOMBRE}}</h3>
+
+        <div class="py-2 px-4 w-full hover:bg-neutral-100">
+          {{lock.PAIS_NOMBRE}}
+        </div>
+    </div>
+</div> -->
+
