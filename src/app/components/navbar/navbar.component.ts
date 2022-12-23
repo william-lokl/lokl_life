@@ -77,4 +77,8 @@ export class NavbarComponent implements OnInit {
     );
     // this.loading.dismiss();
   }
+
+  logOut() {
+    this.authService.logout();
+  }
 }

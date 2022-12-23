@@ -93,6 +93,6 @@ export class AuthService {
     this.currentUserSubject.next(new User());
     this.currentLoginSubject.next(new LoginResponse());
     this.passData.recargaSelected = this.passData.itemSelected = {};
-    //this.router.navigate(['/']);
+    this.router.navigate(['/']);
   }
 }
