@@ -226,6 +226,10 @@ export class RecargasComponent implements OnInit {
     this.calculateTotalPagar();
   }
 
+  cantidadchange(percent: number) {
+    this.calculateTotalPagar();
+  }
+
   clickRecarga() {
     if (
       Number(this.recarga.cantidad) > Number(this.servicioSelected.valorMax) ||
@@ -280,7 +284,8 @@ export class RecargasComponent implements OnInit {
             operador: this.servicioSelected.code,
           };
 
-          // console.log('crear recarga', objRecarga);
+          //console.log(this.totalPagar, this.servicioSelected);
+          console.log('crear recarga', objRecarga);
 
           const loadingM: any = this.loading.show(
             'Creando recarga, por favor espere...'
