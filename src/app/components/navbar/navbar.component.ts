@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { createPopper } from '@popperjs/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +12,24 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  dropdownPopoverShow = false;
+  @ViewChild('btnDropdownRef', { static: false }) btnDropdownRef: any;
+  @ViewChild('popoverDropdownRef', { static: false })
+  popoverDropdownRef: any;
+
   infoUser: any = [];
   showMenu = false;
   open = false;
+
+  ngAfterViewInit() {
+    createPopper(
+      this.btnDropdownRef.nativeElement,
+      this.popoverDropdownRef.nativeElement,
+      {
+        placement: 'bottom-start',
+      }
+    );
+  }
 
   constructor(
     private authService: AuthService,
@@ -29,6 +46,15 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar() {
     this.showMenu = !this.showMenu;
+  }
+
+  toggleDropdown(event: any) {
+    event.preventDefault();
+    if (this.dropdownPopoverShow) {
+      this.dropdownPopoverShow = false;
+    } else {
+      this.dropdownPopoverShow = true;
+    }
   }
 
   async getInfoUser() {

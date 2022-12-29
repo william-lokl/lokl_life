@@ -64,3 +64,13 @@
   font-weight: 700;
   font-size: clamp(17px, 4vw, 24px);
 }
+
+.data-days-content {
+  align-content: center;
+  display: flex;
+  /* padding: 1.71rem 0.86rem 3.64rem; */
+  //grid-gap: 1.86rem;
+  //gap: 1.86rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}

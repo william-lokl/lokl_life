@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -38,18 +38,25 @@ export class RecargasComponent implements OnInit {
   recargaForm!: FormGroup;
   showModal: boolean = false;
 
+  routeSub: any;
+
   constructor(
     private apiService: ApiService,
     public passData: PassDataService,
     public toast: ToastrService,
     public loading: LoadingService,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   Show: boolean = false;
 
   async ngOnInit() {
+    this.routeSub = this.route.params.subscribe((params: any) => {
+      if (params['id']) this.tipo = params['id'];
+    });
+
     this.recargaForm = this.formBuilder.group({
       cantidad: new FormControl('', Validators.compose([Validators.required])),
       numero: new FormControl('', Validators.compose([Validators.required])),
@@ -59,6 +66,10 @@ export class RecargasComponent implements OnInit {
     this.recargaForm.controls['numero'].disable();
 
     await this.consultarPaises();
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
   async consultarPaises() {
@@ -134,8 +145,6 @@ export class RecargasComponent implements OnInit {
                     fives.map((five: any) => {
                       arrayfive.push({ ...product, five });
                     });
-
-                    //five.push({product,...categories})
                   }
                   return null;
                 })
@@ -190,7 +199,8 @@ export class RecargasComponent implements OnInit {
     this.resetForm();
   }
 
-  async selectService() {
+  async selectService(service: any) {
+    this.servicioSelected = service;
     if (this.servicioSelected) {
       if (this.servicioSelected.valor > 0) {
         this.recargaForm.controls['cantidad'].disable();
@@ -208,7 +218,7 @@ export class RecargasComponent implements OnInit {
   async clickFav(fav: any) {
     this.productoSelected = fav;
     this.servicioSelected = fav.five;
-    await this.selectService();
+    await this.selectService(this.servicioSelected);
   }
 
   calculateTotalPagar() {
