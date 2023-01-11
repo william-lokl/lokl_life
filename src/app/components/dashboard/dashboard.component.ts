@@ -62,7 +62,11 @@ export class DashboardComponent implements OnInit {
 
   clickMenu(menu: any) {
     localStorage.setItem('menu', JSON.stringify(menu));
-    if (menu.MENU_PATH === 'recargas' || menu.MENU_PATH === 'pines')
+    if (
+      menu.MENU_TIPO_PROD === 1 ||
+      menu.MENU_TIPO_PROD === 3 ||
+      menu.MENU_TIPO_PROD === 15
+    )
       this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
     else this.router.navigate(['/productos/1']);
     //this.router.navigate(['/recargas/1']);
