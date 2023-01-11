@@ -17,7 +17,7 @@ import { Toast, ToastPackage, ToastrService } from 'ngx-toastr';
     <div [style.display]="state.value === 'inactive' ? 'none' : ''">
       <div
         id="toast-simple"
-        class="flex items-center p-4 space-x-4 w-full max-w-xs text-white bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+        class="flex items-center p-4 space-x-4 w-full max-w-xs text-white bg-white rounded-lg divide-x divide-gray-200 shadow space-x"
         [ngClass]="{
           'bg-green-500': title === 'ok',
           'bg-red-600': title === 'error'

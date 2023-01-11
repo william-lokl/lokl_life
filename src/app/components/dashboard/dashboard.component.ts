@@ -61,9 +61,9 @@ export class DashboardComponent implements OnInit {
 
   clickMenu(menu: any) {
     //console.log(menu);
-    if (menu.MENU_PATH === 'recargas') this.router.navigate(['/recargas/1']);
-    else if (menu.MENU_PATH === 'pines') this.router.navigate(['/recargas/3']);
-    else this.router.navigate(['/recargas/1']);
+    if (menu.MENU_PATH === 'recargas') this.router.navigate(['/productos/1']);
+    else if (menu.MENU_PATH === 'pines') this.router.navigate(['/productos/3']);
+    else this.router.navigate(['/productos/1']);
     //this.router.navigate(['/recargas/1']);
   }
 

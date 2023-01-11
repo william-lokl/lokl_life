@@ -13,7 +13,7 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'recargas/:id',
+    path: 'productos/:id',
     canActivate: [AuthGuard],
     component: RecargasComponent,
   },
