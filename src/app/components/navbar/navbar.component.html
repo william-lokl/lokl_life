@@ -1,10 +1,15 @@
 <nav class="flex justify-between bg-gray-900 text-white  shadow-2xl shadow-lg sticky top-0 z-10">
   <div class="container px-4 mx-auto flex flex-wrap items-center justify-between px-5 xl:px-12 py-4">
     <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
-      <a class="text-3xl font-bold font-heading" href="#">
-        <!-- <img src="../../../assets/img/logov2.png" style="width: 137px" alt=""> -->
-        <img class="mx-auto h-16 w-auto" src="../../../assets/img/logov2.png"  alt="">
-      </a>
+      <div class="flex justify-center items-center" >
+        <a class="text-3xl font-bold font-heading" href="#">
+          <!-- <img src="../../../assets/img/logov2.png" style="width: 137px" alt=""> -->
+          <img class="mx-auto h-16 w-auto" src="../../../assets/img/logov2.png"  alt="">
+        </a>
+        <span *ngIf="menu_name" class=" text-sm mr-2">&nbsp;- {{menu_name}}</span>
+      </div>
+
+
 
       <button class="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button" (click)="toggleNavbar()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">

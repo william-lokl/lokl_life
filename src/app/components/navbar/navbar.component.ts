@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   infoUser: any = [];
   showMenu = false;
   open = false;
+  menu_name: any = undefined;
 
   ngAfterViewInit() {
     createPopper(
@@ -39,6 +40,8 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    const menu_selected = JSON.parse(localStorage.getItem('menu') || '{}');
+    this.menu_name = menu_selected.MENU_DESCRIPCION;
     if (!this.passData.infoClient) {
       await this.getInfoUser();
     }

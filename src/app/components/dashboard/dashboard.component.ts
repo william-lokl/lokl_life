@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    localStorage.removeItem('menu');
     await this.getMenusUser();
   }
 
@@ -44,7 +45,7 @@ export class DashboardComponent implements OnInit {
             let prevMenu = res.data;
             prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
             this.menu = prevMenu;
-            //console.log(this.menu);
+            // console.log(this.menu);
             resolve(res);
           }
         },
@@ -60,9 +61,9 @@ export class DashboardComponent implements OnInit {
   }
 
   clickMenu(menu: any) {
-    //console.log(menu);
-    if (menu.MENU_PATH === 'recargas') this.router.navigate(['/productos/1']);
-    else if (menu.MENU_PATH === 'pines') this.router.navigate(['/productos/3']);
+    localStorage.setItem('menu', JSON.stringify(menu));
+    if (menu.MENU_PATH === 'recargas' || menu.MENU_PATH === 'pines')
+      this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
     else this.router.navigate(['/productos/1']);
     //this.router.navigate(['/recargas/1']);
   }

@@ -90,6 +90,7 @@ export class AuthService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
     this.currentUserSubject.next(new User());
     this.currentLoginSubject.next(new LoginResponse());
     this.passData.recargaSelected = this.passData.itemSelected = {};
