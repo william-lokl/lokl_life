@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
     public passData: PassDataService,
     public toast: ToastrService,
     public loading: LoadingService,
-    public router: Router
+    public router: Router,
+    public sanitizer: DomSanitizer
   ) {}
 
   async ngOnInit() {
@@ -45,8 +47,6 @@ export class DashboardComponent implements OnInit {
             let prevMenu = res.data;
             prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
             this.menu = prevMenu;
-            // console.log(this.menu);
-            resolve(res);
           }
         },
         (error: any) => {
@@ -65,7 +65,9 @@ export class DashboardComponent implements OnInit {
     if (
       menu.MENU_TIPO_PROD === 1 ||
       menu.MENU_TIPO_PROD === 3 ||
-      menu.MENU_TIPO_PROD === 15
+      menu.MENU_TIPO_PROD === 15 ||
+      menu.MENU_TIPO_PROD === 20 ||
+      menu.MENU_TIPO_PROD === 21
     )
       this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
     else this.router.navigate(['/productos/1']);

@@ -23,10 +23,11 @@
                   {{ data.MENU_ICON }}
               </ng-template> -->
                 <!-- <svg:g [innerHTML]="data.MENU_ICON"/> -->
-                <img class="mx-auto h-8 w-auto" src="../../../assets/icon/bill.svg" alt="">
+                <!-- <img class="mx-auto h-8 w-auto" src="../../../assets/icon/bill.svg" alt=""> -->
+                <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(data.MENU_ICON)"></div>
             </div>
             <h3 class="text-lg leading-normal mb-2 font-semibold text-black">{{data?.MENU_DESCRIPCION}}</h3>
-            <div class="h-10">
+            <div class="">
               <p class="text-gray-500">{{data?.MENU_DESCRIPCION}}</p>
             </div>
           </div>

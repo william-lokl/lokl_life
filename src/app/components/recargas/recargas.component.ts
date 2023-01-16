@@ -34,11 +34,16 @@ export class RecargasComponent implements OnInit {
   recarga: any = {
     cantidad: '',
     numero: '',
+    serial: '',
+    email: '',
   };
   recargaForm!: FormGroup;
   showModal: boolean = false;
 
   routeSub: any;
+
+  div2: boolean = true;
+  div3: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -54,16 +59,44 @@ export class RecargasComponent implements OnInit {
 
   async ngOnInit() {
     this.routeSub = this.route.params.subscribe((params: any) => {
-      if (params['id']) this.tipo = params['id'];
+      if (params['id']) this.tipo = Number(params['id']);
     });
 
+    // this.recargaForm = this.formBuilder.group({
+    //   cantidad: new FormControl('', Validators.compose([Validators.required])),
+    //   numero: new FormControl('', Validators.compose([Validators.required])),
+    // });
+
     this.recargaForm = this.formBuilder.group({
-      cantidad: new FormControl('', Validators.compose([Validators.required])),
-      numero: new FormControl('', Validators.compose([Validators.required])),
+      cantidad: new FormControl(''),
+      numero: new FormControl(''),
+      serial: new FormControl(''),
+      email: new FormControl(''),
     });
 
     this.recargaForm.controls['cantidad'].disable();
     this.recargaForm.controls['numero'].disable();
+    this.recargaForm.controls['serial'].disable();
+    this.recargaForm.controls['email'].disable();
+
+    if (this.tipo === 1 || this.tipo === 3 || this.tipo === 15) {
+      /// Recargas - pines - recaudo claro
+      this.div2 = true;
+      this.div3 = false;
+      // this.recargaForm.get('numero')?.clearValidators();
+      this.recargaForm.get('cantidad')?.setValidators(Validators.required);
+      this.recargaForm.get('numero')?.setValidators(Validators.required);
+    } else {
+      /// Activaciones - gifcards
+      this.div2 = false;
+      this.div3 = true;
+      this.recargaForm.get('cantidad')?.setValidators(Validators.required);
+      this.recargaForm.get('numero')?.setValidators(Validators.required);
+      this.recargaForm.get('serial')?.setValidators(Validators.required);
+
+      if (this.tipo === 20)
+        this.recargaForm.get('email')?.setValidators(Validators.required);
+    }
 
     await this.consultarPaises();
   }
@@ -211,6 +244,8 @@ export class RecargasComponent implements OnInit {
         this.recargaForm.controls['numero'].enable();
       }
       this.recargaForm.controls['numero'].enable();
+      this.recargaForm.controls['serial'].enable();
+      this.recargaForm.controls['email'].enable();
       this.calculateTotalPagar();
     }
   }
@@ -229,6 +264,8 @@ export class RecargasComponent implements OnInit {
   resetForm() {
     this.recargaForm.controls['cantidad'].disable();
     this.recargaForm.controls['numero'].disable();
+    this.recargaForm.controls['serial'].disable();
+    this.recargaForm.controls['email'].disable();
     this.recarga = {
       cantidad: '',
       // numero: '',
