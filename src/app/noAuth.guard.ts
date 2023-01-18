@@ -26,7 +26,7 @@ export class NoAuthGuard implements CanActivate {
     if (!this.authService.isAuth) {
       return true;
     }
-    window.location.href = window.location.href = '/dashboard';
+    window.location.href = window.location.href = '/#/dashboard';
     return false;
   }
 }
