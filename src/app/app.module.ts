@@ -20,6 +20,9 @@ import { ReplacePipe } from '../app/pipes/replace-pipe';
 import { FilterPipe } from '../app/pipes/filter-pipe';
 import { ClickOutsideDirective } from './click-outside.directive';
 import { NgxPrintModule } from 'ngx-print';
+import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { NgxPrintModule } from 'ngx-print';
     ReplacePipe,
     FilterPipe,
     ClickOutsideDirective,
+    RecargabalanceComponent,
   ],
   imports: [
     HttpClientModule,
@@ -44,6 +48,8 @@ import { NgxPrintModule } from 'ngx-print';
     ToastrModule.forRoot({
       toastComponent: ToastsContainer, // added custom toast!
     }),
+    NgxPayPalModule,
+    HotToastModule.forRoot({ duration: 5000 }),
   ],
   providers: [
     LoadingService,

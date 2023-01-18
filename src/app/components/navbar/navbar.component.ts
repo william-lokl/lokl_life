@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
-import { ToastrService } from 'ngx-toastr';
+import { HotToastService } from '@ngneat/hot-toast';
 import { createPopper } from '@popperjs/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private apiService: ApiService,
     public passData: PassDataService,
-    public toast: ToastrService
+    private toastService: HotToastService
   ) {}
 
   async ngOnInit() {
@@ -84,6 +84,7 @@ export class NavbarComponent implements OnInit {
 
             this.passData.infoClient = this.infoUser;
             resolve(this.infoUser);
+            // this.showError('No se tiene informacion del usurio', 'ok');
           }
         },
         (error: any) => {
@@ -97,14 +98,22 @@ export class NavbarComponent implements OnInit {
     return promise;
   }
 
-  showError(error: any) {
-    this.toast.show(
-      typeof error === 'object'
-        ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
-        : error,
-      'error'
-    );
-    // this.loading.dismiss();
+  showError(error: any, option?: any) {
+    // this.toast.show(
+    //   typeof error === 'object'
+    //     ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
+    //     : error,
+    //   option ? 'ok' : 'error'
+    // );
+
+    if (option) this.toastService.success(error);
+    else {
+      this.toastService.error(
+        typeof error === 'object'
+          ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
+          : error
+      );
+    }
   }
 
   logOut() {

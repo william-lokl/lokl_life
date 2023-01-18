@@ -1,0 +1,98 @@
+.select-opt {
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.select-opt:focus {
+  border-color: var(--principalColor);
+  --tw-ring-color: var(--principalColor);
+}
+
+.focus\:ring-0:focus {
+  border-color: var(--principalColor);
+}
+
+.peer:focus ~ .peer-focus\:text-blue-600 {
+  color: var(--principalColor);
+}
+
+.btn-accion {
+  background-color: var(--principalColor);
+}
+
+.btn-accion:disabled {
+  opacity: 0.5;
+}
+
+.text-indigo-500 {
+  color: white;
+}
+
+.btn-accion:disabled .text-indigo-500 {
+  opacity: 0.8;
+}
+
+.group:hover .group-hover\:text-indigo-400 {
+  opacity: 0.8;
+  color: white;
+}
+
+.text-indigo-600 {
+  color: var(--principalColor);
+}
+
+.footer-div {
+  background: #fafbff;
+  box-shadow: 0px -4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.item-recarga {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.item-recarga-value {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.item-recarga-value.mx {
+  line-height: 32px;
+  font-weight: 700;
+  font-size: clamp(17px, 4vw, 24px);
+}
+
+.data-days-content {
+  align-content: center;
+  display: flex;
+  /* padding: 1.71rem 0.86rem 3.64rem; */
+  //grid-gap: 1.86rem;
+  //gap: 1.86rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#paypal-button-container {
+  flex: auto;
+  min-width: 250px;
+  min-height: 150px;
+}
+
+.paypal-btns {
+  flex: auto;
+  // min-width: 250px;
+  min-height: 150px;
+}
+
+.input-error-message {
+  margin: 5px 10px 0px 0px;
+  text-align: right;
+  color: var(--principalColor);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+}

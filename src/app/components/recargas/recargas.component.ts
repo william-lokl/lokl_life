@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
@@ -48,11 +48,11 @@ export class RecargasComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     public passData: PassDataService,
-    public toast: ToastrService,
     public loading: LoadingService,
     public router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: HotToastService
   ) {}
 
   Show: boolean = false;
@@ -397,11 +397,13 @@ export class RecargasComponent implements OnInit {
   }
 
   showError(error: any, option?: any) {
-    this.toast.show(
-      typeof error === 'object'
-        ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
-        : error,
-      option ? 'ok' : 'error'
-    );
+    if (option) this.toastService.success(error);
+    else {
+      this.toastService.error(
+        typeof error === 'object'
+          ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
+          : error
+      );
+    }
   }
 }

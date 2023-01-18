@@ -7,6 +7,8 @@ import { PassDataService } from 'src/app/services/pass-data.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { HotToastService } from '@ngneat/hot-toast';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -21,7 +23,8 @@ export class DashboardComponent implements OnInit {
     public toast: ToastrService,
     public loading: LoadingService,
     public router: Router,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private toastService: HotToastService
   ) {}
 
   async ngOnInit() {
@@ -75,11 +78,10 @@ export class DashboardComponent implements OnInit {
   }
 
   showError(error: any) {
-    this.toast.show(
+    this.toastService.error(
       typeof error === 'object'
         ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
-        : error,
-      'error'
+        : error
     );
   }
 }

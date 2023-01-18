@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './noAuth.guard';
 import { RecargasComponent } from './components/recargas/recargas.component';
+import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: 'productos/:id',
     canActivate: [AuthGuard],
     component: RecargasComponent,
+  },
+  {
+    path: 'recarga-balance',
+    canActivate: [AuthGuard],
+    component: RecargabalanceComponent,
   },
   {
     path: '',

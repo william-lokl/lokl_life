@@ -12,5 +12,59 @@
 </head>
 <body>
   <app-root></app-root>
+  <script type="text/javascript">
+
+    ATHM_Checkout = {
+
+        env: 'sandbox',
+        publicToken: 'sandboxtoken01875617264',
+        timeout: 120,
+        theme: 'btn',
+        lang: 'es',
+        total: 1.00,
+        tax: 1.00,
+        subtotal: 1.00,
+
+        metadata1: 'metadata1 test',
+        metadata2: 'metadata2 test',
+
+        items: [
+            {
+                "name":"First Item",
+                "description":"This is a description.",
+                "quantity":"1",
+                "price":"1.00",
+                "tax":"1.00",
+                "metadata":"metadata test"
+            },
+            {
+                "name":"Second Item",
+                "description":"This is another description.",
+                "quantity":"1",
+                "price":"1.00",
+                "tax":"1.00",
+                "metadata":"metadata test"
+            }
+        ],
+
+        onCompletedPayment : function  ( response )
+        {
+            //debugger
+            console.log(response);
+        },
+        onCancelledPayment : function  ( response )
+        {
+            //debugger
+            console.log(response)
+        },
+        onExpiredPayment: function  ( response )
+        {
+            //debugger
+            console.log(response)
+        }
+    }
+  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
 </html>
