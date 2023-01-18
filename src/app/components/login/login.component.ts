@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         //this.loading.dismiss();
         if (res.status) {
-          window.location.href = window.location.href = '/dashboard';
+          window.location.href = window.location.href = '/#/dashboard';
           //console.log('login');
         } else {
           let log = '';
