@@ -76,22 +76,29 @@
             </div>
           </div>
 
-          <div *ngIf="div3" class="grid grid-cols-3">
-            <div class="relative">
-              <input [(ngModel)]="recarga.serial" formControlName="serial" type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              <label for="floating_outlined" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{tipo !== 20? 'Serial':'Número SIM' }}</label>
+          <div *ngIf="div3" >
+            <div class="grid grid-cols-1">
+              <div class="relative mt-4">
+                <input [(ngModel)]="recarga.serial" formControlName="serial" type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <label for="floating_outlined" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{tipo !== 20? 'Serial':'Número SIM' }}</label>
+              </div>
             </div>
-            <div class="relative ml-4">
-              <input [(ngModel)]="recarga.numero" formControlName="numero" type="text" id="floating_outlinedzi" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " maxlength="10"/>
-              <label for="floating_outlinedzi" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{tipo !== 20? 'Número':'Zip Code' }}</label>
+            <div class="grid grid-cols-1">
+              <div class="relative mt-4">
+                <input [(ngModel)]="recarga.numero" formControlName="numero" type="text" id="floating_outlinedzi" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " maxlength="10"/>
+                <label for="floating_outlinedzi" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{tipo !== 20? 'Número':'Zip Code' }}</label>
+              </div>
             </div>
-            <div *ngIf="tipo !== 20" class="relative ml-4">
-              <input   [(ngModel)]="recarga.cantidad" (ngModelChange)="cantidadchange($event)" formControlName="cantidad" type="text" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              <label for="floating_outlined-2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Valor</label>
-            </div>
-            <div *ngIf="tipo === 20" class="relative ml-4">
-              <input   [(ngModel)]="recarga.email" formControlName="email" type="text" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              <label for="floating_outlined-2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
+            <div class="grid grid-cols-1">
+
+              <div *ngIf="tipo !== 20" class="relative mt-4">
+                <input   [(ngModel)]="recarga.cantidad" (ngModelChange)="cantidadchange($event)" formControlName="cantidad" type="text" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <label for="floating_outlined-2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Valor</label>
+              </div>
+              <div *ngIf="tipo === 20" class="relative mt-4">
+                <input   [(ngModel)]="recarga.email" formControlName="email" type="text" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <label for="floating_outlined-2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
+              </div>
             </div>
           </div>
         </form>
