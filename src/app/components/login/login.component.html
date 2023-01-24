@@ -1,12 +1,27 @@
 <div class="bg-white">
   <div class="flex justify-center h-screen">
-      <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)">
-          <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
-              <div>
-                  <h2 class="text-4xl font-bold text-white">PagaTodoPR</h2>
-                  <p class="max-w-xl mt-3 text-gray-300"></p>
-              </div>
-          </div>
+      <!-- <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"> -->
+
+
+      <div class="hidden bg-cover lg:flex lg:w-2/3 h-full flex-col bg-white-900 bg-opacity-40 justify-center items-center">
+        <div class="flex items-center align-middle px-20 ">
+          <swiper *ngIf="images.length>0" [loop]="true" [autoHeight]="true" [allowTouchMove]="false"
+            [autoplay]="true" [pagination]="{ clickable: true }"  [navigation]="true" style="max-width: 1024px;width:  60vw;">
+            <ng-template  *ngFor="let data of images" swiperSlide data-swiper-autoplay="4000">
+              <img [src]="data.BANNER_64" alt="" style="width: 100%;">
+              <!-- <p>{{data.BANNER_ID}}</p> -->
+            </ng-template>
+          </swiper>
+        </div>
+        <div class="mt-4">
+          <h2 class="text-4xl font-bold text-black">PagaTodoPR</h2>
+          <p class="max-w-xl mt-3 text-black-300">
+            + La más fácil interfaz para vender pre-pago <br>
+            + Ingresos de inmediato al recargar <br>
+            + Aumenta el tráfico de tu negocio <br>
+            + Innovadoras herramientas para aumentar tus ingresos y la lealtad de tus clientes
+          </p>
+      </div>
       </div>
 
       <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
@@ -57,4 +72,11 @@
       </div>
   </div>
 </div>
+
+<!-- <swiper [autoplay]="true" [keyboard]="true" [pagination]="true" [scrollbar]="true" [zoom]="true" [navigation]="true">
+  <ng-template swiperSlide>Slide 1</ng-template>
+  <ng-template swiperSlide>Slide 2</ng-template>
+  <ng-template swiperSlide>Slide 3</ng-template>
+</swiper> -->
+
 

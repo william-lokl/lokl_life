@@ -8,6 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ApiService } from 'src/app/services/api.service';
+
+import { HotToastService } from '@ngneat/hot-toast';
+import Swiper, { Navigation, Pagination, Autoplay } from 'swiper';
+
+// configure Swiper to use modules
+Swiper.use([Navigation, Pagination, Autoplay]);
 
 @Component({
   selector: 'app-login',
@@ -23,21 +31,24 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   toastRef: any;
 
-  options: any;
+  images: any = [];
+
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastr: ToastrService
-  ) {
-    this.options = this.toastr.toastrConfig;
-  }
+    public loading: LoadingService,
+    private apiService: ApiService,
+    private toastService: HotToastService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loginForm = this.formBuilder.group({
       terminal: new FormControl('', Validators.compose([Validators.required])),
       password: new FormControl('', Validators.compose([Validators.required])),
     });
+
+    await this.getBanners();
   }
 
   clickfunc() {
@@ -50,6 +61,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         //this.loading.dismiss();
         if (res.status) {
+          localStorage.setItem('banner', '2');
           window.location.href = window.location.href = '/#/dashboard';
           //console.log('login');
         } else {
@@ -65,14 +77,58 @@ export class LoginComponent implements OnInit {
             log =
               '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde';
           }
-          this.toastr.show(log, 'error');
+          this.showError(log);
           console.log(log);
         }
       },
       (error: any) => {
-        this.toastr.show('Su email ó contraseña son inválidos', 'error');
+        this.showError('Su email ó contraseña son inválidos');
         console.log('error en el login', error);
       }
+    );
+  }
+
+  async getBanners() {
+    const loading: any = this.loading.show(
+      'Cargando banners, por favor espere...'
+    );
+
+    let promise = new Promise((resolve, reject) => {
+      this.apiService.get(`/menus/getbanner/1`).subscribe(
+        async (res: any) => {
+          loading.close();
+          if (res.status === 202) this.showError(res.message);
+          else if (!res.status) this.showError(res.message);
+          else if (res.status === 404) this.showError(res.message);
+          else if (res.data.length === 0) {
+            this.showError('No se tiene informacion de los banner');
+          } else {
+            this.images = res.data;
+          }
+        },
+        (error: any) => {
+          loading.close();
+          console.log('Error consultando informacion', error);
+          this.showError(error);
+          reject(error);
+        }
+      );
+    });
+    return promise;
+  }
+
+  onSwiper([swiper]: any) {
+    console.log(swiper);
+  }
+  onSlideChange() {
+    console.log('slide change');
+  }
+
+  showError(error: any) {
+    this.toastService.error(
+      typeof error === 'object'
+        ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
+        : error
     );
   }
 }

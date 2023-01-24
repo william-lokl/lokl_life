@@ -91,6 +91,7 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('menu');
+    localStorage.removeItem('banner');
     this.currentUserSubject.next(new User());
     this.currentLoginSubject.next(new LoginResponse());
     this.passData.recargaSelected = this.passData.itemSelected = {};

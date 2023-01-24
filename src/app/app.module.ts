@@ -23,6 +23,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     }),
     NgxPayPalModule,
     HotToastModule.forRoot({ duration: 5000 }),
+    SwiperModule,
   ],
   providers: [
     LoadingService,

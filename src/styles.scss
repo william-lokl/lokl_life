@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 @import "ngx-toastr/toastr";
+@import "swiper/scss";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+@import "~swiper/scss";
+@import "~swiper/scss/autoplay";
+@import "~swiper/scss/keyboard";
+@import "~swiper/scss/pagination";
+@import "~swiper/scss/scrollbar";
+@import "~swiper/scss/zoom";
 
 html * {
   font-family: "Work Sans", Poppins-Regular, sans-serif, "FontAwesome" !important;
@@ -41,4 +50,29 @@ html * {
 .swal2-loader {
   border-color: var(--principalColor) rgba(0, 0, 0, 0) var(--principalColor)
     rgba(0, 0, 0, 0) !important;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 300px;
+  margin: 50px auto;
+}
+
+.swiper-slide {
+  background: #fff;
+  color: #000;
+  text-align: center;
+  line-height: 300px;
+}
+
+.swiper-button-next {
+  color: var(--principalColor);
+}
+
+.swiper-button-prev {
+  color: var(--principalColor);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--principalColor) !important;
 }
