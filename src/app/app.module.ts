@@ -24,6 +24,7 @@ import { RecargabalanceComponent } from './components/recargabalance/recargabala
 import { NgxPayPalModule } from 'ngx-paypal';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
+import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SwiperModule } from 'swiper/angular';
     FilterPipe,
     ClickOutsideDirective,
     RecargabalanceComponent,
+    CambiarpassComponent,
   ],
   imports: [
     HttpClientModule,

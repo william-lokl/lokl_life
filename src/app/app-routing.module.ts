@@ -6,6 +6,7 @@ import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './noAuth.guard';
 import { RecargasComponent } from './components/recargas/recargas.component';
 import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
+import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: 'recarga-balance',
     canActivate: [AuthGuard],
     component: RecargabalanceComponent,
+  },
+  {
+    path: 'cambiar-clave',
+    canActivate: [AuthGuard],
+    component: CambiarpassComponent,
   },
   {
     path: '',
