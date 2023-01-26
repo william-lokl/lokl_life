@@ -49,6 +49,7 @@ export class RecargabalanceComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.setItem('banner', '3');
+    localStorage.removeItem('menu');
 
     this.recargaForm = this.formBuilder.group({
       ammount: new FormControl('', Validators.compose([Validators.required])),

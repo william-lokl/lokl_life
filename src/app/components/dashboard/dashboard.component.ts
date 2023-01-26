@@ -78,6 +78,8 @@ export class DashboardComponent implements OnInit {
       menu.MENU_TIPO_PROD === 21
     )
       this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
+    else if (menu.MENU_ID === 4 || menu.MENU_DESCRIPCION === 'Reportes')
+      this.router.navigate([`/reportes`]);
     else this.router.navigate(['/productos/1']);
     //this.router.navigate(['/recargas/1']);
   }

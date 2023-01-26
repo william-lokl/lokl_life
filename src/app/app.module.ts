@@ -25,6 +25,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.compo
     ClickOutsideDirective,
     RecargabalanceComponent,
     CambiarpassComponent,
+    ReportesComponent,
   ],
   imports: [
     HttpClientModule,
@@ -54,6 +57,7 @@ import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.compo
     NgxPayPalModule,
     HotToastModule.forRoot({ duration: 5000 }),
     SwiperModule,
+    DpDatePickerModule,
   ],
   providers: [
     LoadingService,

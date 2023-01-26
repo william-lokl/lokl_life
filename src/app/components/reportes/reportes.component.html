@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div>
+  <div class="min-h-full" style="margin-bottom: 160px;">
+    <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4">
+      <div class="text-center mt-6">
+        <span class="text-2xl	font-medium">Reportes</span>
+      </div>
+    </div>
+    <div id="services" class="section relative pt-5 pb-8 md:pt-7 md:pb-0 bg-white flex-grow">
+      <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4 w-full  space-y-8">
+        <form  [formGroup]="searchForm" class="space-y-6" >
+          <input type="hidden" name="remember" value="true">
+          <div class="grid grid-cols-2">
+            <div class="relative">
+              <input [(ngModel)]="search.dateInit" (ngModelChange)="selectInitDate()" formControlName="dateInit" type="date" [max]="today | date:'yyyy-MM-dd'" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <label for="floating_outlined" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Fecha Inicio</label>
+            </div>
+            <div class="relative ml-4">
+              <input [(ngModel)]="search.dateEnd" formControlName="dateEnd" type="date" [readonly]="disabledFin" [min]="search.dateInit" [max]="maxSearch | date:'yyyy-MM-dd'"  id="floating_outlined2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <label for="floating_outlined2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Fecha Final</label>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4 mt-4">
+          <div class="flex flex-wrap flex-row  text-center">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Seleccione tipo de reporte</label>
+            <select  [(ngModel)]="reportSelect" (ngModelChange)="selectPais()" id="countries" class="select-opt bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <option [ngValue]="null" selected disabled>Seleccionar tipo de reporte</option>
+              <option *ngFor="let report of reports" [ngValue]="report">{{report?.descreport}}</option>
+            </select>
+          </div>
+      </div>
+
+      <div class="pt-6 px-4 pb-5 md:pb-7 md:flex md:items-center md:justify-center ">
+        <button [disabled]="!searchForm.valid || !reportSelect" type="submit" (click)="clickConsultar()" class=" md:max-w-xs btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Consultar
+        </button>
+      </div>
+
+    </div>
+
+    <div id="tables" *ngIf="dataReport.length>0" class="section relative pb-8 md:pb-0 bg-white flex-grow overflow-x-auto">
+      <div class="container xl:max-w-5xl md:max-w-5xl mx-auto px-4 w-full  space-y-8">
+        <table class="table-auto w-full	">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headsName" class="p-3 border-gray-400 border-b-2">{{head}}</th>
+            </tr>
+          </thead>
+          <tbody style="text-align: center;">
+            <tr *ngFor="let data of dataReport">
+              <td *ngFor="let label of dataName" style="padding-top: 5px;" [ngStyle]="{'width': width + '%'}"> {{data[label]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

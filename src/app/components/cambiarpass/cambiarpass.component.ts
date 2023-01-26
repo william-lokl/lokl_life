@@ -32,6 +32,7 @@ export class CambiarpassComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    localStorage.removeItem('menu');
     this.changeForm = this.formBuilder.group(
       {
         password: new FormControl(

@@ -7,6 +7,7 @@ import { NoAuthGuard } from './noAuth.guard';
 import { RecargasComponent } from './components/recargas/recargas.component';
 import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'cambiar-clave',
     canActivate: [AuthGuard],
     component: CambiarpassComponent,
+  },
+  {
+    path: 'reportes',
+    canActivate: [AuthGuard],
+    component: ReportesComponent,
   },
   {
     path: '',
