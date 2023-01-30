@@ -25,7 +25,6 @@
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
     "ng-animate": "^2.0.1",
-    "ng2-date-picker": "^13.1.1",
     "ngx-paypal": "^9.0.0",
     "ngx-print": "^1.2.1",
     "ngx-toastr": "^14.3.0",

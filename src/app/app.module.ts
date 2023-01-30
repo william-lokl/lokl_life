@@ -26,7 +26,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
-import { DpDatePickerModule } from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     NgxPayPalModule,
     HotToastModule.forRoot({ duration: 5000 }),
     SwiperModule,
-    DpDatePickerModule,
   ],
   providers: [
     LoadingService,
