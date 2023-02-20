@@ -26,6 +26,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { VentaremotaComponent } from './components/ventaremota/ventaremota.component';
+import { VentarRedeslComponent } from './utilities/ventar-redesl/ventar-redesl.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { ReportesComponent } from './components/reportes/reportes.component';
     RecargabalanceComponent,
     CambiarpassComponent,
     ReportesComponent,
+    VentaremotaComponent,
+    VentarRedeslComponent,
   ],
   imports: [
     HttpClientModule,

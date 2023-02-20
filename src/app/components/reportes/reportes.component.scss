@@ -21,10 +21,24 @@
 
 .btn-accion {
   background-color: var(--principalColor);
+  transition: all 0.5s;
+}
+
+.btn-export-excel {
+  background-color: #26a69a;
+  transition: all 0.5s;
+}
+
+.btn-export-excel:hover {
+  opacity: 0.8;
 }
 
 .btn-accion:disabled {
   opacity: 0.5;
+}
+
+.btn-accion:hover {
+  opacity: 0.8;
 }
 
 .text-indigo-500 {
@@ -82,4 +96,21 @@
 input[readonly],
 input[readonly="readonly"] {
   opacity: 0.3;
+}
+
+.saw-responsive {
+  display: none !important;
+  @media screen and (max-width: 767px) {
+    display: table-cell !important;
+  }
+}
+
+.detail-class {
+  border-radius: 100%;
+  background: var(--principalColor);
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

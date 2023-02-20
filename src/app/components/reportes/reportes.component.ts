@@ -10,6 +10,9 @@ import {
 } from '@angular/forms';
 import * as moment from 'moment';
 import { LoadingService } from '../../services/loading.service';
+import Swal from 'sweetalert2';
+import { ExcelJson } from 'src/app/interfaces/excel-json';
+import { ExportService } from '../../services/export.service';
 
 @Component({
   selector: 'app-reportes',
@@ -42,7 +45,8 @@ export class ReportesComponent implements OnInit {
     private apiService: ApiService,
     private toastService: HotToastService,
     private formBuilder: FormBuilder,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private exportService: ExportService
   ) {}
 
   async ngOnInit() {
@@ -140,10 +144,85 @@ export class ReportesComponent implements OnInit {
     }
   }
 
-  selectPais() {}
-
   async clickConsultar() {
     await this.getDataReport();
+  }
+
+  showDetail(data: any) {
+    let labels = '';
+    for (let index = 0; index < this.headsName.length; index++) {
+      labels =
+        labels +
+        `
+        <div class="grid grid-cols-2">
+          <div class="relative text-left">
+            <span class="text-sm">${this.headsName[index]}</span>
+          </div>
+          <div class="relative text-left">
+            <span class="text-sm">${data[this.dataName[index]]}</span>
+          </div>
+        </div>
+        `;
+    }
+
+    Swal.fire({
+      title: 'Detalle',
+      html: `
+            <div>
+                <form class="mt-1.5 space-y-4" >
+
+                  ${labels}
+
+                </form>
+            </div>
+      `,
+      confirmButtonText: 'Cerrar',
+      focusConfirm: false,
+      showCloseButton: true,
+      showLoaderOnConfirm: true,
+      width: '400px',
+      preConfirm: async () => {
+        return true;
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result: any) => {});
+  }
+
+  exportToExcel(): void {
+    const loading: any = this.loading.show(
+      'Generando excel, por favor espere...'
+    );
+
+    try {
+      const edata: Array<ExcelJson> = [];
+      const udt: ExcelJson = {
+        data: [
+          this.headsName.reduce((obj: any, cur: any, i: any) => {
+            return { ...obj, [i]: cur };
+          }, {}),
+        ],
+        skipHeader: true,
+      };
+
+      this.dataReport.forEach((data: any, index: any) => {
+        let value = {};
+        this.headsName.forEach((head: any, i: any) => {
+          Object.assign(value, { [i]: data[this.dataName[i]] });
+        });
+        udt.data.push(value);
+      });
+
+      edata.push(udt);
+      loading.close();
+      this.exportService.exportJsonToExcel(
+        edata,
+        `${moment().unix()}_${this.reportSelect.descreport}`
+      );
+    } catch (e) {
+      loading.close();
+      console.log('Error generando excel', e);
+      this.showError(e);
+    }
   }
 
   showError(error: any) {

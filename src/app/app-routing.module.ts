@@ -8,6 +8,8 @@ import { RecargasComponent } from './components/recargas/recargas.component';
 import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { PermissionGuard } from './permission.guard';
+import { VentaremotaComponent } from './components/ventaremota/ventaremota.component';
 
 const routes: Routes = [
   {
@@ -28,12 +30,18 @@ const routes: Routes = [
   {
     path: 'cambiar-clave',
     canActivate: [AuthGuard],
+    // resolve: [PermissionGuard],
     component: CambiarpassComponent,
   },
   {
     path: 'reportes',
     canActivate: [AuthGuard],
     component: ReportesComponent,
+  },
+  {
+    path: 'ventaremota',
+    canActivate: [AuthGuard],
+    component: VentaremotaComponent,
   },
   {
     path: '',

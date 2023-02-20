@@ -53,6 +53,10 @@ export class DashboardComponent implements OnInit {
             let prevMenu = res.data;
             prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
             this.menu = prevMenu;
+            // console.log(
+            //   '🚀 ~ file: dashboard.component.ts:56 ~ DashboardComponent ~ prevMenu:',
+            //   prevMenu
+            // );
             resolve(res.data);
           }
         },
@@ -80,6 +84,8 @@ export class DashboardComponent implements OnInit {
       this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
     else if (menu.MENU_ID === 4 || menu.MENU_DESCRIPCION === 'Reportes')
       this.router.navigate([`/reportes`]);
+    else if (menu.MENU_ID === 13 || menu.MENU_DESCRIPCION === 'VentaRemota')
+      this.router.navigate([`/ventaremota`]);
     else this.router.navigate(['/productos/1']);
     //this.router.navigate(['/recargas/1']);
   }

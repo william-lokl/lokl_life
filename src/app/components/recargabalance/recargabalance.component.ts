@@ -78,7 +78,7 @@ export class RecargabalanceComponent implements OnInit {
       ? Number(this.rechargeAmmount) + this.impuesto
       : 0;
     this.total = Number(this.total.toFixed(2));
-    console.log(this.total);
+    // console.log(this.total);
   }
 
   /// Botones
