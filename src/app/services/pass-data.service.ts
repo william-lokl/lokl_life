@@ -7,5 +7,6 @@ export class PassDataService {
   itemSelected: any;
   recargaSelected: any;
   infoClient: any;
+  menuUser: any;
   constructor() {}
 }

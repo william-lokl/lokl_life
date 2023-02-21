@@ -18,42 +18,49 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: DashboardComponent,
   },
   {
     path: 'recargas',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: RecargasComponent,
   },
   {
     path: 'pines',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: PinesComponent,
   },
   {
     path: 'recaudo',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: RecaudoclaroComponent,
   },
   {
     path: 'recarga-balance',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: RecargabalanceComponent,
   },
   {
     path: 'cambiar-clave',
     canActivate: [AuthGuard],
-    // resolve: [PermissionGuard],
+    resolve: [PermissionGuard],
     component: CambiarpassComponent,
   },
   {
     path: 'reportes',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: ReportesComponent,
   },
   {
     path: 'ventaremota',
     canActivate: [AuthGuard],
+    resolve: [PermissionGuard],
     component: VentaremotaComponent,
   },
   {

@@ -59,11 +59,9 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(objLogin).subscribe(
       (res: any) => {
-        //this.loading.dismiss();
         if (res.status) {
           localStorage.setItem('banner', '2');
-          window.location.href = window.location.href = '/#/dashboard';
-          //console.log('login');
+          window.location.href = window.location.href = '/dashboard';
         } else {
           let log = '';
           if (res.message) {

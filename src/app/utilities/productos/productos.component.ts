@@ -59,7 +59,6 @@ export class ProductosComponent implements OnInit {
   Show: boolean = false;
 
   async ngOnInit() {
-    localStorage.setItem('banner', '3');
     this.routeSub = this.route.params.subscribe((params: any) => {
       if (params['id']) this.tipo = Number(params['id']);
     });

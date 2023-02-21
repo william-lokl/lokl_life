@@ -29,52 +29,11 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    localStorage.removeItem('menu');
-    await this.getMenusUser();
+    this.menu = this.passData.menuUser;
     await this.getBanners();
   }
 
-  async getMenusUser() {
-    const loading: any = this.loading.show(
-      'Cargando información, por favor espere...'
-    );
-
-    let promise = new Promise((resolve, reject) => {
-      this.apiService.get(`/menus/getmenus`).subscribe(
-        async (res: any) => {
-          loading.close();
-          if (res.status === 202) this.showError(res.message);
-          else if (!res.status) this.showError(res.message);
-          else if (res.status === 404) this.showError(res.message);
-          else if (res.data.length === 0) {
-            this.showError('No se tiene informacion del usuario');
-            reject('Error');
-          } else {
-            let prevMenu = res.data;
-            prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
-            this.menu = prevMenu;
-            console.log(
-              '🚀 ~ file: dashboard.component.ts:56 ~ DashboardComponent ~ prevMenu:',
-              prevMenu
-            );
-            resolve(res.data);
-          }
-        },
-        (error: any) => {
-          loading.close();
-          console.log('Error consultando informacion', error);
-          this.showError(error);
-          reject(error);
-        }
-      );
-    });
-    return promise;
-  }
-
   clickMenu(menu: any) {
-    localStorage.setItem('menu', JSON.stringify(menu));
-    localStorage.setItem('banner', '3');
-
     if (menu.MENU_TIPO_PROD === 20 || menu.MENU_TIPO_PROD === 21) return false;
     else {
       return this.router.navigate([`/${menu.MENU_PATH}`]);
