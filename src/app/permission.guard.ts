@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree,
   Router,
   Resolve,
 } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { HotToastService } from '@ngneat/hot-toast';
@@ -47,8 +44,6 @@ export class PermissionGuard implements Resolve<any> {
         let prevMenu = value.data;
         prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
         this.passData.menuUser = prevMenu;
-
-        if (thisUrl !== 'dashboard') localStorage.setItem('banner', '3');
         if (
           thisUrl !== 'dashboard' &&
           thisUrl !== 'cambiar-clave' &&
@@ -58,6 +53,7 @@ export class PermissionGuard implements Resolve<any> {
           if (!menu) {
             this.showError(state, 'No tiene permiso para acceder a esta ruta');
           } else {
+            if (thisUrl !== 'dashboard') localStorage.setItem('banner', '3');
             localStorage.setItem('menu', JSON.stringify(menu));
             return true;
           }
@@ -91,8 +87,9 @@ export class PermissionGuard implements Resolve<any> {
 
   showError(state: any, error: any) {
     this.toastService.error(
-      'No tiene permiso para acceder a esta ruta, por favor contacte al administrador'
+      'No tiene permiso para acceder a esta ruta, por favor contacte a a PagaTodo PR.'
     );
-    this.authService.logout();
+    if (state.url === '/dashboard') this.authService.logout();
+    else this.router.navigate(['/dashboard']);
   }
 }

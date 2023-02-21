@@ -330,6 +330,8 @@ export class ProductosComponent implements OnInit {
             numero: this.recarga.numero,
             valor: this.totalPagar,
             operador: this.servicioSelected.code,
+            proveedor: this.servicioSelected.proveedorId,
+            tipo: this.servicioSelected.tipo,
           };
 
           //console.log(this.totalPagar, this.servicioSelected);
