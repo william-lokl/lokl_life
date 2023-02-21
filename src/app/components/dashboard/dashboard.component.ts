@@ -53,10 +53,10 @@ export class DashboardComponent implements OnInit {
             let prevMenu = res.data;
             prevMenu.sort((a: any, b: any) => a.MENU_ORDEN - b.MENU_ORDEN);
             this.menu = prevMenu;
-            // console.log(
-            //   '🚀 ~ file: dashboard.component.ts:56 ~ DashboardComponent ~ prevMenu:',
-            //   prevMenu
-            // );
+            console.log(
+              '🚀 ~ file: dashboard.component.ts:56 ~ DashboardComponent ~ prevMenu:',
+              prevMenu
+            );
             resolve(res.data);
           }
         },
@@ -74,20 +74,11 @@ export class DashboardComponent implements OnInit {
   clickMenu(menu: any) {
     localStorage.setItem('menu', JSON.stringify(menu));
     localStorage.setItem('banner', '3');
-    if (
-      menu.MENU_TIPO_PROD === 1 ||
-      menu.MENU_TIPO_PROD === 3 ||
-      menu.MENU_TIPO_PROD === 15 ||
-      menu.MENU_TIPO_PROD === 20 ||
-      menu.MENU_TIPO_PROD === 21
-    )
-      this.router.navigate([`/productos/${menu.MENU_TIPO_PROD}`]);
-    else if (menu.MENU_ID === 4 || menu.MENU_DESCRIPCION === 'Reportes')
-      this.router.navigate([`/reportes`]);
-    else if (menu.MENU_ID === 13 || menu.MENU_DESCRIPCION === 'VentaRemota')
-      this.router.navigate([`/ventaremota`]);
-    else this.router.navigate(['/productos/1']);
-    //this.router.navigate(['/recargas/1']);
+
+    if (menu.MENU_TIPO_PROD === 20 || menu.MENU_TIPO_PROD === 21) return false;
+    else {
+      return this.router.navigate([`/${menu.MENU_PATH}`]);
+    }
   }
 
   async getBanners() {

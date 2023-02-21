@@ -28,6 +28,9 @@ import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.compo
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { VentaremotaComponent } from './components/ventaremota/ventaremota.component';
 import { VentarRedeslComponent } from './utilities/ventar-redesl/ventar-redesl.component';
+import { ProductosComponent } from './utilities/productos/productos.component';
+import { PinesComponent } from './components/pines/pines.component';
+import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { VentarRedeslComponent } from './utilities/ventar-redesl/ventar-redesl.c
     ReportesComponent,
     VentaremotaComponent,
     VentarRedeslComponent,
+    ProductosComponent,
+    PinesComponent,
+    RecaudoclaroComponent,
   ],
   imports: [
     HttpClientModule,
