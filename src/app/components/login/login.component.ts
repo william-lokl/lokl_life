@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         if (res.status) {
           localStorage.setItem('banner', '2');
-          window.location.href = window.location.href = '/dashboard';
+          window.location.href = window.location.href = '#/dashboard';
         } else {
           let log = '';
           if (res.message) {
