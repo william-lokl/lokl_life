@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
             else if (!res.status) this.showError(res.message);
             else if (res.status === 404) this.showError(res.message);
             else if (res.data.length === 0) {
-              this.showError('No se tiene informacion de los banner');
+              //this.showError('No se tiene informacion de los banner');
             } else {
               Swal.fire({
                 html: `

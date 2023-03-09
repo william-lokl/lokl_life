@@ -38,7 +38,7 @@ export class RecargabalanceComponent implements OnInit {
   total = 0;
   impuesto = 0;
   porcentaje = 0.03;
-  min = 10;
+  min = 100;
 
   constructor(
     private formBuilder: FormBuilder,
