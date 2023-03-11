@@ -34,7 +34,7 @@ export class RecargabalanceComponent implements OnInit {
     number: '',
   };
 
-  rechargeAmmount = 10;
+  rechargeAmmount = 100;
   total = 0;
   impuesto = 0;
   porcentaje = 0.03;
@@ -168,7 +168,7 @@ export class RecargabalanceComponent implements OnInit {
         .done(() => {
           this.d1.nativeElement.insertAdjacentHTML(
             'beforeend',
-            '<div id="ATHMovil_Checkout_Button"></div>'
+            '<div id="ATHMovil_Checkout_Button" style="display:none"></div> '
           );
           const el = document.getElementById('ATHMovil_Checkout_Button');
         })
@@ -179,6 +179,30 @@ export class RecargabalanceComponent implements OnInit {
         });
   }
 
+  //// Funcion de pre recarga con ATH
+  previewRecharge() {
+    let objRecarga = {
+      valor: this.rechargeAmmount,
+      come: 0,
+    };
+    this.apiService
+      .post(`/balance/recharge-balance-preview`, objRecarga)
+      .subscribe(
+        async (res: any) => {
+          if (res.status === 202) this.showError(res.message);
+          else if (!res.status) this.showError(res.message);
+          else if (res.status === 404) this.showError(res.message);
+          else {
+            ATHM_Checkout.metadata1 = res.data[0].idtrxwebhook;
+            $('#ATHMovil_Checkout_Button').click();
+          }
+        },
+        (error: any) => {
+          console.log('error creando la pre-recarga', error);
+          this.showError(error);
+        }
+      );
+  }
   ///FUncion de recarga exitosa
 
   recargarFunc(valor: any, pasarela: any) {
@@ -227,6 +251,9 @@ export class RecargabalanceComponent implements OnInit {
 
   // Mostrar errores
   showError(error: any, option?: any) {
+    if ($('#ATHMreopen-modal').attr('style') === 'display: block;') {
+      $('#close-btn').click();
+    }
     if (option) this.toastService.success(error);
     else {
       this.toastService.error(

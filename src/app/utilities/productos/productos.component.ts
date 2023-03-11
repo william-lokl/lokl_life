@@ -360,10 +360,6 @@ export class ProductosComponent implements OnInit {
                   this.resetForm();
 
                   this.response = this.tipo === 3 ? res.data : res.data[0];
-                  console.log(
-                    '🚀 ~ file: productos.component.ts:363 ~ ProductosComponent ~ this.response:',
-                    this.response
-                  );
                   this.totalResponse =
                     Number(this.response.valorrec) +
                     Number(this.response.ivurec);

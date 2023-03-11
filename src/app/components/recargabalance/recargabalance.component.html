@@ -18,8 +18,8 @@
         * Valor mínimo a recargar $ {{ min }}
       </div>
 
-      <div *ngIf="showPaypalButtons" class="one" style="margin-top:30px;"  #one></div>
-
+      <div *ngIf="showPaypalButtons" class="one" style="margin-top:30px;" #one></div>
+      <div *ngIf="showPaypalButtons" class="btn-new-ath" (click)="previewRecharge()"></div>
       <div style="margin-top:20px; z-index: 10;" size="6">
         <!-- <div id="paypal-button-container"></div> -->
         <ngx-paypal *ngIf="showPaypalButtons" [config]="payPalConfig" class="paypal-btns"> </ngx-paypal>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="sticky z-20">
-    <footer class="footer-div bg-white fixed bottom-0 left-0 z-20 p-8 w-full bg-white border-t border-gray-200 ">
+    <footer class="footer-div fixed bottom-0 left-0 z-20 p-8 w-full bg-white border-t border-gray-200 ">
       <div class="md:flex md:items-center md:justify-center">
         <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
           <div >
