@@ -106,7 +106,7 @@
     </div>
   </div>
   <div class="sticky z-20">
-    <footer class="footer-div bg-white fixed bottom-0 left-0 z-20 p-4 w-full bg-white border-t border-gray-200 ">
+    <footer class="footer-div bg-white fixed bottom-0 left-0 z-20 p-4 w-full border-t border-gray-200 ">
       <div class="md:flex md:items-center md:justify-center">
         <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
           <div >
@@ -152,13 +152,14 @@
         <div class="zigzag" id="print-section">
           <div style="text-align:center; border-bottom: 1px solid silver;">
             <img style="width: auto;height: 4rem;margin-left: auto; margin-right: auto;" src="../../../assets/img/logo.png" alt="">
-            <p style="font-size:20px;margin-bottom: 5px;margin-top:5px">{{response.data[0].nomcome}}</p>
-            <p>{{response.data[0].telcome}}</p>
-            <p style="margin-bottom: 12px;">{{response.data[0].fechrec  | date: 'yyyy-MM-dd hh:mm:ss a'}}</p>
+            <p style="font-size:20px;margin-bottom: 5px;margin-top:5px">{{response.nomcome}}</p>
+            <p>{{response.telcome}}</p>
+            <p style="margin-bottom: 12px;">{{response.fechrec  | date: 'yyyy-MM-dd hh:mm:ss a'}}</p>
+            <p *ngIf="tipo === 3" style="margin-bottom: 12px;"><b>Fecha exp:</b> {{response.fecexp  | date: 'yyyy-MM-dd'}}</p>
           </div>
           <div style="text-align:center">
             <p style="font-size:18px;margin-bottom: 5px;margin-top:8px">
-              <b style="color: var(--itemColor);">{{response.data[0].numerorec}}</b> - {{response.data[0].prodrec}}
+              <b style="color: var(--itemColor);">{{response.numerorec}}</b> <ng-template [ngIf]="tipo !==3"> - {{response.prodrec}} </ng-template>
             </p>
           </div>
           <div style="padding:0px 14px 0px 14px; margin-top: 10px;">
@@ -166,11 +167,11 @@
               <tbody>
                 <tr>
                   <td >Cantidad:</td>
-                  <td >{{response.data[0].valorrec  | currency:'USD' }}</td>
+                  <td >{{response.valorrec  | currency:'USD' }}</td>
                 </tr>
                 <tr>
                   <td >Impuestos:</td>
-                  <td >{{response.data[0].ivurec  | currency:'USD'}}</td>
+                  <td >{{response.ivurec  | currency:'USD'}}</td>
                 </tr>
                 <tr>
                   <td ><b>Total:</b></td>
@@ -179,13 +180,29 @@
               </tbody>
             </table>
           </div>
-          <div style="padding:0px 14px 0px 14px; margin-top: 10px;margin-bottom: 50px;">
+          <div style="padding:0px 14px 0px 14px; margin-top: 10px;margin-bottom: 36px;">
             <p style="float: left;text-align: left;">
               <i>Recharge id: </i>
-              <i><b>{{response.data[0].idrec}}</b></i>
+              <i><b>{{response.idrec}}</b></i>
             </p>
-            <!-- <p class="alignright"><i style="color: var(--ternaryColor);" ><b>{{response.data[0].idrec}}</b></i></p> -->
+            <!-- <p class="alignright"><i style="color: var(--ternaryColor);" ><b>{{response.idrec}}</b></i></p> -->
           </div>
+
+            <ng-template [ngIf]="tipo===3">
+              <div style="padding:0px 14px 0px 14px; margin-top: 10px">
+              <p style="text-align: left;">
+                <i>Serial: </i>
+                <i><b>{{response.serial}}</b></i>
+              </p>
+            </div>
+              <div style="padding:0px 14px 0px 14px; margin-top: 3px">
+              <p style="text-align: left;">
+                <i>Pin: </i>
+                <i><b>{{response.pin}}</b></i>
+              </p>
+            </div>
+            </ng-template>
+
         </div>
       </div>
       <!--footer-->

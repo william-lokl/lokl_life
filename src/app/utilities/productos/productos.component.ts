@@ -341,37 +341,46 @@ export class ProductosComponent implements OnInit {
             'Creando recarga, por favor espere...'
           );
 
-          this.apiService.post(`/productos/recharge/`, objRecarga).subscribe(
-            async (res: any) => {
-              loadingM.close();
-              if (res.status === 202) this.showError(res.message);
-              else if (!res.status) this.showError(res.message);
-              else if (res.status === 404) this.showError(res.message);
-              else {
-                this.showModal = true;
-                this.showError('Recarga realizada con éxito', 'ok');
-                this.productoSelected = null;
-                this.servicioSelected = null;
-                this.resetForm();
+          this.apiService
+            .post(
+              `${this.tipo === 3 ? `/productos/pin/` : `/productos/recharge/`}`,
+              objRecarga
+            )
+            .subscribe(
+              async (res: any) => {
+                loadingM.close();
+                if (res.status === 202) this.showError(res.message);
+                else if (!res.status) this.showError(res.message);
+                else if (res.status === 404) this.showError(res.message);
+                else {
+                  this.showModal = true;
+                  this.showError('Recarga realizada con éxito', 'ok');
+                  this.productoSelected = null;
+                  this.servicioSelected = null;
+                  this.resetForm();
 
-                this.response = res;
-                this.totalResponse =
-                  Number(this.response.data[0].valorrec) +
-                  Number(this.response.data[0].ivurec);
-                // await new Promise((resolve) =>
-                //   setTimeout(async () => {
-                //     window.location.reload();
-                //   }, 1800)
-                // );
-                //this.response = res;
+                  this.response = this.tipo === 3 ? res.data : res.data[0];
+                  console.log(
+                    '🚀 ~ file: productos.component.ts:363 ~ ProductosComponent ~ this.response:',
+                    this.response
+                  );
+                  this.totalResponse =
+                    Number(this.response.valorrec) +
+                    Number(this.response.ivurec);
+                  // await new Promise((resolve) =>
+                  //   setTimeout(async () => {
+                  //     window.location.reload();
+                  //   }, 1800)
+                  // );
+                  //this.response = res;
+                }
+              },
+              (error: any) => {
+                loadingM.close();
+                console.log('error creando la recarga', error);
+                this.showError(error);
               }
-            },
-            (error: any) => {
-              loadingM.close();
-              console.log('error creando la recarga', error);
-              this.showError(error);
-            }
-          );
+            );
         }
         // if (result.isConfirmed) {
         //   Swal.fire({
