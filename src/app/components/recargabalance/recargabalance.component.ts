@@ -151,8 +151,8 @@ export class RecargabalanceComponent implements OnInit {
 
   athButtons() {
     const component = this;
-    ATHM_Checkout.env = 'sandbox';
-    ATHM_Checkout.publicToken = 'sandboxtoken01875617264';
+    ATHM_Checkout.env = 'production';
+    ATHM_Checkout.publicToken = 'd4ffc204761fdae2ca8f46246a97a6aae13fe885';
     ATHM_Checkout.total = this.total;
     ATHM_Checkout.onCompletedPayment = function (response: any) {
       console.log('completed Ath', response);
