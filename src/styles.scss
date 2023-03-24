@@ -5,80 +5,83 @@
 @import "swiper/scss";
 @import "swiper/scss/navigation";
 @import "swiper/scss/pagination";
-@import "~swiper/scss";
-@import "~swiper/scss/autoplay";
-@import "~swiper/scss/keyboard";
-@import "~swiper/scss/pagination";
-@import "~swiper/scss/scrollbar";
-@import "~swiper/scss/zoom";
-
+@import "swiper/scss";
+@import "swiper/scss/autoplay";
+@import "swiper/scss/keyboard";
+@import "swiper/scss/pagination";
+@import "swiper/scss/scrollbar";
+@import "swiper/scss/zoom";
 html * {
-  font-family: "Work Sans", Poppins-Regular, sans-serif, "FontAwesome" !important;
+    font-family: "Work Sans", Poppins-Regular, sans-serif, "FontAwesome" !important;
 }
 
 :root {
-  --principalColor: #ef5350;
-  --principalColorTransp: #ef535059;
+    --principalColor: #ef5350;
+    --principalColorTransp: #ef535059;
 }
 
 .text-principal-500 {
-  --tw-text-opacity: 1;
-  color: var(--principalColor);
+    --tw-text-opacity: 1;
+    color: var(--principalColor);
 }
 
 .toast-container .ngx-toastr {
-  background: none;
-  box-shadow: none;
+    background: none;
+    box-shadow: none;
 }
 
 .toast-container .ngx-toastr:hover {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .focus\:ring-0:focus {
-  border-color: var(--principalColor) !important;
+    border-color: var(--principalColor) !important;
 }
 
-.peer:focus ~ .peer-focus\:text-blue-600 {
-  color: var(--principalColor) !important;
+.peer:focus~.peer-focus\:text-blue-600 {
+    color: var(--principalColor) !important;
 }
 
 .swal2-styled.swal2-confirm {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity)) !important;
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity)) !important;
 }
 
 .swal2-loader {
-  border-color: var(--principalColor) rgba(0, 0, 0, 0) var(--principalColor)
-    rgba(0, 0, 0, 0) !important;
+    border-color: var(--principalColor) rgba(0, 0, 0, 0) var(--principalColor) rgba(0, 0, 0, 0) !important;
 }
 
 .swal2-close:focus {
-  //box-shadow: inset 0 0 0 3px var(--principalColorTransp) !important;
-  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0) !important;
+    //box-shadow: inset 0 0 0 3px var(--principalColorTransp) !important;
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0) !important;
 }
 
 .swiper-container {
-  width: 100%;
-  height: 300px;
-  margin: 50px auto;
+    width: 100%;
+    height: 300px;
+    margin: 50px auto;
 }
 
 .swiper-slide {
-  background: #fff;
-  color: #000;
-  text-align: center;
-  line-height: 300px;
+    background: #fff;
+    color: #000;
+    text-align: center;
+    line-height: 300px;
 }
 
 .swiper-button-next {
-  color: var(--principalColor);
+    color: var(--principalColor);
 }
 
 .swiper-button-prev {
-  color: var(--principalColor);
+    color: var(--principalColor);
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--principalColor) !important;
+    background: var(--principalColor) !important;
 }
+
+
+/* Importing Bootstrap SCSS file. */
+
+@import 'bootstrap/scss/bootstrap';

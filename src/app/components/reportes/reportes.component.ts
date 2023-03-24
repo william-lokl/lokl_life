@@ -47,7 +47,8 @@ export class ReportesComponent implements OnInit {
   pageSize: number = 0;
   collectionSize: any;
   infoReport: any;
-
+  numeroEstado:any;
+  idTransaction:any;
   constructor(
     private apiService: ApiService,
     private toastService: HotToastService,
@@ -95,20 +96,36 @@ export class ReportesComponent implements OnInit {
   }
 
   async getDataReport() {
+    if(this.reportSelect?.idreport === 6 && (this.numeroEstado === undefined || this.numeroEstado === null) && (this.idTransaction === undefined || this.idTransaction === null)){
+      this.showError('Debe digitar un Número o Id de trasacción');
+      return
+    }
     let objReport = {
       reporte: this.reportSelect.idreport,
       fechaIni: this.search.dateInit,
       fechaFin: this.search.dateEnd,
     };
 
+
+    let number = {
+      type:1,
+      code:this.numeroEstado
+    };
+
+    let idtransaction = {
+      type:2,
+      code:this.idTransaction
+    };
     console.log('ObjReport', objReport);
 
     const loading: any = this.loading.show(
       'Cargando información, por favor espere...'
     );
 
+    const url = this.reportSelect?.idreport === 6 ? 'reports/transaction-status' : `/reports/getinforeport`
+
     let promise = new Promise((resolve, reject) => {
-      this.apiService.post(`/reports/getinforeport`, objReport).subscribe(
+      this.apiService.post(url, this.reportSelect?.idreport === 6 && (this.numeroEstado !== undefined || this.numeroEstado !== null)? number : this.reportSelect?.idreport === 6 && (this.idTransaction !== undefined || this.idTransaction !== null) ? idtransaction : objReport).subscribe(
         async (res: any) => {
           loading.close();
           if (res.status === 202) this.showError(res.message);
@@ -158,6 +175,7 @@ export class ReportesComponent implements OnInit {
   }
 
   async clickConsultar() {
+    console.log(this.reportSelect)
     await this.getDataReport();
   }
 

@@ -11,7 +11,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class VentarRedeslComponent implements OnInit {
   @Input() tipo: Number = 1;
-
+  urlVentaRemota: string='';
   constructor(
     private apiService: ApiService,
     public passData: PassDataService,
@@ -19,13 +19,13 @@ export class VentarRedeslComponent implements OnInit {
     private toastService: HotToastService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (this.tipo === 1) {
-      this.createLink();
+      await this.createLink();
     }
   }
 
-  createLink() {
+  async createLink() {
     let objLink = {
       type: this.tipo,
       valor: this.tipo === 1 ? '' : '',
@@ -44,11 +44,13 @@ export class VentarRedeslComponent implements OnInit {
         else if (res.status === 404) this.showError(res.message);
         else {
           // console.log('link creado', res);
-          window.location.href = window.location.href = '/#/dashboard';
+          this.urlVentaRemota = `https://pay.pagatodopr.com/${res.data.linkId}`;
+          console.log(this.urlVentaRemota)
+          /* window.location.href = window.location.href = '/#/dashboard';
           window.open(
             `https://pay.pagatodopr.com/${res.data.linkId}`,
             '_blank'
-          );
+          ); */
         }
       },
       (error: any) => {
@@ -57,6 +59,13 @@ export class VentarRedeslComponent implements OnInit {
         this.showError(error);
       }
     );
+  }
+
+  goToUrl(){
+    window.open(
+            this.urlVentaRemota,
+            '_blank'
+          );
   }
 
   showError(error: any, option?: any) {
