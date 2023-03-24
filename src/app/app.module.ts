@@ -31,6 +31,8 @@ import { VentarRedeslComponent } from './utilities/ventar-redesl/ventar-redesl.c
 import { ProductosComponent } from './utilities/productos/productos.component';
 import { PinesComponent } from './components/pines/pines.component';
 import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.co
     NgxPayPalModule,
     HotToastModule.forRoot({ duration: 5000 }),
     SwiperModule,
+    NgbModule,
   ],
   providers: [
     LoadingService,

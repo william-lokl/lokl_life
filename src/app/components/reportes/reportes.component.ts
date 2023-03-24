@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
 import { ExcelJson } from 'src/app/interfaces/excel-json';
 import { ExportService } from '../../services/export.service';
 
+
+const FILTER_PAG_REGEX = /[^0-9]/g;
+
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
@@ -40,6 +43,10 @@ export class ReportesComponent implements OnInit {
   headsName: any = [];
   dataName: any = [];
   width: any = 0;
+  page: number = 0;
+  pageSize: number = 0;
+  collectionSize: any;
+  infoReport: any;
 
   constructor(
     private apiService: ApiService,
@@ -47,7 +54,9 @@ export class ReportesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loading: LoadingService,
     private exportService: ExportService
-  ) {}
+  ) {
+
+  }
 
   async ngOnInit() {
     this.today = new Date();
@@ -110,7 +119,11 @@ export class ReportesComponent implements OnInit {
             this.showError('No se encontraron resultados del reporte');
             reject('Error');
           } else {
-            this.dataReport = res.data;
+            this.infoReport = res.data
+            this.page = 1;
+          	this.pageSize = 10;
+            this.collectionSize = this.infoReport.length;
+            this.refreshCountries()
             this.headsName = this.reportSelect.labelsreport.split(',');
             this.dataName = this.reportSelect.fieldsreport.split(',');
             this.width = 100 / this.dataName.length;
@@ -138,9 +151,9 @@ export class ReportesComponent implements OnInit {
         'days'
       );
 
-      if (this.maxSearch.isAfter(this.todayMoment)) this.maxSearch = this.today;
+      if (this.maxSearch.isAfter(this.todayMoment)) this.maxSearch = this.todayMoment.format('YYYY-MM-DD');
 
-      this.search.dateEnd = '';
+      this.search.dateEnd = this.maxSearch;
     }
   }
 
@@ -232,5 +245,20 @@ export class ReportesComponent implements OnInit {
         ? '¡Lo sentimos! Estamos presentando problemas. Intenta más tarde'
         : error
     );
+  }
+
+  refreshCountries() {
+		this.dataReport = this.infoReport.map((country:any, i:any) => ({ id: i + 1, ...country })).slice(
+			(this.page - 1) * this.pageSize,
+			(this.page - 1) * this.pageSize + this.pageSize,
+		);
+	}
+
+  selectPage(page: string) {
+    this.page = parseInt(page, 10) || 1;
+  }
+
+  formatInput(input: HTMLInputElement) {
+    input.value = input.value.replace(FILTER_PAG_REGEX, '');
   }
 }
