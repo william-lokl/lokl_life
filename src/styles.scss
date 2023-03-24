@@ -25,6 +25,16 @@ html * {
     color: var(--principalColor);
 }
 
+.page-link {
+    color: #54575a !important;
+}
+
+.page-item.active .page-link {
+    background-color: #253e53 !important;
+    border-color: #253e53 !important;
+    color: #fff !important;
+}
+
 .toast-container .ngx-toastr {
     background: none;
     box-shadow: none;
@@ -84,4 +94,4 @@ html * {
 
 /* Importing Bootstrap SCSS file. */
 
-@import 'bootstrap/scss/bootstrap';
+//@import 'bootstrap/scss/bootstrap';
