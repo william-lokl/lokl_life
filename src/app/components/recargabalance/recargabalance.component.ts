@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -27,7 +27,7 @@ export class RecargabalanceComponent implements OnInit {
 
   @ViewChild('one') d1: ElementRef | any;
 
-  recargaForm!: FormGroup;
+  recargaForm!: UntypedFormGroup;
 
   recarga: any = {
     ammount: '',
@@ -41,7 +41,7 @@ export class RecargabalanceComponent implements OnInit {
   min = 10;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public loading: LoadingService,
     private apiService: ApiService,
     private toastService: HotToastService
@@ -49,7 +49,7 @@ export class RecargabalanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.recargaForm = this.formBuilder.group({
-      ammount: new FormControl('', Validators.compose([Validators.required])),
+      ammount: new UntypedFormControl('', Validators.compose([Validators.required])),
     });
   }
 

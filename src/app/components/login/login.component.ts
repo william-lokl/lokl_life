@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -28,14 +28,14 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
   toastRef: any;
 
   images: any = [];
 
   constructor(
     public router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     public loading: LoadingService,
     private apiService: ApiService,
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      terminal: new FormControl('', Validators.compose([Validators.required])),
-      password: new FormControl('', Validators.compose([Validators.required])),
+      terminal: new UntypedFormControl('', Validators.compose([Validators.required])),
+      password: new UntypedFormControl('', Validators.compose([Validators.required])),
     });
 
     await this.getBanners();

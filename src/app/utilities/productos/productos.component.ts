@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,7 +38,7 @@ export class ProductosComponent implements OnInit {
     serial: '',
     email: '',
   };
-  recargaForm!: FormGroup;
+  recargaForm!: UntypedFormGroup;
   showModal: boolean = false;
 
   routeSub: any;
@@ -51,7 +51,7 @@ export class ProductosComponent implements OnInit {
     public passData: PassDataService,
     public loading: LoadingService,
     public router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private toastService: HotToastService
   ) {}
@@ -69,10 +69,10 @@ export class ProductosComponent implements OnInit {
     // });
 
     this.recargaForm = this.formBuilder.group({
-      cantidad: new FormControl(''),
-      numero: new FormControl(''),
-      serial: new FormControl(''),
-      email: new FormControl(''),
+      cantidad: new UntypedFormControl(''),
+      numero: new UntypedFormControl(''),
+      serial: new UntypedFormControl(''),
+      email: new UntypedFormControl(''),
     });
 
     this.recargaForm.controls['cantidad'].disable();

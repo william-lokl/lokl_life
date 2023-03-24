@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import * as moment from 'moment';
@@ -27,7 +27,7 @@ export class ReportesComponent implements OnInit {
   reportSelect: any = null;
   disabledFin: boolean = true;
 
-  searchForm!: FormGroup;
+  searchForm!: UntypedFormGroup;
 
   search: any = {
     dateInit: '',
@@ -51,7 +51,7 @@ export class ReportesComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private toastService: HotToastService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private loading: LoadingService,
     private exportService: ExportService
   ) {
@@ -62,8 +62,8 @@ export class ReportesComponent implements OnInit {
     this.today = new Date();
     this.todayMoment = moment(this.today, 'YYYY-MM-DD');
     this.searchForm = this.formBuilder.group({
-      dateInit: new FormControl('', Validators.compose([Validators.required])),
-      dateEnd: new FormControl('', Validators.compose([Validators.required])),
+      dateInit: new UntypedFormControl('', Validators.compose([Validators.required])),
+      dateEnd: new UntypedFormControl('', Validators.compose([Validators.required])),
     });
 
     await this.getListReports();

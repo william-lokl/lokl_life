@@ -35,47 +35,46 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    NavbarComponent,
-    ToastsContainer,
-    RecargasComponent,
-    ReplacePipe,
-    FilterPipe,
-    ClickOutsideDirective,
-    RecargabalanceComponent,
-    CambiarpassComponent,
-    ReportesComponent,
-    VentaremotaComponent,
-    VentarRedeslComponent,
-    ProductosComponent,
-    PinesComponent,
-    RecaudoclaroComponent,
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    NgxPrintModule,
-    ToastrModule.forRoot({
-      toastComponent: ToastsContainer, // added custom toast!
-    }),
-    NgxPayPalModule,
-    HotToastModule.forRoot({ duration: 5000 }),
-    SwiperModule,
-    NgbModule,
-  ],
-  providers: [
-    LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  entryComponents: [ToastsContainer],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        DashboardComponent,
+        NavbarComponent,
+        ToastsContainer,
+        RecargasComponent,
+        ReplacePipe,
+        FilterPipe,
+        ClickOutsideDirective,
+        RecargabalanceComponent,
+        CambiarpassComponent,
+        ReportesComponent,
+        VentaremotaComponent,
+        VentarRedeslComponent,
+        ProductosComponent,
+        PinesComponent,
+        RecaudoclaroComponent,
+    ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        NgxPrintModule,
+        ToastrModule.forRoot({
+            toastComponent: ToastsContainer, // added custom toast!
+        }),
+        NgxPayPalModule,
+        HotToastModule.forRoot({ duration: 5000 }),
+        SwiperModule,
+        NgbModule,
+    ],
+    providers: [
+        LoadingService,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

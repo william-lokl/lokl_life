@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,7 +16,7 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./cambiarpass.component.scss'],
 })
 export class CambiarpassComponent implements OnInit {
-  changeForm!: FormGroup;
+  changeForm!: UntypedFormGroup;
 
   changeObj: any = {
     password: '',
@@ -25,7 +25,7 @@ export class CambiarpassComponent implements OnInit {
   };
 
   constructor(
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private apiService: ApiService,
     public loading: LoadingService,
     private toastService: HotToastService
@@ -34,15 +34,15 @@ export class CambiarpassComponent implements OnInit {
   ngOnInit(): void {
     this.changeForm = this.formBuilder.group(
       {
-        password: new FormControl(
+        password: new UntypedFormControl(
           '',
           Validators.compose([Validators.required])
         ),
-        newpassword: new FormControl(
+        newpassword: new UntypedFormControl(
           '',
           Validators.compose([Validators.required])
         ),
-        renewpassword: new FormControl(
+        renewpassword: new UntypedFormControl(
           '',
           Validators.compose([Validators.required])
         ),
