@@ -122,7 +122,7 @@ export class ReportesComponent implements OnInit {
       'Cargando información, por favor espere...'
     );
 
-    const url = this.reportSelect?.idreport === 6 ? 'reports/transaction-status' : `/reports/getinforeport`
+    const url = this.reportSelect?.idreport === 6 ? '/reports/transaction-status' : `/reports/getinforeport`
 
     let promise = new Promise((resolve, reject) => {
       this.apiService.post(url, this.reportSelect?.idreport === 6 && (this.numeroEstado !== undefined || this.numeroEstado !== null)? number : this.reportSelect?.idreport === 6 && (this.idTransaction !== undefined || this.idTransaction !== null) ? idtransaction : objReport).subscribe(
