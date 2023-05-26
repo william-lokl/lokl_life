@@ -1,82 +1,323 @@
 <div class="bg-white">
-  <div class="flex justify-center h-screen">
-      <!-- <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"> -->
+  <div class="container-fluid text-center h-screen">
+    <!-- <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"> -->
 
-
-      <div class="hidden bg-cover lg:flex lg:w-2/3 h-full flex-col bg-white-900 bg-opacity-40 justify-center items-center">
-        <div class="flex items-center align-middle px-20 ">
-          <swiper *ngIf="images.length>0" [loop]="true" [autoHeight]="true" [allowTouchMove]="false"
-            [autoplay]="true" [pagination]="{ clickable: true }"  [navigation]="true" style="max-width: 1024px;width:  60vw;">
-            <ng-template  *ngFor="let data of images" swiperSlide data-swiper-autoplay="4000">
+    <div class="row">
+      <div class="col-7 mt-5">
+        <div class="flex items-center align-middle px-50 ">
+          <swiper *ngIf="images.length>0" [loop]="true" [autoHeight]="true" [allowTouchMove]="false" [autoplay]="true"
+            [pagination]="{ clickable: true }" [navigation]="true" style="max-width: 1024px;width:  60vw;">
+            <ng-template *ngFor="let data of images" swiperSlide data-swiper-autoplay="4000">
               <img [src]="data.BANNER_64" alt="" style="width: 100%;">
               <!-- <p>{{data.BANNER_ID}}</p> -->
             </ng-template>
           </swiper>
         </div>
-        <div class="mt-4">
-          <h2 class="text-4xl font-bold text-black">PagaTodoPR</h2>
-          <p class="max-w-xl mt-3 text-black-300">
-            + La más fácil interfaz para vender pre-pago <br>
-            + Ingresos de inmediato al recargar <br>
-            + Aumenta el tráfico de tu negocio <br>
-            + Innovadoras herramientas para aumentar tus ingresos y la lealtad de tus clientes
-          </p>
-      </div>
       </div>
 
-      <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-          <div class="flex-1">
-              <div class="text-center">
-                <div>
-                  <img class="mx-auto h-20 w-auto" src="../../../assets/img/logo.png"  alt="">
-                  <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Iniciar Sesión</h2>
-                </div>
-                  <p class="mt-3 text-gray-500">Inicia sesión para acceder a tu cuenta</p>
-              </div>
-
-              <div class="w-full max-w-md space-y-8">
-                <form [formGroup]="loginForm" class="mt-8 space-y-6" >
-                  <input type="hidden" name="remember" value="true">
-                  <div class="relative">
-                      <input [(ngModel)]="login.terminal" formControlName="terminal" type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="floating_outlined" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Terminal</label>
-                  </div>
-
-                  <div class="relative">
-                    <input [(ngModel)]="login.password" formControlName="password" type="password" id="floating_outlined-2" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                    <label for="floating_outlined-2" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Contraseña</label>
-                  </div>
-
-                  <!-- <div class="flex items-center justify-end">
-                    <div class="text-sm">
-                      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Olvidó su contraseña?</a>
-                    </div>
-                  </div> -->
-
-
-                </form>
-                <div>
-                  <button [disabled]="!loginForm.valid" type="submit" (click)="clickfunc()" class="btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                      <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-                      </svg>
-                    </span>
-                    Iniciar Sesión
-                  </button>
-                </div>
-
-                  <!-- <p class="mt-6 text-sm text-center text-gray-400">¿Aún no tienes una cuenta? <a href="#" class="text-principal-500 focus:outline-none focus:underline hover:underline">Crear una cuenta</a>.</p> -->
-              </div>
+      <div class="col-5 mt-3">
+        <div class="flex-1">
+          <div class="text-center">
+            <div>
+              <img class="mx-auto h-20 w-auto" src="../../../assets/img/logo.png" alt="">
+              <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Iniciar Sesión</h2>
+            </div>
+            <p class="mt-3 text-gray-500">Inicia sesión para acceder a tu cuenta</p>
           </div>
+
+          <div class="w-full max-w-md space-y-8">
+            <form [formGroup]="loginForm" class="mt-8 space-y-6">
+              <input type="hidden" name="remember" value="true">
+              <div class="relative ml-5">
+                <input [(ngModel)]="login.terminal" formControlName="terminal" type="text" id="floating_outlined"
+                  class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" " />
+                <label for="floating_outlined"
+                  class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Terminal</label>
+              </div>
+
+              <div class="relative ml-5">
+                <input [(ngModel)]="login.password" formControlName="password" type="password" id="floating_outlined-2"
+                  class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" " />
+                <label for="floating_outlined-2"
+                  class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Contraseña</label>
+              </div>
+
+              <!-- <div class="flex items-center justify-end">
+                      <div class="text-sm">
+                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Olvidó su contraseña?</a>
+                      </div>
+                    </div> -->
+
+
+            </form>
+            <div class="ml-5">
+              <button [disabled]="!loginForm.valid" type="submit" (click)="clickfunc()"
+                class="btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                Iniciar Sesión
+              </button>
+            </div>
+
+            <!-- <p class="mt-6 text-sm text-center text-gray-400">¿Aún no tienes una cuenta? <a href="#" class="text-principal-500 focus:outline-none focus:underline hover:underline">Crear una cuenta</a>.</p> -->
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="row justify-content-start mt-4">
+      <div class="col-md-4 col-lg-4 col-sm-12">
+        <div class="container-fluid">
+          <div class="card border-light mb-3">
+            <div class="card-header">
+              <button type="button" class="btn nohover">{{'Recargas Top up ' | uppercase}}</button>
+            </div>
+            <div class="card-body">
+              <div class="mt-2 text-start">
+                <p class=" mt-3 text-black-300">
+                  + La más fácil interfaz para vender pre-pago
+                </p>
+                <p> + Ingresos de inmediato al recargar</p>
+                <p> + Aumenta el tráfico de tu negocio </p>
+                <p> + Innovadoras herramientas para aumentar tus ingresos y la lealtad de tus clientes</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-12">
+        <div class="container-fluid">
+          <div class="card border-light mb-3">
+            <div class="card-header">
+              <button class="btn btn-ligth">
+                {{'tarjetas de regalo virtuales y pin'
+                |uppercase}}</button>
+            </div>
+            <div class="card-body">
+              <div class="mt-2 text-start">
+                <p class=" mt-3 text-black-300">
+                  + La más fácil interfaz para vender pre-pago
+                </p>
+                <p> + Ingresos de inmediato al recargar</p>
+                <p> + Aumenta el tráfico de tu negocio </p>
+                <p> + Innovadoras herramientas para aumentar tus ingresos y la lealtad de tus clientes</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-12">
+        <div class="container-fluid">
+          <div class="card border-light mb-3">
+            <div class="card-header">
+              <button class="nohover btn btn-light">{{'activacion de sims y tarjetas' |uppercase}}</button>
+            </div>
+            <div class="card-body">
+              <div class="mt-2 text-start">
+                <p class=" mt-3 text-black-300">
+                  + La más fácil interfaz para vender pre-pago
+                </p>
+                <p> + Ingresos de inmediato al recargar</p>
+                <p> + Aumenta el tráfico de tu negocio </p>
+                <p> + Innovadoras herramientas para aumentar tus ingresos y la lealtad de tus clientes</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col align-self-end">
+
+        <p class="text-end">¿Te gustaría formar parte de la red PagaTodoPR? </p>
+
+      </div>
+      <div class="col align-self-start">
+        <div class=" text-start">
+          <button (click)="openModal(content)" class="btn btn-danger"> {{'Pre-registrate aquí' |
+            uppercase}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-0 mb-5 align-items-center">
+      <div class="col-8">
+        <p> ¿Ya formas parte de la red de comercios PagatodoPR?</p>
+        <p>¿Te gustaría afiliarte a la red de comercios ganadores?</p>
+        <p>Contáctate con nosotros y comparte tus comentarios, opiniones o necesidades.</p>
+      </div>
+
+      <div class="col-4 d-inline  text-start">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col">
+              <img
+                src="https://st4.depositphotos.com/4270667/20963/v/450/depositphotos_209631242-stock-illustration-headphones-microphone-white-background-flat.jpg"
+                class=" custom-image" alt="25px">
+            </div>
+            <div class="col">
+              <p class="">Ayuda y Soporte <br> 787-3023052</p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
   </div>
+
 </div>
+
+
+
+
+
+<ng-template class="" #content let-modal>
+  <div class="modal-header">
+    <div class="container">
+      <h6 class="text-center">{{titlePreregistro | uppercase}}</h6>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="cerrarmodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="paso1" class="card border-light mb-3">
+      <form [formGroup]="registerForm">
+        <div class="card-body">
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="firstname"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Nombre" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="lastname"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Apellido" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="number" formControlName="cellphone"
+                class=" form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Celular" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="email"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Email" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="paso2" class="card border-light mb-3">
+
+      <form [formGroup]="registerForm">
+        <div class="card-body">
+
+          <div class="mb-3">
+            <div class="input-group">
+              <input type="text" formControlName="nomLegal"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Nombre Legal" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="nomComercial"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Nombre Comercial" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="address"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Dirección" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+
+          <div class="mb-3">
+
+            <div class="input-group">
+              <input type="text" formControlName="country"
+                class="form-control nohover border border-dark border-top-0 border-end-0 border-start-0"
+                placeholder="Ciudad" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="paso3" class="card border-light mb-3">
+
+      <h5 class="text-center">Confirmación y Envío</h5>
+
+
+
+    </div>
+    <div *ngIf="paso4" class="card border-light  mb-3">
+      <div class="">
+        <h5 class="card-title">Gracias por pre-registrarse</h5>
+        <br>
+        <p> Su información fué enviada al departamento de admisiones de PagatodoPR, un personal autorizado se estará
+          comunicando con ustéd para completar el registro como asociado de la Red PagatodoPR.</p>
+      </div>
+
+    </div>
+
+
+    <div class="btn-group float-end" role="group" aria-label="Basic example">
+      <button *ngIf="!paso1 && !paso4" type="button" aria-label="Close" class="btn rounded bg-danger btn-danger me-2"
+        (click)="backStep()">Atrás
+      </button>
+      <button *ngIf="!paso4 && !paso3" type="button" aria-label="Close"
+        class="btn bg-danger rounded float-end btn-danger" (click)="nextStep()">Siguiente
+      </button>
+      <button *ngIf="paso3" type="button" aria-label="Close" class="btn rounded bg-danger btn-danger me-2"
+        (click)="sendInfo()">Enviar</button>
+    </div>
+  </div>
+
+
+
+</ng-template>
 
 <!-- <swiper [autoplay]="true" [keyboard]="true" [pagination]="true" [scrollbar]="true" [zoom]="true" [navigation]="true">
   <ng-template swiperSlide>Slide 1</ng-template>
   <ng-template swiperSlide>Slide 2</ng-template>
   <ng-template swiperSlide>Slide 3</ng-template>
 </swiper> -->
-
-
