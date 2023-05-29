@@ -2,8 +2,9 @@
   <div class="container-fluid text-center h-screen">
     <!-- <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"> -->
 
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-7 mt-5">
+    <div class="row align-items-center">
+      <div
+        class="col-sm-12 col-md-12 col-lg-7 mt-5 order-2 order-sm-2 order-md-1 order-lg-1 order-xl-1 order-xxl-1 justify-content-center">
         <div class="flex items-center align-middle px-50 ">
           <swiper *ngIf="images.length>0" [loop]="true" [autoHeight]="true" [allowTouchMove]="false" [autoplay]="true"
             [pagination]="{ clickable: true }" [navigation]="true" style="max-width: 1024px;width:  60vw;">
@@ -15,8 +16,9 @@
         </div>
       </div>
 
-      <div class="col-sm-12 col-md-12 col-lg-5 mt-3">
-        <div class="flex-1">
+      <div
+        class="col-sm-12 col-md-12 col-lg-5 mt-3  order-1 order-sm-1 order-md-2 order-lg-2 order-xl-2 order-xxl-2 justify-content-center">
+        <div class="flex-1 text-center">
           <div class="text-center">
             <div>
               <img class="mx-auto h-20 w-auto" src="../../../assets/img/logo.png" alt="">
@@ -24,52 +26,59 @@
             </div>
             <p class="mt-3 text-gray-500">Inicia sesión para acceder a tu cuenta</p>
           </div>
+        </div>
 
-          <div class="w-full max-w-md space-y-8">
-            <form [formGroup]="loginForm" class="mt-8 space-y-6">
-              <input type="hidden" name="remember" value="true">
-              <div class="relative ml-5">
-                <input [(ngModel)]="login.terminal" formControlName="terminal" type="text" id="floating_outlined"
-                  class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=" " />
-                <label for="floating_outlined"
-                  class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Terminal</label>
+        <div class="">
+          <form [formGroup]="loginForm" class="mt-8 space-y-6">
+
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-12 col-lg-12 justify-content-center">
+                <input type="hidden" name="remember" value="true">
+                <div class="relative ml-5">
+                  <input [(ngModel)]="login.terminal" formControlName="terminal" type="text" id="floating_outlined"
+                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " />
+                  <label for="floating_outlined"
+                    class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Terminal</label>
+                </div>
               </div>
+            </div>
 
-              <div class="relative ml-5">
-                <input [(ngModel)]="login.password" formControlName="password" type="password" id="floating_outlined-2"
-                  class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=" " />
-                <label for="floating_outlined-2"
-                  class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Contraseña</label>
-              </div>
 
-              <!-- <div class="flex items-center justify-end">
+            <div class="relative mt-2 ml-5">
+              <input [(ngModel)]="login.password" formControlName="password" type="password" id="floating_outlined-2"
+                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " />
+              <label for="floating_outlined-2"
+                class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Contraseña</label>
+            </div>
+
+            <!-- <div class="flex items-center justify-end">
                       <div class="text-sm">
                         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Olvidó su contraseña?</a>
                       </div>
                     </div> -->
 
 
-            </form>
-            <div class="ml-5">
-              <button [disabled]="!loginForm.valid" type="submit" (click)="clickfunc()"
-                class="btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd"
-                      d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
-                      clip-rule="evenodd" />
-                  </svg>
-                </span>
-                Iniciar Sesión
-              </button>
-            </div>
-
-            <!-- <p class="mt-6 text-sm text-center text-gray-400">¿Aún no tienes una cuenta? <a href="#" class="text-principal-500 focus:outline-none focus:underline hover:underline">Crear una cuenta</a>.</p> -->
+          </form>
+          <div class="ml-5 mt-2">
+            <button [disabled]="!loginForm.valid" type="submit" (click)="clickfunc()"
+              class="btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                    clip-rule="evenodd" />
+                </svg>
+              </span>
+              Iniciar Sesión
+            </button>
           </div>
+
+          <!-- <p class="mt-6 text-sm text-center text-gray-400">¿Aún no tienes una cuenta? <a href="#" class="text-principal-500 focus:outline-none focus:underline hover:underline">Crear una cuenta</a>.</p> -->
         </div>
+
       </div>
     </div>
 
