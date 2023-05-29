@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
     // this.isSpinner = false
 
-    this.bnIdle.startWatching(60).subscribe((res) => {
+    this.bnIdle.startWatching(14400).subscribe((res) => {
 
       if (res && localStorage.getItem('token')) {
         localStorage.removeItem('token');
