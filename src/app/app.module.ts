@@ -32,6 +32,10 @@ import { ProductosComponent } from './utilities/productos/productos.component';
 import { PinesComponent } from './components/pines/pines.component';
 import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BnNgIdleService } from 'bn-ng-idle';
+
+
+
 
 
 @NgModule({
@@ -69,12 +73,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         HotToastModule.forRoot({ duration: 5000 }),
         SwiperModule,
         NgbModule,
+
+
     ],
     providers: [
+        BnNgIdleService,
         LoadingService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

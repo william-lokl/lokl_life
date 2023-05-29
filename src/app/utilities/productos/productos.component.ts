@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
+import { log } from 'console';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
@@ -31,6 +32,9 @@ export class ProductosComponent implements OnInit {
   totalPagar = 0;
   totalResponse: any = 0;
   response: any = [];
+  ivu = 0;
+  incluirivu = false;
+
 
   recarga: any = {
     cantidad: '',
@@ -45,6 +49,7 @@ export class ProductosComponent implements OnInit {
 
   div2: boolean = true;
   div3: boolean = false;
+  confirm_pass: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -53,8 +58,9 @@ export class ProductosComponent implements OnInit {
     public router: Router,
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
-    private toastService: HotToastService
-  ) {}
+    private toastService: HotToastService,
+    private renderer: Renderer2
+  ) { }
 
   Show: boolean = false;
 
@@ -285,9 +291,9 @@ export class ProductosComponent implements OnInit {
     ) {
       this.showError(
         'El valor debe ser mayor o igual $ ' +
-          this.servicioSelected.valorMin +
-          ' y menor o igual a $ ' +
-          this.servicioSelected.valorMax
+        this.servicioSelected.valorMin +
+        ' y menor o igual a $ ' +
+        this.servicioSelected.valorMax
       );
     } else {
       Swal.fire({
@@ -312,6 +318,7 @@ export class ProductosComponent implements OnInit {
           const password: any =
             Swal.getPopup()?.querySelector('#pass_outlined-2');
           try {
+            this.confirm_pass = password.value
             let result: any = await this.checkPassword(password.value);
             if (result.status) return true;
             else {
@@ -327,6 +334,7 @@ export class ProductosComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           let objRecarga = {
+            password: this.confirm_pass,
             numero: this.recarga.numero,
             valor: this.totalPagar,
             operador: this.servicioSelected.code,
@@ -363,6 +371,9 @@ export class ProductosComponent implements OnInit {
                   this.totalResponse =
                     Number(this.response.valorrec) +
                     Number(this.response.ivurec);
+
+                  this.ivu = this.totalResponse * (3 / 100);
+
                   // await new Promise((resolve) =>
                   //   setTimeout(async () => {
                   //     window.location.reload();
@@ -414,4 +425,35 @@ export class ProductosComponent implements OnInit {
       );
     }
   }
+
+  shareUrl() {
+
+    if (this.incluirivu) {
+      let url_ivu = `https://api.whatsapp.com/send?phone=1${this.response.numerorec}&text=I%20AM%20GROOT%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SAN%20JUAN%0A%20%20%20%20%20%20%20%20%20%20%20%20%203232915235%0A%20RECARGA%20EN%20LINEA%20CLARO%0A%20%20%20TRANSACCION%20EXITOSA%0ANumero%20%20%20%20%20%20%20%20%20%20${this.response.numerorec}%0AValor%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20$${this.response.valorrec}%0AIVU%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20$${this.ivu}%0ATOTAL%20%20%20%20%20%20%20%20%20%20%20%20%20$${this.totalResponse}%0ATransacci%C3%B3n%20%20000001347367%0AFecha%20%20%202023-05-25%2012:37:38%0ARECUERDA%20SOLICITAR%20TU%20RECIBO%20IVU`;
+      this.renderer.setAttribute(window.open(url_ivu, '_blank'), 'noopener', 'true');
+    } else {
+
+      let url_sin_ivu = `https://api.whatsapp.com/send?phone=1${this.response.numerorec}&text=I%20AM%20GROOT%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SAN%20JUAN%0A%20%20%20%20%20%20%20%20%20%20%20%20%203232915235%0A%20RECARGA%20EN%20LINEA%20CLARO%0A%20%20%20TRANSACCION%20EXITOSA%0ANumero%20%20%20%20%20%20%20%20%20%20${this.response.numerorec}%0AValor%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20$${this.response.valorrec}%0AIVU%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20$0%0ATOTAL%20%20%20%20%20%20%20%20%20%20%20%20%20$${this.totalResponse}%0ATransacci%C3%B3n%20%20000001347380%0AFecha%20%20%202023-05-25%2021:20:33%0ARECUERDA%20SOLICITAR%20TU%20RECIBO%20IVU`
+      this.renderer.setAttribute(window.open(url_sin_ivu, '_blank'), 'noopener', 'true');
+    }
+  }
+
+  changeCheck() {
+
+    this.incluirivu = !this.incluirivu;
+
+    console.log(this.ivu);
+
+    if (this.incluirivu == true) {
+      this.totalResponse += Number(this.ivu);
+
+    }
+    if (this.incluirivu == false) {
+      this.totalResponse -= this.ivu;
+    }
+
+    console.log(this.totalResponse);
+
+  }
+
 }
