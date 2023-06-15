@@ -78,7 +78,7 @@
           <input type="hidden" name="remember" value="true">
           <div *ngIf="div2" class="grid grid-cols-2">
             <div class="relative">
-              <input [(ngModel)]="recarga.numero" formControlName="numero" type="text" maxlength="10"
+              <input [(ngModel)]="recarga.numero" formControlName="numero" type="text" maxlength="10" #inputTexto
                 id="floating_outlined"
                 class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" " />
@@ -134,41 +134,26 @@
                   class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
               </div>
             </div>
+
+
           </div>
         </form>
-      </div>
-    </div>
-  </div>
-  <div class="sticky z-20">
-    <footer class="footer-div bg-white fixed bottom-0 left-0 z-20 p-4 w-full border-t border-gray-200 ">
-      <div class="md:flex md:items-center md:justify-center">
-        <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
-          <div>
-            <div><span class="item-recarga">Valor de recarga</span></div>
-            <div *ngIf="recarga.cantidad"><span class="item-recarga-value">{{ recarga.cantidad | currency:'USD'
-                }}</span></div>
-            <div *ngIf="!recarga.cantidad"><span class="item-recarga-value">{{ '0.0' | currency:'USD' }}</span></div>
-          </div>
-          <div>
-            <div><span class="item-recarga">Cargo de servicio</span></div>
-            <div><span class="item-recarga-value">{{fee | currency:'USD'}}</span></div>
-          </div>
-          <div>
-            <div style="text-align: right;"><span class="item-recarga">Valor total</span></div>
-            <div style="text-align: right;"><span class="item-recarga-value mx">{{totalPagar | currency:'USD' }}</span>
-            </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12">
+            <button type="submit"
+              [disabled]="recargaForm.get('numero')?.value?.length != 10 || !recargaForm.get('cantidad')?.value"
+              (click)="clickRecarga(recarga_numero)"
+              class="nohover btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Continuar
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="pt-6 px-4 md:flex md:items-center md:justify-center ">
-        <button [disabled]="!recargaForm.valid" type="submit" (click)="clickRecarga()"
-          class=" md:max-w-xl btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-          Continuar
-        </button>
-      </div>
-    </footer>
+
+    </div>
   </div>
+
 </div>
 
 <div *ngIf="showModal"
@@ -282,7 +267,103 @@
 <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 
 
+<ng-template #recarga_numero let-modal>
+  <div class="modal-header">
+    <div class="container">
+      <h6 class="text-center">{{ 'ingrese su clave '| titlecase}}</h6>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="cerrarmodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
+
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-12">
+        <div class="">
+          <h5 class="fs">Servicio Seleccionado</h5>
+        </div>
+        <div>
+          <span>{{ servicioSelected.nombre }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="">
+          <h5 class="fs">Número</h5>
+        </div>
+        <div>
+          <span>{{ recarga.numero}}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="">
+          <h5 class="fs">Valor de recarga</h5>
+        </div>
+        <div>
+          <span *ngIf="recarga.cantidad">{{ recarga.cantidad | currency:'USD'}}
+          </span>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <div><span class="fs">Cargo de servicio</span></div>
+          <div><span class="">{{fee | currency:'USD'}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <span class="fs">Valor total</span>
+        </div>
+        <div>
+          <span class="">{{totalPagar | currency:'USD'
+            }}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="w-full max-w-md space-y-8 mt-3">
+      <form class="mt-1.5 space-y-6">
+        <div class="relative">
+          <input type="password" id="pass_outlined-2" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" " />
+          <label for="pass_outlined-2"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Clave</label>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <button [disabled]="!recargaForm.valid" type="submit" (click)="Recargar()"
+      class="nohover md:max-w-xl btn-accion group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      Continuar
+    </button>
+
+  </div>
+
+
+
+</ng-template>
 
 <!-- <input type="search" [ngModel]="paisSelected?.PAIS_NOMBRE" (ngModelChange)="setThresholds()"  class="form-control" placeholder="Search" id="listSearch" #search>
     <div *ngIf="Show" (clickOutside)="closeList1()" class="absolute w-fit py-1 mt-2 border border-1 border-neutral-400 rounded-md cursor-pointer">

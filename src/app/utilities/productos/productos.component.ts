@@ -1,11 +1,13 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import {
+  FormGroup,
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotToastService } from '@ngneat/hot-toast';
 import { log } from 'console';
 import { ApiService } from 'src/app/services/api.service';
@@ -20,6 +22,7 @@ import Swal from 'sweetalert2';
 })
 export class ProductosComponent implements OnInit {
   @Input() tipo: Number = 1;
+  @ViewChild('inputTexto') inputTexto!: ElementRef;
 
   selectedRecipe: any;
   paises: any = [];
@@ -42,7 +45,7 @@ export class ProductosComponent implements OnInit {
     serial: '',
     email: '',
   };
-  recargaForm!: UntypedFormGroup;
+  recargaForm!: FormGroup;
   showModal: boolean = false;
 
   routeSub: any;
@@ -50,6 +53,7 @@ export class ProductosComponent implements OnInit {
   div2: boolean = true;
   div3: boolean = false;
   confirm_pass: string = '';
+  password = "";
 
   constructor(
     private apiService: ApiService,
@@ -59,7 +63,8 @@ export class ProductosComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private toastService: HotToastService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private modalService: NgbModal,
   ) { }
 
   Show: boolean = false;
@@ -75,10 +80,10 @@ export class ProductosComponent implements OnInit {
     // });
 
     this.recargaForm = this.formBuilder.group({
-      cantidad: new UntypedFormControl(''),
-      numero: new UntypedFormControl(''),
-      serial: new UntypedFormControl(''),
-      email: new UntypedFormControl(''),
+      cantidad: ['', [Validators.required]],
+      numero: ['', [Validators.required, Validators.minLength(10)]],
+      serial: [''],
+      email: [''],
     });
 
     this.recargaForm.controls['cantidad'].disable();
@@ -106,6 +111,7 @@ export class ProductosComponent implements OnInit {
     }
 
     await this.consultarPaises();
+
   }
 
   ngOnDestroy() {
@@ -261,6 +267,7 @@ export class ProductosComponent implements OnInit {
     this.productoSelected = fav;
     this.servicioSelected = fav.five;
     await this.selectService(this.servicioSelected);
+    this.inputTexto.nativeElement.focus();
   }
 
   calculateTotalPagar() {
@@ -284,7 +291,7 @@ export class ProductosComponent implements OnInit {
     this.calculateTotalPagar();
   }
 
-  clickRecarga() {
+  async clickRecarga(content?: any) {
     if (
       Number(this.recarga.cantidad) > Number(this.servicioSelected.valorMax) ||
       Number(this.recarga.cantidad) < Number(this.servicioSelected.valorMin)
@@ -296,8 +303,10 @@ export class ProductosComponent implements OnInit {
         this.servicioSelected.valorMax
       );
     } else {
-      Swal.fire({
-        // title: 'Submit your Github username',
+      console.log(this.recargaForm.value);
+
+      this.openModal(content);
+      /* Swal.fire({
         html: `
               <label for="countries" class="block mb-4 text-md font-medium text-gray-900"><b>Ingrese su clave</b></label>
 
@@ -373,13 +382,6 @@ export class ProductosComponent implements OnInit {
                     Number(this.response.ivurec);
 
                   this.ivu = this.totalResponse * (3 / 100);
-
-                  // await new Promise((resolve) =>
-                  //   setTimeout(async () => {
-                  //     window.location.reload();
-                  //   }, 1800)
-                  // );
-                  //this.response = res;
                 }
               },
               (error: any) => {
@@ -389,14 +391,85 @@ export class ProductosComponent implements OnInit {
               }
             );
         }
-        // if (result.isConfirmed) {
-        //   Swal.fire({
-        //     title: `${result?.value.login}'s avatar`,
-        //     imageUrl: result?.value.avatar_url,
-        //   });
-        // }
-      });
+      }); */
     }
+  }
+
+  async Recargar() {
+    console.log(this.password);
+    try {
+      this.confirm_pass = this.password
+      let result: any = await this.checkPassword(this.password);
+
+      if (!result.status) {
+        Swal.showValidationMessage(`${result.message}`);
+      }
+
+      let objRecarga = {
+        password: this.confirm_pass,
+        numero: this.recarga.numero,
+        valor: this.totalPagar,
+        operador: this.servicioSelected.code,
+        proveedor: this.servicioSelected.proveedorId,
+        tipo: this.servicioSelected.tipo,
+      };
+      console.log('crear recarga', objRecarga);
+
+      const loadingM: any = this.loading.show(
+        'Creando recarga, por favor espere...'
+      );
+
+
+      this.apiService
+        .post(
+          `${this.tipo === 3 ? `/productos/pin/` : `/productos/recharge/`}`,
+          objRecarga
+        )
+        .subscribe(
+          async (res: any) => {
+            loadingM.close();
+            this.cerrarmodal();
+            if (res.status === 202) this.showError(res.message);
+            else if (!res.status) this.showError(res.message);
+            else if (res.status === 404) this.showError(res.message);
+            else {
+              this.showModal = true;
+              this.showError('Recarga realizada con éxito', 'ok');
+              this.productoSelected = null;
+              this.servicioSelected = null;
+              this.resetForm();
+
+              this.response = this.tipo === 3 ? res.data : res.data[0];
+              this.totalResponse =
+                Number(this.response.valorrec) +
+                Number(this.response.ivurec);
+
+              this.ivu = this.totalResponse * (3 / 100);
+            }
+          },
+          (error: any) => {
+            loadingM.close();
+            console.log('error creando la recarga', error);
+            this.showError(error);
+          }
+        );
+    } catch (e) {
+
+      Swal.showValidationMessage(`${e}`);
+
+    }
+
+  }
+
+  async cerrarmodal() {
+
+    this.modalService.dismissAll();
+
+  }
+
+  async openModal(content?: any) {
+    this.modalService.open(content, { centered: true, size: 'sm' });
+
   }
 
   toggleModal() {

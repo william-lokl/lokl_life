@@ -78,3 +78,13 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.nohover:focus,
+.nohover:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.fs {
+  font-size: 13px;
+}
