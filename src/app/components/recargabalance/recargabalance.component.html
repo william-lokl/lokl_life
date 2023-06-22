@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div >
+<div>
   <div class="min-h-full" style="margin-bottom: 160px;">
     <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4">
       <div class="text-center mt-6">
@@ -8,11 +8,16 @@
     </div>
 
     <div class="container xl:max-w-2xl md:max-w-2xl mx-auto px-4 w-full  mt-6">
-      <form  [formGroup]="recargaForm" class="space-y-6" >
-          <div class="relative">
-            <input [(ngModel)]="rechargeAmmount" (ngModelChange)="cantidadchange($event)" formControlName="ammount" type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-            <label for="floating_outlined" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Valor de recarga</label>
-          </div>
+      <form [formGroup]="recargaForm" class="space-y-6">
+        <div class="relative">
+          <input [(ngModel)]="rechargeAmmount" (ngModelChange)="cantidadchange($event)" formControlName="ammount"
+            type="text" id="floating_outlined"
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" " />
+          <label for="floating_outlined"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Valor
+            de recarga</label>
+        </div>
       </form>
       <div class="input-error-message" *ngIf="rechargeAmmount<min">
         * Valor mínimo a recargar $ {{ min }}
@@ -22,7 +27,7 @@
       <div *ngIf="showPaypalButtons" class="btn-new-ath" (click)="previewRecharge()"></div>
       <div style="margin-top:20px; z-index: 10;" size="6">
         <!-- <div id="paypal-button-container"></div> -->
-        <ngx-paypal *ngIf="showPaypalButtons" [config]="payPalConfig" class="paypal-btns"> </ngx-paypal>
+        <!--  <ngx-paypal *ngIf="showPaypalButtons" [config]="payPalConfig" class="paypal-btns"> </ngx-paypal> -->
       </div>
     </div>
 
@@ -33,10 +38,11 @@
     <footer class="footer-div fixed bottom-0 left-0 z-20 p-8 w-full bg-white border-t border-gray-200 ">
       <div class="md:flex md:items-center md:justify-center">
         <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
-          <div >
+          <div>
             <div><span class="item-recarga">Valor de recarga</span></div>
-            <div *ngIf="rechargeAmmount" ><span  class="item-recarga-value">{{ rechargeAmmount   | currency:'USD' }}</span></div>
-            <div *ngIf="!rechargeAmmount" ><span  class="item-recarga-value">{{ '0.0'  | currency:'USD' }}</span></div>
+            <div *ngIf="rechargeAmmount"><span class="item-recarga-value">{{ rechargeAmmount | currency:'USD' }}</span>
+            </div>
+            <div *ngIf="!rechargeAmmount"><span class="item-recarga-value">{{ '0.0' | currency:'USD' }}</span></div>
           </div>
           <div>
             <div><span class="item-recarga">Cargo de servicio</span></div>
@@ -44,10 +50,12 @@
           </div>
           <div>
             <div style="text-align: right;"><span class="item-recarga">Valor total</span></div>
-            <div *ngIf="rechargeAmmount>=min" style="text-align: right;"><span class="item-recarga-value mx">{{total  | currency:'USD' }}</span></div>
-            <div *ngIf="rechargeAmmount<min" style="text-align: right;"><span class="item-recarga-value mx">-</span></div>
+            <div *ngIf="rechargeAmmount>=min" style="text-align: right;"><span class="item-recarga-value mx">{{total |
+                currency:'USD' }}</span></div>
+            <div *ngIf="rechargeAmmount<min" style="text-align: right;"><span class="item-recarga-value mx">-</span>
+            </div>
           </div>
-      </div>
+        </div>
       </div>
     </footer>
   </div>
