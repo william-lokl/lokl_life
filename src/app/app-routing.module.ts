@@ -13,60 +13,12 @@ import { VentaremotaComponent } from './components/ventaremota/ventaremota.compo
 import { ProductosComponent } from './utilities/productos/productos.component';
 import { PinesComponent } from './components/pines/pines.component';
 import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
+import { LandinpageComponent } from './landinpage/landinpage.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: DashboardComponent,
-  },
-  {
-    path: 'recargas',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: RecargasComponent,
-  },
-  {
-    path: 'pines',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: PinesComponent,
-  },
-  {
-    path: 'recaudo',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: RecaudoclaroComponent,
-  },
-  {
-    path: 'recarga-balance',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: RecargabalanceComponent,
-  },
-  {
-    path: 'cambiar-clave',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: CambiarpassComponent,
-  },
-  {
-    path: 'reportes',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: ReportesComponent,
-  },
-  {
-    path: 'ventaremota',
-    canActivate: [AuthGuard],
-    resolve: [PermissionGuard],
-    component: VentaremotaComponent,
-  },
-  {
     path: '',
-    canActivate: [NoAuthGuard],
-    component: LoginComponent,
+    component: LandinpageComponent,
   },
   {
     path: '**',
@@ -76,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

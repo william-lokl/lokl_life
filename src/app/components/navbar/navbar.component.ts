@@ -42,11 +42,11 @@ export class NavbarComponent implements OnInit {
   async ngOnInit() {
     const menu_selected = JSON.parse(localStorage.getItem('menu') || '{}');
     this.menu_name = menu_selected.MENU_DESCRIPCION;
-   /* if (!this.passData.infoClient) {
+    /* if (!this.passData.infoClient) {
       await this.getInfoUser();
       console.log(this.passData.infoClient);
     } */
-    await this.getInfoUser();
+    //await this.getInfoUser();
   }
 
   toggleNavbar() {

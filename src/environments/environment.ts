@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-
+  paypalUrl: '',
+  athUrl: '',
+  url: '',
+  clientPaypal: '',
+  porcentaje: 0,
 };
 
 /*

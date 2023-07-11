@@ -33,6 +33,9 @@ import { PinesComponent } from './components/pines/pines.component';
 import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { LandinpageComponent } from './landinpage/landinpage.component';
+import { MinuteroComponent } from './shared/minutero/minutero.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 
@@ -57,6 +60,9 @@ import { BnNgIdleService } from 'bn-ng-idle';
         ProductosComponent,
         PinesComponent,
         RecaudoclaroComponent,
+        LandinpageComponent,
+        MinuteroComponent,
+        FooterComponent,
     ],
     imports: [
         HttpClientModule,
