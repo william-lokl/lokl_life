@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
   ngAfterViewInit() {
     createPopper(
-      this.btnDropdownRef.nativeElement,
+      this.btnDropdownRef?.nativeElement,
       this.popoverDropdownRef.nativeElement,
       {
         placement: 'bottom-start',

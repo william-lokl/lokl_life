@@ -99,7 +99,13 @@ html * {
   border-bottom: 1px solid black !important;
   outline: none !important;
 }
+.fondogray {
+  background-color: rgb(240, 230, 230);
+}
 
+body {
+  background-color: rgb(240, 230, 230);
+}
 /* Importing Bootstrap SCSS file. */
 
 //@import 'bootstrap/scss/bootstrap';

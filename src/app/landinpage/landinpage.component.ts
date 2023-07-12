@@ -28,8 +28,8 @@ export class LandinpageComponent implements OnInit {
   createPlayer() {
     // Crea el reproductor de YouTube dentro del div con id "youtube-player"
     this.player = new (window as any).YT.Player('youtube-player', {
-      height: '250',
-      width: '640',
+      height: '100%',
+      width: '100%',
       videoId: 'CQDtTMMa2mQ', // Reemplaza con el ID de tu video de YouTube
     });
   }

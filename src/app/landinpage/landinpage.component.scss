@@ -1,5 +1,6 @@
 .fondo-div {
   background-image: url("../../assets/img/fondo.jpg");
-  background-size: contain;
+  background-size: cover;
   background-position: center;
+  height: calc(75vh);
 }
