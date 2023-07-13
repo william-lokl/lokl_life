@@ -20,8 +20,7 @@ import { ReplacePipe } from '../app/pipes/replace-pipe';
 import { FilterPipe } from '../app/pipes/filter-pipe';
 import { ClickOutsideDirective } from './click-outside.directive';
 import { NgxPrintModule } from 'ngx-print';
-import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
-import { NgxPayPalModule } from 'ngx-paypal';
+//import { NgxPayPalModule } from 'ngx-paypal';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
@@ -37,57 +36,69 @@ import { LandinpageComponent } from './landinpage/landinpage.component';
 import { MinuteroComponent } from './shared/minutero/minutero.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
-
-
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SteperComponent } from './shared/steper/steper.component';
+import { MatTabContent, MatTabGroup } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { PreguntasComponent } from './shared/preguntas/preguntas.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        DashboardComponent,
-        NavbarComponent,
-        ToastsContainer,
-        RecargasComponent,
-        ReplacePipe,
-        FilterPipe,
-        ClickOutsideDirective,
-        RecargabalanceComponent,
-        CambiarpassComponent,
-        ReportesComponent,
-        VentaremotaComponent,
-        VentarRedeslComponent,
-        ProductosComponent,
-        PinesComponent,
-        RecaudoclaroComponent,
-        LandinpageComponent,
-        MinuteroComponent,
-        FooterComponent,
-    ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        NgxPrintModule,
-        ToastrModule.forRoot({
-            toastComponent: ToastsContainer, // added custom toast!
-        }),
-        NgxPayPalModule,
-        HotToastModule.forRoot({ duration: 5000 }),
-        SwiperModule,
-        NgbModule,
-
-
-    ],
-    providers: [
-        BnNgIdleService,
-        LoadingService,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    NavbarComponent,
+    ToastsContainer,
+    RecargasComponent,
+    ReplacePipe,
+    FilterPipe,
+    ClickOutsideDirective,
+    CambiarpassComponent,
+    ReportesComponent,
+    VentaremotaComponent,
+    VentarRedeslComponent,
+    ProductosComponent,
+    PinesComponent,
+    RecaudoclaroComponent,
+    LandinpageComponent,
+    MinuteroComponent,
+    FooterComponent,
+    SteperComponent,
+    PreguntasComponent,
+  ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    // NgxPrintModule,
+    ToastrModule.forRoot({
+      toastComponent: ToastsContainer, // added custom toast!
+    }),
+    //NgxPayPalModule,
+    HotToastModule.forRoot({ duration: 5000 }),
+    SwiperModule,
+    NgbModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatButtonToggleModule,
+    MatTabsModule,
+  ],
+  providers: [
+    BnNgIdleService,
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -15,6 +15,8 @@ html * {
   font-family: "Work Sans", Poppins-Regular, sans-serif, "FontAwesome" !important;
 }
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 :root {
   --principalColor: #ef5350;
   --principalColorTransp: #ef535059;
@@ -109,3 +111,33 @@ body {
 /* Importing Bootstrap SCSS file. */
 
 //@import 'bootstrap/scss/bootstrap';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.mat-tab-label,
+.mat-tab-link {
+  color: #ffffff !important;
+}
+/* .custom-tab-group .mat-tab-header-pagination {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: white;
+}
+
+.custom-tab-group .mat-tab-header-pagination-disabled {
+  background-color: white !important;
+  color: white;
+}
+
+.custom-tab-group .mat-tab-header-pagination-arrow {
+  color: rgb(255, 255, 255) !important;
+} */
+
+.mat-tab-header-pagination mat-icon {
+  color: white !important;
+}

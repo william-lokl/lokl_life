@@ -5,7 +5,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './noAuth.guard';
 import { RecargasComponent } from './components/recargas/recargas.component';
-import { RecargabalanceComponent } from './components/recargabalance/recargabalance.component';
 import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { PermissionGuard } from './permission.guard';
@@ -31,4 +30,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
