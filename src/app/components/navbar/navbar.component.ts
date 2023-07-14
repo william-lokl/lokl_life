@@ -5,6 +5,7 @@ import { PassDataService } from 'src/app/services/pass-data.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { createPopper } from '@popperjs/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined = undefined;
+
+  reason = '';
+
   dropdownPopoverShow = false;
   @ViewChild('btnDropdownRef', { static: false }) btnDropdownRef: any;
   @ViewChild('popoverDropdownRef', { static: false })
@@ -23,13 +28,13 @@ export class NavbarComponent implements OnInit {
   menu_name: any = undefined;
 
   ngAfterViewInit() {
-    createPopper(
+    /* createPopper(
       this.btnDropdownRef?.nativeElement,
       this.popoverDropdownRef?.nativeElement,
       {
         placement: 'bottom-start',
       }
-    );
+    ); */
   }
 
   constructor(
@@ -116,6 +121,11 @@ export class NavbarComponent implements OnInit {
           : error
       );
     }
+  }
+
+  close(reason: string) {
+    this.reason = reason;
+    this.sidenav?.close();
   }
 
   logOut() {

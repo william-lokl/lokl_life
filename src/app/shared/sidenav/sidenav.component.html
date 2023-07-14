@@ -1,0 +1,25 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+    <mat-drawer class="bg-black" style="width: 80%;" #drawer mode="over">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 class="text-white text-center">LOKL</h1>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class="fondogray">
+
+        <div class="row d-sm-flex d-md-flex d-lg-none">
+            <div class="col-4">
+                <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+            </div>
+            <div class="col-4">
+                <h1 class="text-center">LOKL</h1>
+            </div>
+            <div class="col-4">
+                <p class="text-end">imagen</p>
+            </div>
+        </div>
+        <!-- <router-outlet></router-outlet> -->
+        <!-- <app-landinpage></app-landinpage> -->
+    </mat-drawer-content>
+</mat-drawer-container>

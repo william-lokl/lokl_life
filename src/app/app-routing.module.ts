@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './noAuth.guard';
-import { RecargasComponent } from './components/recargas/recargas.component';
-import { CambiarpassComponent } from './components/cambiarpass/cambiarpass.component';
-import { ReportesComponent } from './components/reportes/reportes.component';
-import { PermissionGuard } from './permission.guard';
-import { VentaremotaComponent } from './components/ventaremota/ventaremota.component';
-import { ProductosComponent } from './utilities/productos/productos.component';
-import { PinesComponent } from './components/pines/pines.component';
-import { RecaudoclaroComponent } from './components/recaudoclaro/recaudoclaro.component';
+
 import { LandinpageComponent } from './landinpage/landinpage.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandinpageComponent,
+    /* children: [
+      { path: 'registro', component: RegisterComponent }, // Ruta para el componente de registro dentro de LandingPageComponent
+      // Otras rutas hijas de LandingPageComponent...
+    ], */
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: '**',

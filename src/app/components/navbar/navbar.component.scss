@@ -8,3 +8,15 @@
   color: black;
   border: none;
 }
+
+.example-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav {
+  width: 250px; /* Ajusta el ancho según tus necesidades */
+}

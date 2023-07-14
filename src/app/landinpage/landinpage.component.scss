@@ -12,3 +12,15 @@
   background-position: start;
   height: calc(30vh);
 }
+
+@media (max-width: 576px) {
+  .sm-margin {
+    margin-top: 10px; /* Ajusta el margen según tus necesidades */
+  }
+}
+
+@media (max-width: 768px) {
+  .sm-margin {
+    margin-top: 10px; /* Ajusta el margen según tus necesidades */
+  }
+}

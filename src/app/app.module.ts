@@ -45,6 +45,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { PreguntasComponent } from './shared/preguntas/preguntas.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     FooterComponent,
     SteperComponent,
     PreguntasComponent,
+    SidenavComponent,
+    RegisterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -92,6 +97,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDividerModule,
     MatButtonToggleModule,
     MatTabsModule,
+    MatSidenavModule,
   ],
   providers: [
     BnNgIdleService,
