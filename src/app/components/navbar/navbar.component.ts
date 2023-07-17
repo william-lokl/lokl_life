@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PassDataService } from 'src/app/services/pass-data.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { createPopper } from '@popperjs/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -41,7 +41,8 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private apiService: ApiService,
     public passData: PassDataService,
-    private toastService: HotToastService
+    private toastService: HotToastService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -130,5 +131,9 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+  }
+
+  redireTo(path: string) {
+    this.router.navigate([`${path}`]);
   }
 }
