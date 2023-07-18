@@ -4,23 +4,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './noAuth.guard';
 
-import { LandinpageComponent } from './landinpage/landinpage.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { LandinpageComponent } from './home/landinpage/landinpage.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './home/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LandinpageComponent,
-    /* children: [
-      { path: 'registro', component: RegisterComponent }, // Ruta para el componente de registro dentro de LandingPageComponent
-      // Otras rutas hijas de LandingPageComponent...
-    ], */
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
+    component: SidenavComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./home/landingmodule/landingmodule.module').then(
+            (m) => m.LandingmoduleModule
+          ),
+      },
+    ],
   },
   {
     path: '**',

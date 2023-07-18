@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="true">
+<mat-drawer-container class="" [hasBackdrop]="true">
     <mat-drawer class="bg-black" style="width: 80%;" #drawer mode="over">
         <div class="row mt-5">
             <div class="col-12">
@@ -6,19 +6,22 @@
             </div>
         </div>
     </mat-drawer>
-    <mat-drawer-content class="">
-        <div class="row d-sm-flex d-md-flex d-lg-none">
-            <div class="col-4 fondo-blanco">
-                <button mat-raised-button class="bg-body" (click)="drawer.toggle()">Toggle drawer</button>
+    <mat-drawer-content class="fondogray">
+        <div class="row d-sm-flex d-md-flex d-lg-none bg-body">
+            <div class="col-4">
+                <button class="btn" (click)="drawer.toggle()"><i class="fa-solid fa-sliders"></i></button>
             </div>
             <div class="col-4">
-                <h1 class="text-center">LOKL</h1>
+                <h1 class="text-center" (click)="redireTo('')">LOKL</h1>
             </div>
             <div class="col-4">
-                <p class="text-end">imagen</p>
+                <button class="btn float-end" (click)="redireTo('register')" type="button">
+                    <i class="fa-solid fa-user"></i></button>
             </div>
         </div>
-        <!-- <router-outlet></router-outlet> -->
-        <!-- <app-landinpage></app-landinpage> -->
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
     </mat-drawer-content>
+
+
 </mat-drawer-container>
