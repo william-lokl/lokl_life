@@ -1,11 +1,26 @@
 <div class="row align-items-center bg-body d-none d-sm-none d-md-none d-lg-flex">
-    <div class="col-6 mb-3 mt-3">
-        <button class="btn btn-focus text-black border-0" (click)="redireTo('')"> LOKL</button>
+    <div class="col-6 mb-3">
+        <button class="btn btn-focus text-black border-0 fs-1 " (click)=" redireTo('')"> LOKL</button>
         <button class="btn btn-outline-primary rounded rounded-5">Inscribete</button>
         <button class="btn  btn-focus text-black border-0"> Blog</button>
     </div>
-    <div class="col-6 align-content-center">
+
+
+    <div class="col-6">
+        <div class="dropdown text-end">
+            <button class="btn float-end dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
         <button class="btn btn-focus buttonlogin float-end" (click)="redireTo('register')"> Registrate</button>
         <button class="btn btn-focus buttonlogin float-end"> Iniciar Sesión</button>
+
+
     </div>
 </div>

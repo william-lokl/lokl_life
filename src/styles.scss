@@ -146,16 +146,9 @@ app-footer {
   overflow: hidden !important;
 }
 
-/* .btn-focus:active,
+.btn-focus:active,
 :focus,
 :active:focus {
-  outline: none;
-  box-shadow: none;
-} */
-
-button.btn-focus:focus,
-button.btn-focus:active,
-button.btn-focus:active:focus {
   outline: none;
   box-shadow: none;
 }
