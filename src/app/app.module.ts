@@ -21,40 +21,23 @@ import { SwiperModule } from 'swiper/angular';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { LandinpageComponent } from './home/landinpage/landinpage.component';
-import { MinuteroComponent } from './shared/minutero/minutero.component';
-import { FooterComponent } from './shared/footer/footer.component';
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SteperComponent } from './shared/steper/steper.component';
-import { MatTabContent, MatTabGroup } from '@angular/material/tabs';
+
 import { MatDividerModule } from '@angular/material/divider';
-import { PreguntasComponent } from './shared/preguntas/preguntas.component';
+
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavComponent } from './shared/sidenav/sidenav.component';
-import { RegisterComponent } from './home/register/register.component';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    ReplacePipe,
-    FilterPipe,
-    ClickOutsideDirective,
-    LandinpageComponent,
-    MinuteroComponent,
-    FooterComponent,
-    SteperComponent,
-    PreguntasComponent,
-    SidenavComponent,
-    RegisterComponent,
-  ],
+  declarations: [AppComponent, ReplacePipe, FilterPipe, ClickOutsideDirective],
   imports: [
     HttpClientModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
