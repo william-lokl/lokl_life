@@ -21,6 +21,14 @@ import { PreguntasComponent } from 'src/app/shared/preguntas/preguntas.component
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
 import { LandinpageComponent } from '../landinpage/landinpage.component';
 import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
+import { LoginComponent } from 'src/app/login/login.component';
+
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,6 +40,7 @@ import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
     LandinpageComponent,
     MinuteroComponent,
     RegisterComponent,
+    LoginComponent
   ],
   imports: [
     LandingmoduleRoutingModule,
@@ -45,6 +54,9 @@ import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
     MatButtonToggleModule,
     MatTabsModule,
     MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule
   ],
 })
 export class LandingmoduleModule {}
