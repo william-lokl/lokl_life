@@ -138,6 +138,18 @@ app-footer {
 
 .mat-drawer-content {
   overflow: hidden !important;
+
+  @media (min-width: 0px) {
+    overflow: scroll !important;
+  }
+
+  @media (min-width: 576px) {
+    overflow: scroll !important;
+  }
+
+  @media (min-width: 1200px) {
+    overflow: hidden !important;
+  }
 }
 
 .btn-focus:active,
