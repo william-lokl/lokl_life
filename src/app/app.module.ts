@@ -14,8 +14,7 @@ import { LoadingService } from './services/loading.service';
 import { ReplacePipe } from '../app/pipes/replace-pipe';
 import { FilterPipe } from '../app/pipes/filter-pipe';
 import { ClickOutsideDirective } from './click-outside.directive';
-import { NgxPrintModule } from 'ngx-print';
-//import { NgxPayPalModule } from 'ngx-paypal';
+
 import { HotToastModule } from '@ngneat/hot-toast';
 import { SwiperModule } from 'swiper/angular';
 
@@ -30,8 +29,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [AppComponent, ReplacePipe, FilterPipe, ClickOutsideDirective],
@@ -56,6 +55,7 @@ import { LoginComponent } from './login/login.component';
     MatButtonToggleModule,
     MatTabsModule,
     MatSidenavModule,
+    YouTubePlayerModule,
   ],
   providers: [
     BnNgIdleService,
