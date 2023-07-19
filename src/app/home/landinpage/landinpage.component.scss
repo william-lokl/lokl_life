@@ -24,3 +24,79 @@
     margin-top: 10px; /* Ajusta el margen según tus necesidades */
   }
 }
+
+@media (max-width: 992px) {
+  .sm-margin {
+    margin-top: 0px; /* Ajusta el margen según tus necesidades */
+  }
+  .video-container {
+    position: sticky;
+    padding-bottom: 500%;
+    overflow: hidden;
+  }
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sm-margin {
+    margin-top: 0px; /* Ajusta el margen según tus necesidades */
+  }
+}
+
+.card {
+  // Estilos generales de la card...
+
+  @media (min-width: 1400px) {
+    // Ajusta este valor según tus necesidades
+    height: 95%; // Cambia el alto de la card para tamaño xl
+  }
+
+  /* @media (min-width: 1800px) {
+    // Ajusta este valor según tus necesidades
+    height: 80%; // Cambia el alto de la card para tamaño xl
+  } */
+}
+
+.video-container {
+  position: sticky;
+  padding-bottom: 60%;
+  height: 0;
+  overflow: hidden;
+
+  @media (min-width: 992px) {
+    // Ajusta este valor según tus necesidades
+    padding-bottom: 79%; // Cambia el alto de la card para tamaño xl
+  }
+
+  @media (min-width: 1200px) {
+    // Ajusta este valor según tus necesidades
+    padding-bottom: 60%; // Cambia el alto de la card para tamaño xl
+  }
+  @media (min-width: 1400px) {
+    // Ajusta este valor según tus necesidades
+    padding-bottom: 50%; // Cambia el alto de la card para tamaño xl
+  }
+
+  @media (min-width: 1600px) {
+    // Ajusta este valor según tus necesidades
+    padding-bottom: 42%; // Cambia el alto de la card para tamaño xl
+  }
+  @media (min-width: 1800px) {
+    // Ajusta este valor según tus necesidades
+    padding-bottom: 35%; // Cambia el alto de la card para tamaño xl
+  }
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
