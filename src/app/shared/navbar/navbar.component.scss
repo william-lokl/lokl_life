@@ -3,7 +3,22 @@
   background-color: white;
 }
 
+.buttonnav:hover,
+:focus,
+:active:focus {
+  color: blue;
+  background-color: white;
+}
+
 .buttonlogin {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.buttonlogin:hover,
+:focus,
+:active:focus {
   background-color: white;
   color: black;
   border: none;
@@ -17,6 +32,14 @@
   right: 0;
 }
 
-.sidenav {
-  width: 250px; /* Ajusta el ancho según tus necesidades */
+.btn-focus:active,
+:focus,
+:active:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.lokl {
+  font-family: "Oswald", sans-serif !important;
+  font-weight: 600;
 }

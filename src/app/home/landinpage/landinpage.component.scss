@@ -1,66 +1,52 @@
 .fondo-div {
-  background-image: url("../../../assets/img/fondo.jpg");
+  background-image: url("../../../assets/img/image-login.jpg");
   background-size: cover;
-  //background-position: ;
-  height: calc(75vh);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .fondo-inversion {
   background-image: url("../../../assets/img/fondo.jpg");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: start;
-  height: calc(30vh);
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
 }
 
 @media (max-width: 576px) {
   .sm-margin {
-    margin-top: 10px; /* Ajusta el margen según tus necesidades */
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 768px) {
   .sm-margin {
-    margin-top: 10px; /* Ajusta el margen según tus necesidades */
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 992px) {
   .sm-margin {
-    margin-top: 0px; /* Ajusta el margen según tus necesidades */
-  }
-  .video-container {
-    position: sticky;
-    padding-bottom: 500%;
-    overflow: hidden;
-  }
-  .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    margin-top: 0px;
   }
 }
 
 @media (max-width: 1200px) {
   .sm-margin {
-    margin-top: 0px; /* Ajusta el margen según tus necesidades */
+    margin-top: 0px;
   }
 }
 
-.card {
-  // Estilos generales de la card...
-
-  @media (min-width: 1400px) {
-    // Ajusta este valor según tus necesidades
-    height: 95%; // Cambia el alto de la card para tamaño xl
+.card-video {
+  @media (min-width: 1200px) {
+    height: 100%;
   }
-
-  /* @media (min-width: 1800px) {
-    // Ajusta este valor según tus necesidades
-    height: 80%; // Cambia el alto de la card para tamaño xl
-  } */
+  @media (min-width: 1400px) {
+    height: 100%;
+  }
 }
 
 .video-container {
@@ -70,26 +56,21 @@
   overflow: hidden;
 
   @media (min-width: 992px) {
-    // Ajusta este valor según tus necesidades
-    padding-bottom: 79%; // Cambia el alto de la card para tamaño xl
+    padding-bottom: 79%;
   }
 
   @media (min-width: 1200px) {
-    // Ajusta este valor según tus necesidades
-    padding-bottom: 60%; // Cambia el alto de la card para tamaño xl
+    padding-bottom: 60%;
   }
   @media (min-width: 1400px) {
-    // Ajusta este valor según tus necesidades
-    padding-bottom: 50%; // Cambia el alto de la card para tamaño xl
+    padding-bottom: 60%;
   }
 
   @media (min-width: 1600px) {
-    // Ajusta este valor según tus necesidades
-    padding-bottom: 42%; // Cambia el alto de la card para tamaño xl
+    padding-bottom: 42%;
   }
   @media (min-width: 1800px) {
-    // Ajusta este valor según tus necesidades
-    padding-bottom: 35%; // Cambia el alto de la card para tamaño xl
+    padding-bottom: 35%;
   }
 }
 
@@ -99,4 +80,76 @@
   left: 0;
   width: 100%;
   height: 100%;
+
+  @media (min-width: 768px) {
+    width: 90%;
+    height: 100%;
+  }
+
+  @media (min-width: 992px) {
+    width: 90%;
+    height: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 83%;
+    height: 100%;
+  }
+
+  @media (min-width: 1400px) {
+    width: 83%;
+    height: 100%;
+  }
+}
+
+.h1,
+p {
+  font-family: Lato, sans-serif !important;
+}
+
+.divider-vertical {
+  width: 1px; /* Ancho del divisor vertical */
+  height: 90%; /* Altura del divisor vertical */
+  background-color: grey; /* Color gris */
+  margin-left: 50%;
+}
+
+.image-card-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-card-container img {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 53%;
+  left: 45%;
+  width: 60%;
+  height: 40%;
+  background-color: white;
+  border-radius: 15px;
+
+  @media (min-width: 1200px) {
+    height: 30%;
+  }
+}
+
+.container-md {
+  @media (min-width: 0px) and (max-width: 991.98px) {
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+
+    .btn {
+      background-color: white;
+      color: black;
+      margin-bottom: 5%;
+    }
+  }
 }

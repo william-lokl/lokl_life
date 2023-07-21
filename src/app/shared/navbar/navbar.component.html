@@ -1,22 +1,30 @@
-<div class="row align-items-center bg-body d-none d-sm-none d-md-none d-lg-flex">
-    <div class="col-6 mb-3">
-        <button class="btn btn-focus text-black border-0 fs-1 " (click)=" redireTo('')"> LOKL</button>
-        <button class="btn btn-outline-primary rounded rounded-5">Inscribete</button>
-        <button class="btn  btn-focus text-black border-0"> Blog</button>
-    </div>
-    <div class="col-6">
-        <div class="dropdown text-end">
-            <button class="btn float-end dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user"></i>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+<div class="container-fluid">
+    <div class="row align-items-center bg-body d-none d-sm-none d-md-none d-lg-flex">
+        <div class="col-1 text-center">
+            <!-- <h1 class="display-1 lokl">Display 1</h1> -->
+            <!--  <button class="btn btn-focus text-black border-0 display-1 fs-1 text-center lokl " (click)=" redireTo('')">
+                LOKL</button> -->
+            <img (click)=" redireTo('')" src="../../../assets/img/logo_lokl.png" width="100%" style="cursor:pointer"
+                alt="">
         </div>
-        <button class="btn btn-focus buttonlogin float-end" (click)="redireTo('register')"> Registrate</button>
-        <button class="btn btn-focus buttonlogin float-end" (click)="redireTo('login')"> Iniciar Sesión</button>
+        <div class="col-4 text-start">
+            <button class="btn buttonnav border border-primary rounded rounded-5">Inscribete Webinars</button>
+            <button class="btn btn-focus text-black border-0 fw-normal fs-4 "> Blog</button>
+        </div>
+        <div class="col-7">
+            <div class="dropdown text-end">
+                <button class="btn float-end dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-focus buttonlogin float-end" (click)="redireTo('register')"> Registrate</button>
+            <button class="btn btn-focus buttonlogin float-end" (click)="redireTo('login')"> Iniciar Sesión</button>
+        </div>
     </div>
 </div>
