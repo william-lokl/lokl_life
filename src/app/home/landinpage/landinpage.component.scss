@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 100%;
 }
 
 .fondo-inversion {
@@ -124,6 +124,11 @@ p {
   display: block;
   width: 100%;
   height: 100%;
+
+  @media (min-width: 992px) and (max-width: 1100px) {
+    width: 90%;
+    height: 100%;
+  }
 }
 
 .card-overlay {
@@ -135,6 +140,10 @@ p {
   background-color: white;
   border-radius: 15px;
 
+  @media (min-width: 992px) and (max-width: 1199px) {
+    width: 55%;
+    height: 35%;
+  }
   @media (min-width: 1200px) {
     height: 30%;
   }
@@ -152,4 +161,16 @@ p {
       margin-bottom: 5%;
     }
   }
+}
+
+.imagen-calculadora {
+  background-color: aqua;
+  border-radius: 45px;
+}
+
+.container-calculadora {
+  /*  margin-top: 200px;
+  margin-left: 450px; */
+  margin-top: 25%;
+  margin-left: 50%;
 }
