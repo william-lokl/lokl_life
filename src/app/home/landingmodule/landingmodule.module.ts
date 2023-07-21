@@ -16,7 +16,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavComponent } from 'src/app/shared/sidenav/sidenav.component';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { PreguntasComponent } from 'src/app/shared/preguntas/preguntas.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
 import { LandinpageComponent } from '../landinpage/landinpage.component';
@@ -24,6 +26,8 @@ import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
 import { LoginComponent } from 'src/app/login/login.component';
+import { SidenavComponent } from 'src/app/shared/sidenav/sidenav.component';
+import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { LoginComponent } from 'src/app/login/login.component';
     LandinpageComponent,
     MinuteroComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    CardhotelesComponent,
   ],
   imports: [
     LandingmoduleRoutingModule,
@@ -49,6 +54,7 @@ import { LoginComponent } from 'src/app/login/login.component';
     MatButtonToggleModule,
     MatTabsModule,
     MatSidenavModule,
+    MatFormFieldModule,
     YouTubePlayerModule,
   ],
 })
