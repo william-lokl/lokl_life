@@ -194,3 +194,23 @@ app-footer {
     height: 100vh;
   }
 }
+
+.space-row-register {
+  height: 100vh;
+
+  @media (min-width: 0px) {
+    height: 65vh;
+  }
+
+  @media (min-width: 576px) {
+    height: 45vh;
+  }
+
+  @media (min-width: 768px) {
+    height: 45vh;
+  }
+
+  @media (min-width: 992px) {
+    height: 90vh;
+  }
+}

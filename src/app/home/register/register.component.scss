@@ -4,3 +4,19 @@
   outline: none;
   box-shadow: none;
 }
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 1450px) {
+  .image-div {
+    display: none;
+  }
+}
+
+// Tamaño mínimo de pantalla para mostrar el div con la imagen
+@media (min-width: 1451px) {
+  .image-div {
+    display: block;
+  }
+}
+
+
