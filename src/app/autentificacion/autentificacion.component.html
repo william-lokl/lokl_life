@@ -1,0 +1,142 @@
+<app-minutero></app-minutero>
+
+<div class="row mt-4">
+    <div class="col-6">
+
+        <div class="row mb-3">
+            <div class="col-9 offset-3">
+                <p class="fw-bold fs-3">Información de Facturación</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-9 offset-3">
+                <p class="fw-normal text-muted fs-5">Utilizamos esta información para registrar productos, asegurar tu
+                    identidad y calcular impuestos y tarifas. Se requieren todos los campos a menos que se indique lo
+                    contrario.</p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-4 pe-0 offset-3 ">
+                <label for="exampleInputEmail1" class="form-label text-muted">Nombre</label>
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label="Nombre"
+                    aria-describedby="basic-addon1" />
+
+            </div>
+            <div class="col-4 p-0">
+                <label for="exampleInputEmail1" class="form-label text-muted">Apellido</label>
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label=" Apellido"
+                    aria-describedby="basic-addon1" />
+
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-8 pe-0 offset-3">
+                <label for="exampleInputEmail1" class="form-label text-muted">Tipo de documento</label>
+                <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
+                    <option value="1" selected>Cédula de ciudadanía</option>
+                    <option value="2">Cédula de extranjeria</option>
+                    <option value="3">Pasaporte</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-8 pe-0 offset-3">
+                <label for="exampleInputEmail1" class="form-label text-muted">Número de identificación</label>
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label=" Apellido"
+                    aria-describedby="basic-addon1" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-9 offset-3">
+                <label for="exampleInputEmail1" class="form-label text-muted">Fecha de nacimiento</label>
+                <mat-form-field appearance="fill" class="picker">
+                    <mat-label>MM/DD/YYYY</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-8 pe-0 offset-3">
+                <label for="exampleInputEmail1" class="form-label text-muted">Número de celular</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend w-25 border border-0 ">
+                        <select class="custom-select border border-end-0" id="inputGroupSelect01">
+                            <option selected>Imagen</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control border border-start-0 ps-0"
+                        placeholder="Digita tu celular" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-8 pe-0 offset-3">
+                <label for="exampleInputEmail1" class="form-label text-muted">Dirección de domicilio</label>
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label=" Apellido"
+                    aria-describedby="basic-addon1" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-4 pe-0 offset-3 ">
+                <label for="exampleInputEmail1" class="form-label text-muted">País</label>
+                <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
+                    <option value="1" selected>Colombia</option>
+                    <option value="2">Chile</option>
+                    <option value="3">España</option>
+                </select>
+
+            </div>
+            <div class="col-4 p-0">
+                <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
+                <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
+                    <option value="1" selected>Bogotá</option>
+                    <option value="2">Antioquia</option>
+                    <option value="3">Barranquilla</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-6 ps-0">
+
+        <div class="row mb-3">
+            <div class="col-9">
+                <p class="fw-bold fs-3">Autentificación de identidad
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-9">
+                <p class="fw-normal text-muted fs-5">Para continuar la compra primero deberás añadir tu documento
+                    oficial, con esto nos ayudas a verificar tu identidad. Este proceso asegura que cada miembro de la
+                    plataforma cuenta con una identidad legal válida.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"+>
+                <app-filedrop></app-filedrop>
+            </div>
+            <div class="col-4">
+                <app-filedrop></app-filedrop>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

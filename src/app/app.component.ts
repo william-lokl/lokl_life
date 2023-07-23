@@ -10,18 +10,18 @@ import * as moment from 'moment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'portal-pagatodopr';
+  title = 'LOKL';
   constructor(private bnIdle: BnNgIdleService, private router: Router) {}
 
   ngOnInit() {
     // this.isSpinner = false
     moment.locale('es');
-    this.bnIdle.startWatching(14400).subscribe((res) => {
+    /* this.bnIdle.startWatching(14400).subscribe((res) => {
       if (res && localStorage.getItem('token')) {
         localStorage.removeItem('token');
         this.router.navigate(['login']);
       }
-    });
+    }); */
   }
 
   redireTo(path: string) {

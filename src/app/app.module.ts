@@ -28,9 +28,12 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
+import { FiledropComponent } from './shared/filedrop/filedrop.component';
 
 @NgModule({
   declarations: [AppComponent, ReplacePipe, FilterPipe, ClickOutsideDirective],
@@ -55,6 +58,8 @@ import { CommonModule } from '@angular/common';
     MatButtonToggleModule,
     MatTabsModule,
     MatSidenavModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     YouTubePlayerModule,
   ],
   providers: [

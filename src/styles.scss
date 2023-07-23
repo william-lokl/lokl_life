@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 .nohover:focus {
   border: none !important;
@@ -182,4 +183,34 @@ app-footer {
   align-items: center;
   color: rgb(240, 230, 230);
   background-color: rgb(240, 230, 230);
+}
+
+.custom-select {
+  width: 200px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  /* Agrega más estilos aquí según tus preferencias */
+}
+
+/* Estilo para las opciones seleccionadas */
+.custom-select option:checked {
+  background-color: white;
+  color: black; /* Cambia este color según tus preferencias */
+}
+
+/* Estilo para las opciones cuando el cursor está encima */
+.custom-select option:hover {
+  background-color: white;
+  color: black; /* Cambia este color según tus preferencias */
+}
+
+.form-select.form-select:focus {
+  background-color: #f8f9fa; /* Cambia el color de fondo cuando está activo */
+  color: #495057; /* Cambia el color del texto cuando está activo */
+}
+
+.form-select.form-select-lg:focus {
+  background-color: #f8f9fa; /* Cambia el color de fondo cuando está activo */
+  color: #495057; /* Cambia el color del texto cuando está activo */
 }

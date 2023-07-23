@@ -16,7 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { PreguntasComponent } from 'src/app/shared/preguntas/preguntas.component';
@@ -28,6 +28,9 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { LoginComponent } from 'src/app/login/login.component';
 import { SidenavComponent } from 'src/app/shared/sidenav/sidenav.component';
 import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.component';
+import { AutentificacionComponent } from 'src/app/autentificacion/autentificacion.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { FiledropComponent } from 'src/app/shared/filedrop/filedrop.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,11 @@ import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.com
     RegisterComponent,
     LoginComponent,
     CardhotelesComponent,
+    AutentificacionComponent,
+    FiledropComponent,
   ],
   imports: [
+    CommonModule,
     LandingmoduleRoutingModule,
     ReactiveFormsModule,
     FormsModule,
@@ -55,7 +61,9 @@ import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.com
     MatTabsModule,
     MatSidenavModule,
     MatFormFieldModule,
+    MatDatepickerModule,
     YouTubePlayerModule,
+    NgxFileDropModule,
   ],
 })
 export class LandingmoduleModule {}
