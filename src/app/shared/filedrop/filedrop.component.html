@@ -1,17 +1,13 @@
 <div draggable="true" class="border-0  fondogray" ngClass="{{dragAreaClass}}">
     <div class="text-center altura-dragfile">
-        <i style="color: #726addbf" class="fa d-block fa-plus-square mt-3 fa-2x"></i>
-        <a class="text-muted text-center" href="javascript:void(0)" (click)="file.click()">
+        <i style="color: #8a82ffbf" class="d-block mt-3 fa-2x fa-solid fa-file-arrow-up"></i>
+        <a class="text-black text-center mt-1" href="javascript:void(0)" style="text-decoration: none;"
+            (click)="file.click()">
             Subir Archivo Frontal
         </a>
     </div>
     <input type="file" #file accept=".jpg,.pdf,.png" [multiple]="false" (change)=" incomingfile($event)"
         style="display:none" />
-    <!-- <div class="row justify-content-center mt-5">
-        <div class="col-lg-4 col-md-4 border-secondary" style="border-style: none;">
-           
-        </div>
-    </div> -->
 </div>
 
 

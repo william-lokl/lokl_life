@@ -214,3 +214,8 @@ app-footer {
   background-color: #f8f9fa; /* Cambia el color de fondo cuando está activo */
   color: #495057; /* Cambia el color del texto cuando está activo */
 }
+
+/* Opción: Si deseas utilizar una variable CSS */
+a:hover {
+  background-color: transparent;
+}
