@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AuthGuard } from './auth.guard';
-import { NoAuthGuard } from './noAuth.guard';
-
 import { LandinpageComponent } from './home/landinpage/landinpage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';

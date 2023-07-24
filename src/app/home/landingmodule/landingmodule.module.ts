@@ -25,12 +25,13 @@ import { LandinpageComponent } from '../landinpage/landinpage.component';
 import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
-import { LoginComponent } from 'src/app/login/login.component';
+import { LoginComponent } from 'src/app/home/login/login.component';
 import { SidenavComponent } from 'src/app/shared/sidenav/sidenav.component';
 import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.component';
-import { AutentificacionComponent } from 'src/app/autentificacion/autentificacion.component';
+import { AutentificacionComponent } from 'src/app/checkout/pages/autentificacion/autentificacion.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FiledropComponent } from 'src/app/shared/filedrop/filedrop.component';
+import { InversionComponent } from 'src/app/checkout/pages/inversion/inversion.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FiledropComponent } from 'src/app/shared/filedrop/filedrop.component';
     CardhotelesComponent,
     AutentificacionComponent,
     FiledropComponent,
+    InversionComponent,
   ],
   imports: [
     CommonModule,
