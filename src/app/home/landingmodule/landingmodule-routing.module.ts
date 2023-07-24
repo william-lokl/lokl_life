@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'test',
-        component: AutentificacionComponent,
+        loadChildren: () => import('src/app/checkout/checkout.module').then( m => m.CheckoutModule )
       },
     ],
   },
