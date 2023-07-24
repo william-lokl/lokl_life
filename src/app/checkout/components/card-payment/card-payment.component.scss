@@ -1,0 +1,32 @@
+.svg-card{
+  width: 69px;
+  height: 49px;
+}
+
+.circle-container{
+  border-radius: 9999px !important;
+  border-color: gray;
+  border-width: 1px;
+}
+
+.circle{
+  border-radius: 9999px !important;
+  height: 0.5rem !important;
+  width: 0.5rem !important;
+  background-color: gray;
+}
+
+.card-select{
+  border-color: #7c3aed;
+  --bs-border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.circle-select{
+  background-color: #7c3aed;
+}
+
+.contenedor{
+  cursor: pointer;
+}
+

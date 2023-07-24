@@ -6,10 +6,12 @@ import { AutentificacionComponent } from './pages/autentificacion/autentificacio
 const routes: Routes = [
   {path: 'invest', component: InversionComponent},
   {path: 'personal-data', component: AutentificacionComponent},
+  {path: '', redirectTo: 'invest', pathMatch: 'full'},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class CheckoutRoutingModule { }
