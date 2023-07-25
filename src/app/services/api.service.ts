@@ -15,8 +15,12 @@ export class ApiService {
       .pipe(map((d) => d));
   }
 
-  get(path: string) {
-    return this.http.get<any>(`${environment.url}${path}`).pipe(map((d) => d));
+  get(path: string, data?: any): any {
+    console.log(data);
+
+    return this.http
+      .get<any>(`${environment.url}${path}`, data)
+      .pipe(map((data) => data));
   }
 
   delete(path: string) {

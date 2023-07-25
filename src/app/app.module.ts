@@ -24,10 +24,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
+import { JwtInterceptor } from './jwt.interceptor';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, ClickOutsideDirective],
   imports: [
+    AppRoutingModule,
     HttpClientModule,
     CommonModule,
     BrowserModule,
@@ -35,7 +38,8 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    HotToastModule.forRoot({ duration: 5000 }),
+    RouterModule.forRoot([]),
+    //HotToastModule.forRoot({ duration: 5000 }),
     SwiperModule,
     NgbModule,
     MatSelectModule,
@@ -50,7 +54,15 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
     YouTubePlayerModule,
   ],
-  providers: [BnNgIdleService],
+
+  providers: [
+    BnNgIdleService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

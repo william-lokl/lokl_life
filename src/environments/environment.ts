@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  paypalUrl: '',
-  athUrl: '',
-  url: '',
-  clientPaypal: '',
-  porcentaje: 0,
+  url: 'https://develop.api.lokl.life/api/v1/',
 };
 
 /*
