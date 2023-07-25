@@ -22,8 +22,11 @@ const routes: Routes = [
         component: LoginComponent,
       },
       {
-        path: 'test',
-        loadChildren: () => import('src/app/checkout/checkout.module').then( m => m.CheckoutModule )
+        path: 'checkout',
+        loadChildren: () =>
+          import('src/app/checkout/checkout.module').then(
+            (m) => m.CheckoutModule
+          ),
       },
     ],
   },

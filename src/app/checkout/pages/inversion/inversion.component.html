@@ -23,21 +23,19 @@
       <div class="row">
         <div class="col-12 ">
           <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
-          <input type="text" class="form-control form-control-lg rounded-0" value="11.000.040"/>
+          <input type="text" class="form-control form-control-lg rounded-0" value="11.000.040" />
         </div>
       </div>
 
       <div class="d-flex justify-content-between mt-3 container-cuotas">
 
-        <app-custom-select [data] = "opcionesSelect" (onOpcionSeleccionada)="changeDues($event)" ></app-custom-select>
+        <app-custom-select [data]="opcionesSelect" (onOpcionSeleccionada)="changeDues($event)"></app-custom-select>
 
 
-        <div class="border pago-unico p-2 text-center align-items-center"
-        [ngClass] = "{
+        <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
           'pago-unico-selected': pagoUnicoSelected
-        }"
-        (click) = "clickPagoUnico()">
-          <p class = "fs-6 mb-0">Pago unico</p>
+        }" (click)="clickPagoUnico()">
+          <p class="fs-6 mb-0">Pago unico</p>
         </div>
 
       </div>
@@ -47,29 +45,33 @@
 
       <!-- TODO: deslizable -->
 
-          <app-card></app-card>
+      <app-card></app-card>
 
 
       <div class="mt-4">
 
-        <p class = "fs-3 fw-bold">Selecciona tu método de pago</p>
+        <p class="fs-3 fw-bold">Selecciona tu método de pago</p>
 
-        <p class = "fs-6 mt-4">
-          <strong>Recuerda:</strong> Qué el pago con tarjeta de crédito puede tener fees adicionales dentro de tu inversión.
+        <p class="fs-6 mt-4">
+          <strong>Recuerda:</strong> Qué el pago con tarjeta de crédito puede tener fees adicionales dentro de tu
+          inversión.
         </p>
 
         <div class="mt-3 mb-4">
-          <app-card-payment *ngFor = "let card of paymentCards" [payment] = "card.name" [selected] = "card.selected" (click) = "activateCard(card.name)"></app-card-payment>
+          <app-card-payment *ngFor="let card of paymentCards" [payment]="card.name" [selected]="card.selected"
+            (click)="activateCard(card.name)"></app-card-payment>
         </div>
 
       </div>
 
-      <div class="d-flex justify-content-between auth mb-5" >
+      <div class="d-flex justify-content-between auth mb-5">
 
-        <mat-checkbox color = "primary" class = "check-auth" [formControl]="checkboxControl"> </mat-checkbox>
+        <mat-checkbox color="primary" class="check-auth" [formControl]="checkboxControl"> </mat-checkbox>
 
         <div class="ml-2 " (click)="clickAuth()">
-          Al realizar el pago, apruebas el débito automático a tu medio de pago y aceptas que tu suscripción será de inmediato. Aceptas recibir notificaciones y aceptas las Políticas de privacidad de LOKL. Además te cobraremos el cargo mensual o anual estándar de forma recurrente según tu método de pago registrado.
+          Al realizar el pago, apruebas el débito automático a tu medio de pago y aceptas que tu suscripción será de
+          inmediato. Aceptas recibir notificaciones y aceptas las Políticas de privacidad de LOKL. Además te cobraremos
+          el cargo mensual o anual estándar de forma recurrente según tu método de pago registrado.
         </div>
       </div>
 
@@ -77,7 +79,7 @@
 
 
     <div class="col-9 col-lg-3">
-      <div class = "img-prom">
+      <div class="img-prom">
         Estás a un paso <br>
         de obtener más beneficios <br>
         invirtiendo $28.000.000
@@ -85,53 +87,56 @@
 
       <div class="mt-3 border border-1 rounded-1 p-4">
 
-        <p class = "fs-4 fw-bold"> Resumen de inversión </p>
-        <p class = "fw-light"> Orden de inversión: <strong> {{fecha | date}} </strong> </p>
+        <p class="fs-4 fw-bold"> Resumen de inversión </p>
+        <p class="fw-light"> Orden de inversión: <strong> {{fecha | date}} </strong> </p>
 
         <hr>
 
-        <p class = "fs-6 mb-5 col-gray"> Proyecto:  Nido de Agua </p>
+        <p class="fs-6 mb-5 col-gray"> Proyecto: Nido de Agua </p>
 
-        <p class = "fs-5 fw-bold"> Pago por suscripción </p>
+        <p class="fs-5 fw-bold"> Pago por suscripción </p>
 
         <div class="d-flex justify-content-between">
-          <p class = "fs-6 col-gray"> inversión total: </p>
-          <p class = "fs-5 fw-bold"> {{total | currency}} </p>
+          <p class="fs-6 col-gray"> inversión total: </p>
+          <p class="fs-5 fw-bold"> {{total | currency}} </p>
         </div>
 
         <div class="d-flex justify-content-between">
-          <p class = "fs-6 col-gray"> Cuotos diferidas: </p>
-          <p class = "fs-5 fw-bold"> 3 meses </p>
+          <p class="fs-6 col-gray"> Cuotos diferidas: </p>
+          <p class="fs-5 fw-bold"> 3 meses </p>
         </div>
-
-        <hr>
-
-        <div class="d-flex justify-content-between">
-          <p class = "fs-6 col-gray"> Subtotal:  </p>
-          <p class = "fs-5 fw-bold"> {{subtotal | currency}} </p>
-        </div>
-
-        <p class = "mt-3 mb-1 col-gray">Proximo pago {{fechaEnMes | date}}</p>
-
-        <div class="d-flex justify-content-between">
-          <p class = "fs-6 col-gray"> Impuestos y tarifas:  </p>
-          <p class = "fs-5 fw-bold"> {{0 | currency}} </p>
-        </div>
-        <p class = "col-gray">Fee tarjeta de crédito 2,5%</p>
 
         <hr>
 
         <div class="d-flex justify-content-between">
-          <p class = "fs-6"> Total:  </p>
-          <p class = "fs-5 fw-bold"> {{total | currency}} </p>
+          <p class="fs-6 col-gray"> Subtotal: </p>
+          <p class="fs-5 fw-bold"> {{subtotal | currency}} </p>
+        </div>
+
+        <p class="mt-3 mb-1 col-gray">Proximo pago {{fechaEnMes | date}}</p>
+
+        <div class="d-flex justify-content-between">
+          <p class="fs-6 col-gray"> Impuestos y tarifas: </p>
+          <p class="fs-5 fw-bold"> {{0 | currency}} </p>
+        </div>
+        <p class="col-gray">Fee tarjeta de crédito 2,5%</p>
+
+        <hr>
+
+        <div class="d-flex justify-content-between">
+          <p class="fs-6"> Total: </p>
+          <p class="fs-5 fw-bold"> {{total | currency}} </p>
         </div>
 
 
 
-        <button mat-button class = "btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3"> Continuar </button>
+        <button mat-button (click)=" redireTo('checkout/personal-data')"
+          class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3">
+          Continuar </button>
       </div>
 
-      <p class = "mt-3 col-gray" >¿Tienes alguna duda? Contáctanos a <a href = "mailto:info@lokl.life" class = "col-gray">info@lokl.life</a> o comunicate a nuestro canal de atención</p>
+      <p class="mt-3 col-gray">¿Tienes alguna duda? Contáctanos a <a href="mailto:info@lokl.life"
+          class="col-gray">info@lokl.life</a> o comunicate a nuestro canal de atención</p>
     </div>
   </div>
 
@@ -139,6 +144,6 @@
 
 </div>
 
-<app-steper></app-steper>
+<!-- <app-steper></app-steper> -->
 
 <app-footer></app-footer>

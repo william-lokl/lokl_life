@@ -2,77 +2,76 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PaymentCard } from '../../interfaces/paymentCard.interface';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inversion',
   templateUrl: './inversion.component.html',
-  styleUrls: ['./inversion.component.scss']
+  styleUrls: ['./inversion.component.scss'],
 })
 export class InversionComponent implements OnInit {
-
   public checkboxControl: FormControl = new FormControl(false);
   public fecha: Date = new Date();
-  public fechaEnMes: Date =  this.generarFecha();
+  public fechaEnMes: Date = this.generarFecha();
   public pagoUnicoSelected: boolean = false;
   public selectCuotasSelected: boolean = false;
   public cuotaActual: number = 3;
   public opcionesSelect: CustomSelectElement[] = [
-    {name: "3 meses", value: 3, selected: true},
-    {name: "6 meses", value: 6, selected: false},
-    {name: "9 meses", value: 9, selected: false},
-  ]
+    { name: '3 meses', value: 3, selected: true },
+    { name: '6 meses', value: 6, selected: false },
+    { name: '9 meses', value: 9, selected: false },
+  ];
   total = 11200040;
   subtotal = 30000000;
 
   paymentCards: PaymentCard[] = [
-    {name: 'visa', selected: false},
-    {name: 'pse', selected: false},
-  ]
+    { name: 'visa', selected: false },
+    { name: 'pse', selected: false },
+  ];
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  generarFecha(): Date{
+  generarFecha(): Date {
     const fecha = new Date();
 
-    fecha.setMonth( fecha.getMonth() + 1 )
+    fecha.setMonth(fecha.getMonth() + 1);
 
     return fecha;
   }
 
-  clickAuth(){
-    this.checkboxControl.setValue( !this.checkboxControl.value )
+  clickAuth() {
+    this.checkboxControl.setValue(!this.checkboxControl.value);
   }
 
-  activateCard(card: "visa" | "pse"){
-
-    if(card == "visa"){
-      this.paymentCards[0].selected = true
-      this.paymentCards[1].selected = false
+  activateCard(card: 'visa' | 'pse') {
+    if (card == 'visa') {
+      this.paymentCards[0].selected = true;
+      this.paymentCards[1].selected = false;
     }
 
-    if(card == "pse"){
-      this.paymentCards[1].selected = true
-      this.paymentCards[0].selected = false
+    if (card == 'pse') {
+      this.paymentCards[1].selected = true;
+      this.paymentCards[0].selected = false;
     }
-
   }
 
-  clickSelectCuotas(){
+  clickSelectCuotas() {
     this.selectCuotasSelected = true;
     this.pagoUnicoSelected = false;
   }
 
-  clickPagoUnico(){
+  clickPagoUnico() {
     this.selectCuotasSelected = false;
     this.pagoUnicoSelected = true;
   }
 
-  changeDues(event: number){
+  changeDues(event: number) {
     console.log(event);
+  }
+
+  redireTo(path: string) {
+    this.router.navigate([`${path}`]);
   }
 }
