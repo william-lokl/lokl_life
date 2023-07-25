@@ -17,7 +17,7 @@
 
 <div *ngFor = "let option of data ; let i= index"
   class = "opcion-desp border p-2 text-center align-items-center border-top-0 select--"
-  (click) = "onClickOption(option.value)"
+  (click) = "onClickOption(option)"
   [ngClass]="{
     'border-bottom-0': !(i == dataLength),
     'd-none': !selectSelected

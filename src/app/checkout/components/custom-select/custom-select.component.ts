@@ -41,8 +41,16 @@ export class CustomSelectComponent implements OnInit {
     this.selectSelected = !this.selectSelected;
   }
 
-  onClickOption(value: any){
-    this.onOpcionSeleccionada.emit(value)
+  onClickOption(element: CustomSelectElement){
+    const oldName = this.elementSelected.name;
+
+    this.elementSelected = element;
+
+    this.selectSelected = false;
+
+    console.log(this.elementSelected)
+
+    this.onOpcionSeleccionada.emit(element.value);
   }
 
 }
