@@ -19,4 +19,19 @@
   }
 }
 
+.text-header-register {
+  text-align: start;
+}
+.text-header-register h3{
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+@media (max-width: 991px) {
+  .text-header-register {
+    text-align: justify;
+  }
+}
+
 

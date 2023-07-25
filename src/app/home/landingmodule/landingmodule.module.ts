@@ -25,7 +25,7 @@ import { LandinpageComponent } from '../landinpage/landinpage.component';
 import { MinuteroComponent } from 'src/app/shared/minutero/minutero.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
-import { LoginComponent } from 'src/app/login/login.component';
+import { LoginComponent } from 'src/app/home/login/login.component';
 import { SidenavComponent } from 'src/app/shared/sidenav/sidenav.component';
 import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.component';
 
