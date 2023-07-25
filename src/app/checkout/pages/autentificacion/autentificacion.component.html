@@ -56,13 +56,12 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-9 offset-0 offset-lg-3 pe-2 pe-lg-1">
                     <label for="exampleInputEmail1" class="form-label text-muted">Fecha de nacimiento</label>
                     <mat-form-field appearance="fill" class="picker p-0">
-                        <mat-label>DD/MM/YYYY</mat-label>
-                        <input matInput [matDatepicker]="picker" placeholder="DD/MM/YYYY" (focus)="picker.open()"
-                            (click)="picker.open()" [(ngModel)]="selectedDate">
-                        <!-- Agregar ngModel para vincular el valor seleccionado -->
+                        <mat-label>Mes/Dia/Año</mat-label>
+                        <input matInput [matDatepicker]="picker">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
                     </mat-form-field>
+
                 </div>
             </div>
 

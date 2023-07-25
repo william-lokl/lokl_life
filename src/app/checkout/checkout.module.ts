@@ -10,6 +10,13 @@ import { InversionComponent } from './pages/inversion/inversion.component';
 import { CardComponent } from './components/card/card.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MAT_DATE_FORMATS,
+  DateAdapter,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+  ],
+
+  providers: [
+    // Opcional: Si necesitas ajustar el idioma
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
 })
 export class CheckoutModule {}
