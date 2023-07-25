@@ -6,6 +6,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./autentificacion.component.scss'],
 })
 export class AutentificacionComponent implements OnInit {
+  selectedDate: any;
   resolucion_movil: boolean = false;
   paso1: boolean = true;
   paso2: boolean = false;

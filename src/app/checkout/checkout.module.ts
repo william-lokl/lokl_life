@@ -11,21 +11,21 @@ import { CardComponent } from './components/card/card.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     InversionComponent,
     AutentificacionComponent,
     CardComponent,
-    CardPaymentComponent
+    CardPaymentComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     CheckoutRoutingModule,
     LandingmoduleModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class CheckoutModule { }
+export class CheckoutModule {}

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./filedrop.component.scss'],
 })
 export class FiledropComponent implements OnInit {
+  @Input() label: string = '';
+
   file: any = [];
   dragAreaClass: string = '';
   preview: any;

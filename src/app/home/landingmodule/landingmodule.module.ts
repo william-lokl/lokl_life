@@ -33,13 +33,9 @@ import { MaterialModule } from 'src/app/material/material.module';
     RegisterComponent,
     LoginComponent,
     CardhotelesComponent,
-    FiledropComponent
-  ],
-  exports:[
-    MinuteroComponent,
-    FooterComponent,
     FiledropComponent,
   ],
+  exports: [MinuteroComponent, FooterComponent, FiledropComponent],
   imports: [
     CommonModule,
     LandingmoduleRoutingModule,
@@ -49,5 +45,6 @@ import { MaterialModule } from 'src/app/material/material.module';
     YouTubePlayerModule,
     NgxFileDropModule,
   ],
+  providers: [],
 })
 export class LandingmoduleModule {}

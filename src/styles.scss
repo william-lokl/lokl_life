@@ -1,5 +1,4 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~bootstrap/dist/css/bootstrap.min.css";
+@use "@angular/material" as mat;
 
 .nohover:focus {
   border: none !important;
@@ -69,22 +68,6 @@ app-footer {
   box-shadow: none;
 }
 
-.bg-blue {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
-.bg-blue:hover,
-:focus {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
-.bg-blue:active:focus {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
 .form-check-input {
   background-color: white;
   border-color: none;
@@ -97,10 +80,6 @@ app-footer {
   border-color: none;
   box-shadow: none;
   border: 0;
-}
-
-.form-check-input[type="checkbox"] {
-  border-radius: 0em;
 }
 
 .space-row {
@@ -190,7 +169,6 @@ app-footer {
   font-size: 16px;
   background-color: white;
   color: black;
-  /* Agrega más estilos aquí según tus preferencias */
 }
 
 /* Estilo para las opciones seleccionadas */
