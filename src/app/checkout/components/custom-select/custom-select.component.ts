@@ -12,10 +12,14 @@ export class CustomSelectComponent implements OnInit {
   @Input() selectSelected: boolean = false;
   @Input() data: CustomSelectElement[] = [];
   @Input() public ssColor: string = "#7c3aed";
+  @Input() public justIzquierda: boolean = false;
+
+  desplegar: boolean = false;
 
   @Output('onOpcionSeleccionada') onOpcionSeleccionada: EventEmitter<any> = new EventEmitter<any>();
 
-  dataLength?: number;;
+
+  dataLength?: number;
 
   elementSelected!: CustomSelectElement;
 
@@ -38,7 +42,8 @@ export class CustomSelectComponent implements OnInit {
   }
 
   clickSelect(){
-    this.selectSelected = !this.selectSelected;
+    this.selectSelected = true;
+    this.desplegar = !this.desplegar;
   }
 
   onClickOption(element: CustomSelectElement){
@@ -46,9 +51,11 @@ export class CustomSelectComponent implements OnInit {
 
     this.elementSelected = element;
 
-    this.selectSelected = false;
+    this.desplegar = false;
 
-    console.log(this.elementSelected)
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i].name == oldName ) this.data[i].selected = false
+    }
 
     this.onOpcionSeleccionada.emit(element.value);
   }

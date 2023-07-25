@@ -1,13 +1,15 @@
 <div class="custom-select- border p-2 text-center align-items-center "
   [ngClass] = "{
     'select--': selectSelected,
-    'border-bottom-0': selectSelected
+    'border-bottom-0': desplegar,
+    'text-center': !justIzquierda,
+    'text-left': justIzquierda
   }"
   (click)="clickSelect()">
     <p class = "fs-6 mb-0"> {{elementSelected.name}} </p>
     <svg [ngClass] = "{
-      'svg-select-down': selectSelected,
-      'svg-select': !selectSelected
+      'svg-select-down': desplegar,
+      'svg-select': !desplegar
     }"
     width="14" height = "8"
     >
@@ -20,7 +22,9 @@
   (click) = "onClickOption(option)"
   [ngClass]="{
     'border-bottom-0': !(i == dataLength),
-    'd-none': !selectSelected
+    'd-none': !desplegar,
+    'text-center': !justIzquierda,
+    'text-left': justIzquierda
   }">
   <p class = "fs-6 mb-0"> {{option.name}} </p>
 </div>
