@@ -96,18 +96,16 @@
                     class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0 ">
                     <label for="exampleInputEmail1" class="form-label text-muted">País</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                        <option value="1" selected>Colombia</option>
-                        <option value="2">Chile</option>
-                        <option value="3">España</option>
+                        <option *ngFor="let country of countries" [value]="country" style="box-shadow: 0;">{{ country }}
+                        </option>
                     </select>
 
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
                     <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                        <option value="1" selected>Bogotá</option>
-                        <option value="2">Antioquia</option>
-                        <option value="3">Barranquilla</option>
+                        <option *ngFor="let citie of cities" [value]="citie" style="box-shadow: 0;">{{ citie }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -139,7 +137,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-5">
                 <div class="col-9">
                     <p class="font-weight-light text-muted fs-6">Para continuar la compra primero deberás añadir tu
                         documento
@@ -166,14 +164,14 @@
                         pasaporte. Cualquier otro tipo de documento será invalido.</p>
                 </div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-9">
                     <hr>
                 </div>
             </div>
             <div class="row mb-5">
                 <div class="col-9">
-                    <p class="font-weight-light text-muted fs-6">Contrato de vinculación a LOKL</p>
+                    <p class="font-weight-light text-muted fs-5">Contrato de vinculación a LOKL</p>
                 </div>
             </div>
             <div class="row mb-5">
@@ -204,10 +202,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <div class="col-4">
-                    <button class="btn bg-black rounded rounded-5 w-100 text-white">
+            <div class="row">
+                <div class="col-4 pt-3">
+                    <button class="btn bg-black  rounded rounded-5 w-100 text-white">
                         Firmar Contrato
                     </button>
                 </div>

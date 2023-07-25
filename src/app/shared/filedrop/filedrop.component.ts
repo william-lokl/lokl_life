@@ -9,7 +9,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class FiledropComponent implements OnInit {
   @Input() label: string = '';
 
-  file: any = [];
+  public archivo: any = [];
+  name_archivo = '';
   dragAreaClass: string = '';
   preview: any;
   error: string = '';
@@ -42,12 +43,15 @@ export class FiledropComponent implements OnInit {
   ngOnInit(): void {}
 
   public async incomingfile(event: any) {
-    this.file = [];
-    this.file = event.target.files[0];
-    this.extraerBase64(this.file).then((imagen: any) => {
+    this.archivo = [];
+    this.archivo = event.target.files[0];
+    console.log(this.archivo);
+    this.name_archivo = this.archivo.name;
+
+    this.extraerBase64(this.archivo).then((imagen: any) => {
       this.preview = imagen.base;
     });
-    console.log(this.file);
+    console.log(this.archivo);
   }
 
   extraerBase64 = async ($event: any) =>
@@ -76,12 +80,13 @@ export class FiledropComponent implements OnInit {
     if (files.length > 1) this.error = 'Only one file at time allow';
     else {
       this.error = '';
-      this.file = files[0];
-      console.log('nombre', this.file);
-      this.extraerBase64(this.file).then((imagen: any) => {
+      this.archivo = files[0];
+      console.log('nombre', this.archivo);
+      this.extraerBase64(this.archivo).then((imagen: any) => {
         this.preview = imagen.base;
       });
-      //console.log(files[0].size, files[0].name, files[0].type);
+      this.name_archivo = files[0].name;
+      console.log(files[0].size, files[0].name, files[0].type);
     }
   }
 }

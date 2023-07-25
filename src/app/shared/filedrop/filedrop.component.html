@@ -3,7 +3,8 @@
         <i style="color: #8a82ffbf" class="d-block mt-3 fa-2x fa-solid fa-file-arrow-up"></i>
         <a class="text-black text-center mt-1" href="javascript:void(0)" style="text-decoration: none;"
             (click)="file.click()">
-            {{label}}
+            {{name_archivo ? name_archivo : label }}
+
         </a>
     </div>
     <input type="file" #file accept=".jpg,.pdf,.png" [multiple]="false" (change)=" incomingfile($event)"
