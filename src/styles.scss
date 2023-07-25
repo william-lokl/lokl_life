@@ -1,4 +1,4 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@use "@angular/material" as mat;
 
 .nohover:focus {
   border: none !important;
@@ -54,22 +54,6 @@ app-footer {
   box-shadow: none;
 }
 
-.bg-blue {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
-.bg-blue:hover,
-:focus {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
-.bg-blue:active:focus {
-  background-color: rgb(15, 8, 46);
-  color: white;
-}
-
 .form-check-input {
   background-color: white;
   border-color: none;
@@ -82,10 +66,6 @@ app-footer {
   border-color: none;
   box-shadow: none;
   border: 0;
-}
-
-.form-check-input[type="checkbox"] {
-  border-radius: 0em;
 }
 
 .space-row {
@@ -190,3 +170,37 @@ app-footer {
     min-height: 100vh;
   }
 }
+.custom-select {
+  width: 200px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+}
+
+/* Estilo para las opciones seleccionadas */
+.custom-select option:checked {
+  background-color: white;
+  color: black; /* Cambia este color según tus preferencias */
+}
+
+/* Estilo para las opciones cuando el cursor está encima */
+.custom-select option:hover {
+  background-color: white;
+  color: black; /* Cambia este color según tus preferencias */
+}
+
+.form-select.form-select:focus {
+  background-color: #f8f9fa; /* Cambia el color de fondo cuando está activo */
+  color: #495057; /* Cambia el color del texto cuando está activo */
+}
+
+.form-select.form-select-lg:focus {
+  background-color: #f8f9fa; /* Cambia el color de fondo cuando está activo */
+  color: #495057; /* Cambia el color del texto cuando está activo */
+}
+
+/* Opción: Si deseas utilizar una variable CSS */
+a:hover {
+  background-color: transparent;
+}
+

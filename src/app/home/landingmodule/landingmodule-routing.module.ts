@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
 import { LandinpageComponent } from '../landinpage/landinpage.component';
 import { LoginComponent } from 'src/app/home/login/login.component';
+import { AutentificacionComponent } from 'src/app/checkout/pages/autentificacion/autentificacion.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,13 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'checkout',
+        loadChildren: () =>
+          import('src/app/checkout/checkout.module').then(
+            (m) => m.CheckoutModule
+          ),
       },
     ],
   },

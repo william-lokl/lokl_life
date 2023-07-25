@@ -1,0 +1,19 @@
+<div draggable="true" class="border-0" style="background-color: rgb(242, 242, 242);" ngClass="{{dragAreaClass}}">
+    <div class="text-center altura-dragfile">
+        <i style="color: #8a82ffbf" class="d-block mt-3 fa-2x fa-solid fa-file-arrow-up"></i>
+        <a class="text-black text-center mt-1" href="javascript:void(0)" style="text-decoration: none;"
+            (click)="file.click()">
+            {{name_archivo ? name_archivo : label }}
+
+        </a>
+    </div>
+    <input type="file" #file accept=".jpg,.pdf,.png" [multiple]="false" (change)=" incomingfile($event)"
+        style="display:none" />
+</div>
+
+
+<!-- <div class="row justify-content-center">
+    <div *ngIf="preview " class="col-lg-4 col-md-2 col-sm-12">
+        <img class="rounded" width="300" height="" [src]="preview" />
+    </div>
+</div> -->

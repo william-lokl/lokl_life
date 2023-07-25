@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between p-4 rounded-1 border border-2 contenedor" [ngClass]="{ 'card-select': selected }">
+
+  <div class="d-flex justify-content-center align-contentf-center">
+    <div class="mr-5">
+      <img [src]="imgUrl" alt="payment" class = "svg-card">
+    </div>
+    <div>
+      <p class = "fs-6 fw-bold mb-0">Tarjeta de crédito</p>
+      <p class = "fs-7 mb-0">VISA, Mastercard, American</p>
+    </div>
+  </div>
+
+  <div class = "align-self-center" >
+    <div class = "circle-container border border-2 p-2">
+      <div class="circle" [ngClass]="{ 'circle-select': selected }"></div>
+    </div>
+  </div>
+</div>
