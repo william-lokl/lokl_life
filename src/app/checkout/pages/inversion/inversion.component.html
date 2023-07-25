@@ -1,179 +1,207 @@
 <app-minutero></app-minutero>
 
-<div style = "padding: 140px;">
+<div style="padding-top: 140px">
+  <app-actualroute></app-actualroute>
+  <form [formGroup]="formInversion">
+    <div class="row mt-5">
+      <div class="col-12 col-lg-6">
+        <div class="row mb-3">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <p class="fw-bold fs-3 font-black font-lato text-3x1">
+              Empieza hoy mismo!
+            </p>
+          </div>
+        </div>
 
-  <div class="row mt-5 justify-content-center">
-    <form class="col-9 col-lg-5" [formGroup]="formInversion">
-      <div class="row mb-3">
-        <div class="col-12 col-lg-8 offset-0">
+        <div class="row mb-3">
+          <div class="col-12 col-lg-9 offset-lg-3">
+            <p class="font-weight-light text-muted fs-6">
+              Escoge tu mejor opción de pago e inicia tu camino
+              comoinversionista en LOKL.
+            </p>
+          </div>
+        </div>
 
-          <p class="fw-bold fs-3 font-black font-lato text-3x1">Empieza hoy mismo!</p>
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
+            <input type="number" class="form-control form-control-lg rounded-0" formControlName="value"
+              (input)="calcularMontos()" placeholder="$0" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <div class="d-flex justify-content-between mt-3 container-cuotas">
+              <app-custom-select [data]="opcionesSelect"
+                (onOpcionSeleccionada)="changeDues($event)"></app-custom-select>
+              <select hidden>
+                <option value="1"></option>
+                <option value="3"></option>
+                <option value="9"></option>
+                <option value="12"></option>
+              </select>
+
+              <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
+                  'pago-unico-selected': pagoUnicoSelected
+                }" (click)="clickPagoUnico()">
+                <p class="fs-6 mb-0">Pago unico</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <hr class="mt-5 mb-5" />
+          </div>
+        </div>
+
+        <!-- TODO: deslizable -->
+        <div class="row mb-3">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" [ngClass]="{
+                    active: cardData[0].dues == formInversion.value.dues
+                  }">
+                  <app-card [data]="cardData[0]" class="d-block"></app-card>
+                </div>
+                <div class="carousel-item" [ngClass]="{
+                    active: cardData[1].dues == formInversion.value.dues
+                  }">
+                  <app-card [data]="cardData[1]" class="d-block"></app-card>
+                </div>
+                <div class="carousel-item" [ngClass]="{
+                    active: cardData[2].dues == formInversion.value.dues
+                  }">
+                  <app-card [data]="cardData[2]" class="d-block"></app-card>
+                </div>
+                <div class="carousel-item" [ngClass]="{
+                    active: cardData[3].dues == formInversion.value.dues
+                  }">
+                  <app-card [data]="cardData[3]" class="d-block"></app-card>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="javascript:void(0)" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="javascript:void(0)" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <p class="fs-3 fw-bold">Selecciona tu método de pago</p>
+
+            <p class="fs-6 mt-4">
+              <strong>Recuerda:</strong> Qué el pago con tarjeta de crédito
+              puede tener fees adicionales dentro de tu inversión.
+            </p>
+
+            <div class="mt-3 mb-4">
+              <app-card-payment *ngFor="let card of paymentCards" [payment]="card.name" [selected]="card.selected"
+                (click)="activateCard(card.name)"></app-card-payment>
+
+              <input hidden type="checkbox" value="visa" />
+              <input hidden type="checkbox" value="pse" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-0 offset-lg-3">
+            <div class="d-flex justify-content-between auth mb-5">
+              <mat-checkbox color="primary" class="check-auth" formControlName="acceptTerms">
+              </mat-checkbox>
+
+              <div class="ml-2" (click)="clickAuth()">
+                Al realizar el pago, apruebas el débito automático a tu medio de
+                pago y aceptas que tu suscripción será de inmediato. Aceptas
+                recibir notificaciones y aceptas las Políticas de privacidad de
+                LOKL. Además te cobraremos el cargo mensual o anual estándar de
+                forma recurrente según tu método de pago registrado.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="col-4 ml-4 d-none d-sm-none d-md-none d-lg-block">
+        <div class="img-prom">
+          Estás a un paso <br />
+          de obtener más beneficios <br />
+          invirtiendo $28.000.000
+        </div>
 
-      <div class="row mb-3">
-        <div class="col-12 col-lg-9 ">
-          <p class="font-weight-light text-muted fs-6">
-            Escoge tu mejor opción de pago e inicia tu camino comoinversionista en LOKL.
+        <div class="mt-3 border border-1 rounded-1 p-4">
+          <p class="fs-4 fw-bold">Resumen de inversión</p>
+          <p class="fw-light">
+            Orden de inversión: <strong> {{ fecha | date }} </strong>
           </p>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12 ">
-          <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
-          <input type="number" class="form-control form-control-lg rounded-0" formControlName = "value" (input)="calcularMontos()" placeholder="$0"/>
-        </div>
-      </div>
+          <hr />
 
-      <div class="d-flex justify-content-between mt-3 container-cuotas">
+          <p class="fs-6 mb-5 col-gray">Proyecto: Nido de Agua</p>
 
-        <app-custom-select [data]="opcionesSelect" (onOpcionSeleccionada)="changeDues($event)" ></app-custom-select>
-        <select hidden>
-          <option value="1"></option>
-          <option value="3"></option>
-          <option value="9"></option>
-          <option value="12"></option>
-        </select>
+          <p class="fs-5 fw-bold">Pago por suscripción</p>
 
-        <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
-          'pago-unico-selected': pagoUnicoSelected
-        }" (click)="clickPagoUnico()">
-          <p class="fs-6 mb-0">Pago unico</p>
-        </div>
-
-      </div>
-
-      <hr class="mt-5 mb-5">
-
-
-      <!-- TODO: deslizable -->
-
-      <div id="carouselExampleControls" class="carousel slide p-3" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item" [ngClass]="{'active': cardData[0].dues == formInversion.value.dues}">
-            <app-card [data] = "cardData[0]" class = "d-block"></app-card>
+          <div class="d-flex justify-content-between">
+            <p class="fs-6 col-gray">inversión total:</p>
+            <p class="fs-5 fw-bold">
+              {{ formInversion.value.value | currency }}
+            </p>
           </div>
-          <div class="carousel-item" [ngClass]="{'active': cardData[1].dues == formInversion.value.dues}">
-            <app-card [data] = "cardData[1]" class = "d-block"></app-card>
+
+          <div class="d-flex justify-content-between">
+            <p class="fs-6 col-gray">Cuotas diferidas:</p>
+            <p class="fs-5 fw-bold">
+              {{ this.formInversion.value.dues | i18nPlural : mapCuotas }}
+            </p>
           </div>
-          <div class="carousel-item" [ngClass]="{'active': cardData[2].dues == formInversion.value.dues}">
-            <app-card [data] = "cardData[2]" class = "d-block"></app-card>
+
+          <hr />
+
+          <div class="d-flex justify-content-between mb-3">
+            <p class="fs-6 col-gray">Subtotal:</p>
+            <p class="fs-5 fw-bold">{{ subtotal | currency }}</p>
           </div>
-          <div class="carousel-item" [ngClass]="{'active': cardData[3].dues == formInversion.value.dues}">
-            <app-card [data] = "cardData[3]" class = "d-block"></app-card>
+
+          <p class="mt-3 mb-1 col-gray" *ngIf="formInversion.value.dues != 1">
+            Proximo pago {{ fechaEnMes | date }}
+          </p>
+
+          <div class="d-flex justify-content-between">
+            <p class="fs-6 col-gray">Impuestos y tarifas:</p>
+            <p class="fs-5 fw-bold">{{ impuestosTarifas | currency }}</p>
           </div>
+          <p class="col-gray">Fee tarjeta de crédito 2,5%</p>
+
+          <hr />
+
+          <div class="d-flex justify-content-between">
+            <p class="fs-6">Total:</p>
+            <p class="fs-5 fw-bold">{{ total | currency }}</p>
+          </div>
+
+          <button mat-button (click)="redireTo('checkout/personal-data')"
+            class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3">
+            Continuar
+          </button>
         </div>
-        <a class="carousel-control-prev" href="javascript:void(0)" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="javascript:void(0)" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
 
-
-
-
-      <div class="mt-4">
-
-        <p class="fs-3 fw-bold">Selecciona tu método de pago</p>
-
-        <p class="fs-6 mt-4">
-          <strong>Recuerda:</strong> Qué el pago con tarjeta de crédito puede tener fees adicionales dentro de tu
-          inversión.
+        <p class="mt-3 col-gray">
+          ¿Tienes alguna duda? Contáctanos a
+          <a href="mailto:info@lokl.life" class="col-gray">info@lokl.life</a> o
+          comunicate a nuestro canal de atención
         </p>
-
-        <div class="mt-3 mb-4">
-          <app-card-payment *ngFor="let card of paymentCards" [payment]="card.name" [selected]="card.selected"
-            (click)="activateCard(card.name)"></app-card-payment>
-
-          <input hidden type="checkbox" value = "visa" >
-          <input hidden type="checkbox" value = "pse" >
-        </div>
-
       </div>
-
-      <div class="d-flex justify-content-between auth mb-5">
-
-        <mat-checkbox color="primary" class="check-auth" formControlName="acceptTerms"> </mat-checkbox>
-
-        <div class="ml-2 " (click)="clickAuth()">
-          Al realizar el pago, apruebas el débito automático a tu medio de pago y aceptas que tu suscripción será de
-          inmediato. Aceptas recibir notificaciones y aceptas las Políticas de privacidad de LOKL. Además te cobraremos
-          el cargo mensual o anual estándar de forma recurrente según tu método de pago registrado.
-        </div>
-      </div>
-
-    </form>
-
-
-    <div class="col-9 col-lg-4 col-derecha">
-      <div class="img-prom">
-        Estás a un paso <br>
-        de obtener más beneficios <br>
-        invirtiendo $28.000.000
-      </div>
-
-      <div class="mt-3 border border-1 rounded-1 p-4">
-
-        <p class="fs-4 fw-bold"> Resumen de inversión </p>
-        <p class="fw-light"> Orden de inversión: <strong> {{fecha | date}} </strong> </p>
-
-        <hr>
-
-        <p class="fs-6 mb-5 col-gray"> Proyecto: Nido de Agua </p>
-
-        <p class="fs-5 fw-bold"> Pago por suscripción </p>
-
-        <div class="d-flex justify-content-between">
-          <p class="fs-6 col-gray"> inversión total: </p>
-          <p class="fs-5 fw-bold"> {{ formInversion.value.value | currency}} </p>
-        </div>
-
-        <div class="d-flex justify-content-between">
-          <p class="fs-6 col-gray"> Cuotas diferidas: </p>
-          <p class="fs-5 fw-bold"> {{this.formInversion.value.dues | i18nPlural: mapCuotas}} </p>
-        </div>
-
-        <hr>
-
-        <div class="d-flex justify-content-between mb-3">
-          <p class="fs-6 col-gray"> Subtotal: </p>
-          <p class="fs-5 fw-bold"> {{subtotal | currency}} </p>
-        </div>
-
-        <p class="mt-3 mb-1 col-gray" *ngIf="formInversion.value.dues != 1" >Proximo pago {{fechaEnMes | date}}</p>
-
-        <div class="d-flex justify-content-between">
-          <p class="fs-6 col-gray"> Impuestos y tarifas: </p>
-          <p class="fs-5 fw-bold"> {{impuestosTarifas | currency}} </p>
-        </div>
-        <p class="col-gray">Fee tarjeta de crédito 2,5%</p>
-
-        <hr>
-
-        <div class="d-flex justify-content-between">
-          <p class="fs-6"> Total: </p>
-          <p class="fs-5 fw-bold"> {{total | currency}} </p>
-        </div>
-
-
-
-        <button mat-button (click)=" redireTo('checkout/personal-data')"
-          class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3">
-          Continuar </button>
-      </div>
-
-      <p class="mt-3 col-gray">¿Tienes alguna duda? Contáctanos a <a href="mailto:info@lokl.life"
-          class="col-gray">info@lokl.life</a> o comunicate a nuestro canal de atención</p>
     </div>
-  </div>
-
-
-
+  </form>
 </div>
 
 <!-- <app-steper></app-steper> -->

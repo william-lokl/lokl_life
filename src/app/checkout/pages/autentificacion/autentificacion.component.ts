@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 
 @Component({
   selector: 'app-autentificacion',
@@ -15,6 +16,12 @@ export class AutentificacionComponent implements OnInit {
   paso1: boolean = true;
   paso2: boolean = false;
   paso3: boolean = false;
+
+  public opcionesSelect: CustomSelectElement[] = [
+    { name: 'Cédula de Ciudadania', value: 1, selected: true },
+    { name: 'Cédula de Extranjeria', value: 2, selected: false },
+    { name: 'Pasaporte', value: 3, selected: false },
+  ];
   constructor(private http: HttpClient) {}
 
   @HostListener('window:resize', ['$event'])
@@ -97,5 +104,9 @@ export class AutentificacionComponent implements OnInit {
     } else {
       this.cities = [];
     }
+  }
+
+  changeDues(event: number) {
+    console.log(event);
   }
 }

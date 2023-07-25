@@ -1,6 +1,7 @@
 <app-minutero></app-minutero>
-<div class="" style="padding-top: 140px;" *ngIf="resolucion_movil == false">
-    <div class="row mt-4">
+<div class="" style="padding-top: 140px" *ngIf="resolucion_movil == false">
+    <app-actualroute></app-actualroute>
+    <div class="row mt-5">
         <div class="col-12 col-lg-6">
             <div class="row mb-3">
                 <div class="col-12 col-lg-9 offset-0 offset-lg-3">
@@ -9,12 +10,11 @@
             </div>
             <div class="row mb-3">
                 <div class="col-12 col-lg-9 offset-lg-3">
-                    <p class="font-weight-light text-muted fs-6">Utilizamos esta información para registrar productos,
-                        asegurar
-                        tu
-                        identidad y calcular impuestos y tarifas. Se requieren todos los campos a menos que se indique
-                        lo
-                        contrario.</p>
+                    <p class="font-weight-light text-muted fs-6">
+                        Utilizamos esta información para registrar productos, asegurar tu
+                        identidad y calcular impuestos y tarifas. Se requieren todos los
+                        campos a menos que se indique lo contrario.
+                    </p>
                 </div>
             </div>
 
@@ -24,24 +24,25 @@
                     <label for="exampleInputEmail1" class="form-label text-muted">Nombre</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label="Nombre"
                         aria-describedby="basic-addon1" />
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Apellido</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder=""
                         aria-label=" Apellido" aria-describedby="basic-addon1" />
                 </div>
             </div>
-
-            <div class="row mb-3">
+            <div class="row mb-2">
                 <div class="col-12 col-sm-12 col-lg-8 pe-2 pe-lg-0 offset-lg-3">
                     <label for="exampleInputEmail1" class="form-label text-muted">Tipo de documento</label>
-                    <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
+                    <!-- <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
                         <option value="1" selected>Cédula de ciudadanía</option>
                         <option value="2">Cédula de extranjeria</option>
                         <option value="3">Pasaporte</option>
-
-                    </select>
+                    </select> -->
+                    <div class="d-flex justify-content-between mt-1 container-cuotas">
+                        <app-custom-select [data]="opcionesSelect" [justIzquierda]="true"
+                            (onOpcionSeleccionada)="changeDues($event)"></app-custom-select>
+                    </div>
                 </div>
             </div>
 
@@ -52,32 +53,32 @@
                         aria-label=" Apellido" aria-describedby="basic-addon1" />
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-1">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-9 offset-0 offset-lg-3 pe-2 pe-lg-1">
                     <label for="exampleInputEmail1" class="form-label text-muted">Fecha de nacimiento</label>
-                    <mat-form-field appearance="fill" class="picker p-0">
+                    <mat-form-field appearance="fill" class="picker p-0 border border-0">
                         <mat-label>Mes/Dia/Año</mat-label>
-                        <input matInput [matDatepicker]="picker">
+                        <input matInput [matDatepicker]="picker" />
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
                     </mat-form-field>
-
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-12 col-lg-8 pe-2 pe-lg-0 offset-0 offset-lg-3">
                     <label for="exampleInputEmail1" class="form-label text-muted">Número de celular</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend  border border-0">
-                            <select class="custom-select h-100 border border-end-0 rounded-0" id="inputGroupSelect01">
+                    <div class="input-group">
+                        <div class="input-group-prepend w-25 border-light">
+                            <select class="custom-select  border border-end-0   rounded-0" id="inputGroupSelect01"
+                                style="height:50px;">
                                 <option selected>Imagen</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control form-control-lg border border-start-0 rounded-0 ps-0 "
+                        <input type="text" class="form-control border border-start-0 rounded-0 ps-0"
                             placeholder="Digita tu celular" />
                     </div>
                 </div>
@@ -91,20 +92,21 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-1">
                 <div
-                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0 ">
+                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">País</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                        <option *ngFor="let country of countries" [value]="country" style="box-shadow: 0;">{{ country }}
+                        <option *ngFor="let country of countries" [value]="country" style="box-shadow: 0">
+                            {{ country }}
                         </option>
                     </select>
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                        <option *ngFor="let citie of cities" [value]="citie" style="box-shadow: 0;">{{ citie }}
+                        <option *ngFor="let citie of cities" [value]="citie" style="box-shadow: 0">
+                            {{ citie }}
                         </option>
                     </select>
                 </div>
@@ -112,16 +114,15 @@
 
             <div class="row mb-3">
                 <div
-                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0 ">
+                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Ciudad</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
                         <option value="1" selected>Seleccione su Ciudad</option>
                         <option value="2">Chile</option>
                         <option value="3">España</option>
                     </select>
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Código de referido</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder=""
                         aria-label=" Apellido" aria-describedby="basic-addon1" />
@@ -132,18 +133,18 @@
         <div class="col-6 ps-1 d-none d-sm-none d-md-none d-lg-block">
             <div class="row mb-3">
                 <div class="col-9">
-                    <p class="fw-bold fs-3">Autentificación de identidad
-                    </p>
+                    <p class="fw-bold fs-3">Autentificación de identidad</p>
                 </div>
             </div>
 
-            <div class="row mb-5">
-                <div class="col-9">
-                    <p class="font-weight-light text-muted fs-6">Para continuar la compra primero deberás añadir tu
-                        documento
-                        oficial, con esto nos ayudas a verificar tu identidad. Este proceso asegura que cada miembro de
-                        la
-                        plataforma cuenta con una identidad legal válida.</p>
+            <div class="row mb-4">
+                <div class="col-8">
+                    <p class="font-weight-light text-muted fs-6 text-justify">
+                        Para continuar la compra primero deberás añadir tu documento
+                        oficial, con esto nos ayudas a verificar tu identidad. Este proceso
+                        asegura que cada miembro de la plataforma cuenta con una identidad
+                        legal válida.
+                    </p>
                 </div>
             </div>
 
@@ -154,71 +155,69 @@
                 <div class="col-4">
                     <app-filedrop [label]="'Subir Archivo trasero'"></app-filedrop>
                 </div>
-
             </div>
 
-            <div class="row mb-4">
-                <div class="col-9">
-                    <p class="font-weight-light text-muted fs-6">Recuerda: Los documentos aceptados son cédula de
-                        ciudadania y
-                        pasaporte. Cualquier otro tipo de documento será invalido.</p>
+            <div class="row mb-3">
+                <div class="col-8">
+                    <p class="font-weight-light text-muted fs-6 text-justify">
+                        Recuerda: Los documentos aceptados son cédula de ciudadania y
+                        pasaporte. Cualquier otro tipo de documento será invalido.
+                    </p>
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-9">
-                    <hr>
+                <div class="col-8">
+                    <hr />
                 </div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-9">
-                    <p class="font-weight-light text-muted fs-5">Contrato de vinculación a LOKL</p>
+                    <p class="font-weight-light text-muted fs-5">
+                        Contrato de vinculación a LOKL
+                    </p>
                 </div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-9">
-                    <p class="fw-bold fs-3">Firma el documento
+                    <p class="fw-bold fs-3">Firma el documento</p>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-8">
+                    <p class="font-weight-light text-muted text-justify fs-6">
+                        Por medio del documento de intención se te entregarán los derechos
+                        de la compañía a la cual vas a invertir. Firma el documento de forma
+                        segura a través de AUCO.
                     </p>
                 </div>
             </div>
 
             <div class="row mb-5">
-                <div class="col-9">
-                    <p class="font-weight-light text-muted fs-6">Por medio del documento de intención se te entregarán
-                        los derechos de la compañía a la cual vas a invertir. Firma el documento de forma segura a
-                        través de AUCO.</p>
-                </div>
-            </div>
-
-            <div class="row mb-5">
-                <div class="col-9">
+                <div class="col-8">
                     <div class="form-check text-start">
                         <input class="form-check-input border border-dark" type="checkbox" value=""
                             id="flexCheckChecked" checked />
-                        <label class="form-check-label ps-1 fs-24" for="flexCheckChecked"
+                        <label class="form-check-label ps-1 fs-24 text-justify" for="flexCheckChecked"
                             style="color: #6c757d; font-size: 16px">
-                            Reconozco que toda inversión
-                            conlleva algunos riesgos inherentes.
+                            Reconozco que toda inversión conlleva algunos riesgos inherentes.
                         </label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4 pt-3">
-                    <button class="btn bg-black  rounded rounded-5 w-100 text-white">
+                <div class="col-4">
+                    <button class="btn bg-black rounded rounded-5 w-100 text-white">
                         Firmar Contrato
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
-<div class="container-fluid" *ngIf="resolucion_movil == true">
-    <div class="row mt-4">
+<div class="" *ngIf="resolucion_movil == true">
+    <div class="row mt-5">
         <div class="col-12" *ngIf="paso1">
             <div class="row mb-3">
                 <div class="col-12 col-lg-9 offset-0 offset-lg-3">
@@ -227,12 +226,11 @@
             </div>
             <div class="row mb-3">
                 <div class="col-12 col-lg-9 offset-lg-3">
-                    <p class="font-weight-light text-muted fs-6">Utilizamos esta información para registrar productos,
-                        asegurar
-                        tu
-                        identidad y calcular impuestos y tarifas. Se requieren todos los campos a menos que se indique
-                        lo
-                        contrario.</p>
+                    <p class="font-weight-light text-muted fs-6">
+                        Utilizamos esta información para registrar productos, asegurar tu
+                        identidad y calcular impuestos y tarifas. Se requieren todos los
+                        campos a menos que se indique lo contrario.
+                    </p>
                 </div>
             </div>
 
@@ -242,9 +240,8 @@
                     <label for="exampleInputEmail1" class="form-label text-muted">Nombre</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder="" aria-label="Nombre"
                         aria-describedby="basic-addon1" />
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Apellido</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder=""
                         aria-label=" Apellido" aria-describedby="basic-addon1" />
@@ -258,7 +255,6 @@
                         <option value="1" selected>Cédula de ciudadanía</option>
                         <option value="2">Cédula de extranjeria</option>
                         <option value="3">Pasaporte</option>
-
                     </select>
                 </div>
             </div>
@@ -275,7 +271,7 @@
                     <label for="exampleInputEmail1" class="form-label text-muted">Fecha de nacimiento</label>
                     <mat-form-field appearance="fill" class="picker p-0">
                         <mat-label>MM/DD/YYYY</mat-label>
-                        <input matInput [matDatepicker]="picker">
+                        <input matInput [matDatepicker]="picker" />
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -286,7 +282,7 @@
                 <div class="col-12 col-lg-8 pe-2 pe-lg-0 offset-0 offset-lg-3">
                     <label for="exampleInputEmail1" class="form-label text-muted">Número de celular</label>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend  border border-0">
+                        <div class="input-group-prepend border border-0 select-numero">
                             <select class="custom-select border border-end-0 rounded-0" id="inputGroupSelect01">
                                 <option selected>Imagen</option>
                                 <option value="1">One</option>
@@ -294,7 +290,7 @@
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control border border-start-0 rounded-0 ps-0 "
+                        <input type="text" class="form-control border border-start-0 rounded-0 ps-0"
                             placeholder="Digita tu celular" />
                     </div>
                 </div>
@@ -310,16 +306,15 @@
 
             <div class="row mb-3">
                 <div
-                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0 ">
+                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">País</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
                         <option value="1" selected>Colombia</option>
                         <option value="2">Chile</option>
                         <option value="3">España</option>
                     </select>
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
                         <option value="1" selected>Bogotá</option>
@@ -331,16 +326,15 @@
 
             <div class="row mb-3">
                 <div
-                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-5 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0 ">
+                    class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-5 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Ciudad</label>
                     <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
                         <option value="1" selected>Seleccione su Ciudad</option>
                         <option value="2">Chile</option>
                         <option value="3">España</option>
                     </select>
-
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 ps-0 ps-lg-0 pe-lg-0 pe-xl-0 ">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                     <label for="exampleInputEmail1" class="form-label text-muted">Código de referido</label>
                     <input type="text" class="form-control form-control-lg rounded-0" placeholder=""
                         aria-label=" Apellido" aria-describedby="basic-addon1" />
@@ -358,18 +352,18 @@
         <div class="col-12" *ngIf="paso2">
             <div class="row mb-3">
                 <div class="col-12">
-                    <p class="fw-bold fs-3">Autentificación de identidad
-                    </p>
+                    <p class="fw-bold fs-3">Autentificación de identidad</p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-12">
-                    <p class="font-weight-light text-muted fs-6">Para continuar la compra primero deberás añadir tu
-                        documento
-                        oficial, con esto nos ayudas a verificar tu identidad. Este proceso asegura que cada miembro de
-                        la
-                        plataforma cuenta con una identidad legal válida.</p>
+                    <p class="font-weight-light text-muted fs-6">
+                        Para continuar la compra primero deberás añadir tu documento
+                        oficial, con esto nos ayudas a verificar tu identidad. Este proceso
+                        asegura que cada miembro de la plataforma cuenta con una identidad
+                        legal válida.
+                    </p>
                 </div>
             </div>
             <div class="row mb-3">
@@ -379,17 +373,16 @@
                 <div class="col-12">
                     <app-filedrop [label]="'Subir Archivo trasero'"></app-filedrop>
                 </div>
-
             </div>
 
             <div class="row mb-3">
                 <div class="col-9">
-                    <p class="font-weight-light text-muted fs-6">Recuerda: Los documentos aceptados son cédula de
-                        ciudadania y
-                        pasaporte.</p>
+                    <p class="font-weight-light text-muted fs-6">
+                        Recuerda: Los documentos aceptados son cédula de ciudadania y
+                        pasaporte.
+                    </p>
                 </div>
             </div>
-
 
             <div class="row mb-3">
                 <div class="col-12">
@@ -403,16 +396,17 @@
         <div class="col-12" *ngIf="paso3">
             <div class="row mb-3 ps-3">
                 <div class="col-12">
-                    <p class="fw-bold fs-3">Firmar Documento
-                    </p>
+                    <p class="fw-bold fs-3">Firmar Documento</p>
                 </div>
             </div>
 
             <div class="row mb-3 ps-3">
                 <div class="col-12">
-                    <p class="font-weight-light text-muted fs-6">Por medio del documento de intención se te entregarán
-                        los derechos de la compañía a la cual vas a invertir. Firma el documento de forma segura a
-                        través de AUCO.</p>
+                    <p class="font-weight-light text-muted fs-6">
+                        Por medio del documento de intención se te entregarán los derechos
+                        de la compañía a la cual vas a invertir. Firma el documento de forma
+                        segura a través de AUCO.
+                    </p>
                 </div>
             </div>
 
@@ -423,8 +417,7 @@
                             id="flexCheckChecked" checked />
                         <label class="form-check-label ps-1 fs-24" for="flexCheckChecked"
                             style="color: #6c757d; font-size: 16px">
-                            Reconozco que toda inversión
-                            conlleva algunos riesgos inherentes.
+                            Reconozco que toda inversión conlleva algunos riesgos inherentes.
                         </label>
                     </div>
                 </div>
@@ -439,6 +432,5 @@
             </div>
         </div>
     </div>
-
 </div>
 <app-footer></app-footer>
