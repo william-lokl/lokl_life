@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  data = {
+  @Input() data = {
     dues: 3,
     pay: 11400500,
     units: 100,
@@ -23,6 +23,11 @@ export class CardComponent implements OnInit {
   duesMap = {
     '=1': 'Un pago de:',
     'other': 'Cuotas mensuales de:'
+  }
+
+  monthsMap = {
+    '=1': '1 mes',
+    'other': '# meses'
   }
 
 

@@ -1,12 +1,13 @@
 <app-minutero></app-minutero>
 
-<div class="" style="padding-top: 140px;">
+<div style = "padding: 140px;">
+
   <div class="row mt-5 justify-content-center">
-    <div class="col-9 col-lg-5">
+    <form class="col-9 col-lg-5" [formGroup]="formInversion">
       <div class="row mb-3">
         <div class="col-12 col-lg-8 offset-0">
 
-          <p class="fw-bold fs-3">Empieza hoy mismo!</p>
+          <p class="fw-bold fs-3 font-black font-lato text-3x1">Empieza hoy mismo!</p>
         </div>
       </div>
 
@@ -21,14 +22,19 @@
       <div class="row">
         <div class="col-12 ">
           <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
-          <input type="text" class="form-control form-control-lg rounded-0" value="11.000.040" />
+          <input type="number" class="form-control form-control-lg rounded-0" formControlName = "value" (input)="calcularMontos()" placeholder="$0"/>
         </div>
       </div>
 
       <div class="d-flex justify-content-between mt-3 container-cuotas">
 
-        <app-custom-select [data]="opcionesSelect" (onOpcionSeleccionada)="changeDues($event)"></app-custom-select>
-
+        <app-custom-select [data]="opcionesSelect" (onOpcionSeleccionada)="changeDues($event)" ></app-custom-select>
+        <select hidden>
+          <option value="1"></option>
+          <option value="3"></option>
+          <option value="9"></option>
+          <option value="12"></option>
+        </select>
 
         <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
           'pago-unico-selected': pagoUnicoSelected
@@ -43,7 +49,32 @@
 
       <!-- TODO: deslizable -->
 
-      <app-card></app-card>
+      <div id="carouselExampleControls" class="carousel slide p-3" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" [ngClass]="{'active': cardData[0].dues == formInversion.value.dues}">
+            <app-card [data] = "cardData[0]" class = "d-block"></app-card>
+          </div>
+          <div class="carousel-item" [ngClass]="{'active': cardData[1].dues == formInversion.value.dues}">
+            <app-card [data] = "cardData[1]" class = "d-block"></app-card>
+          </div>
+          <div class="carousel-item" [ngClass]="{'active': cardData[2].dues == formInversion.value.dues}">
+            <app-card [data] = "cardData[2]" class = "d-block"></app-card>
+          </div>
+          <div class="carousel-item" [ngClass]="{'active': cardData[3].dues == formInversion.value.dues}">
+            <app-card [data] = "cardData[3]" class = "d-block"></app-card>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="javascript:void(0)" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="javascript:void(0)" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
 
 
       <div class="mt-4">
@@ -58,13 +89,16 @@
         <div class="mt-3 mb-4">
           <app-card-payment *ngFor="let card of paymentCards" [payment]="card.name" [selected]="card.selected"
             (click)="activateCard(card.name)"></app-card-payment>
+
+          <input hidden type="checkbox" value = "visa" >
+          <input hidden type="checkbox" value = "pse" >
         </div>
 
       </div>
 
       <div class="d-flex justify-content-between auth mb-5">
 
-        <mat-checkbox color="primary" class="check-auth" [formControl]="checkboxControl"> </mat-checkbox>
+        <mat-checkbox color="primary" class="check-auth" formControlName="acceptTerms"> </mat-checkbox>
 
         <div class="ml-2 " (click)="clickAuth()">
           Al realizar el pago, apruebas el débito automático a tu medio de pago y aceptas que tu suscripción será de
@@ -73,10 +107,10 @@
         </div>
       </div>
 
-    </div>
+    </form>
 
 
-    <div class="col-9 col-lg-4">
+    <div class="col-9 col-lg-4 col-derecha">
       <div class="img-prom">
         Estás a un paso <br>
         de obtener más beneficios <br>
@@ -96,26 +130,26 @@
 
         <div class="d-flex justify-content-between">
           <p class="fs-6 col-gray"> inversión total: </p>
-          <p class="fs-5 fw-bold"> {{total | currency}} </p>
+          <p class="fs-5 fw-bold"> {{ formInversion.value.value | currency}} </p>
         </div>
 
         <div class="d-flex justify-content-between">
-          <p class="fs-6 col-gray"> Cuotos diferidas: </p>
-          <p class="fs-5 fw-bold"> 3 meses </p>
+          <p class="fs-6 col-gray"> Cuotas diferidas: </p>
+          <p class="fs-5 fw-bold"> {{this.formInversion.value.dues | i18nPlural: mapCuotas}} </p>
         </div>
 
         <hr>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mb-3">
           <p class="fs-6 col-gray"> Subtotal: </p>
           <p class="fs-5 fw-bold"> {{subtotal | currency}} </p>
         </div>
 
-        <p class="mt-3 mb-1 col-gray">Proximo pago {{fechaEnMes | date}}</p>
+        <p class="mt-3 mb-1 col-gray" *ngIf="formInversion.value.dues != 1" >Proximo pago {{fechaEnMes | date}}</p>
 
         <div class="d-flex justify-content-between">
           <p class="fs-6 col-gray"> Impuestos y tarifas: </p>
-          <p class="fs-5 fw-bold"> {{0 | currency}} </p>
+          <p class="fs-5 fw-bold"> {{impuestosTarifas | currency}} </p>
         </div>
         <p class="col-gray">Fee tarjeta de crédito 2,5%</p>
 

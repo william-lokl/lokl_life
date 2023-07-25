@@ -57,7 +57,7 @@ export class CustomSelectComponent implements OnInit {
       if (this.data[i].name == oldName ) this.data[i].selected = false
     }
 
-    this.onOpcionSeleccionada.emit(element.value);
+    this.onOpcionSeleccionada.emit(element);
   }
 
 }

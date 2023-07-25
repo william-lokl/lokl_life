@@ -2,7 +2,7 @@
 <div class="container border p-4 rounded-1">
 
 
-  <p class = "text-center fw-bold fs-5">3 meses</p>
+  <p class = "text-center fw-bold fs-5"> {{data.dues | i18nPlural:monthsMap}} </p>
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> {{data.dues| i18nPlural:duesMap}} </p>
