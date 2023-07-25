@@ -1,23 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-card-payment',
   templateUrl: './card-payment.component.html',
   styleUrls: ['./card-payment.component.scss']
 })
-export class CardPaymentComponent implements OnInit {
+export class CardPaymentComponent implements OnInit, OnChanges {
 
   @Input() payment: string = "";
-  @Input() selected: boolean = false;
+  @Input() selected?: boolean = true;
 
   imgUrl: string = ""
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selected']) {
+      this.selected = changes['selected'].currentValue;
+    }
     this.imgUrl = '/assets/icon/payment/' + this.payment + (!this.selected ? "-unselected" : "") + '.svg'
-    console.log(this.imgUrl);
-    console.log(this.payment);
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

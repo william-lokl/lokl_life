@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PaymentCard } from '../../interfaces/paymentCard.interface';
+import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 
 
 
@@ -16,6 +17,12 @@ export class InversionComponent implements OnInit {
   public fechaEnMes: Date =  this.generarFecha();
   public pagoUnicoSelected: boolean = false;
   public selectCuotasSelected: boolean = false;
+  public cuotaActual: number = 3;
+  public opcionesSelect: CustomSelectElement[] = [
+    {name: "3 meses", value: 3, selected: true},
+    {name: "6 meses", value: 6, selected: false},
+    {name: "9 meses", value: 9, selected: false},
+  ]
   total = 11200040;
   subtotal = 30000000;
 
@@ -44,12 +51,12 @@ export class InversionComponent implements OnInit {
   activateCard(card: "visa" | "pse"){
 
     if(card == "visa"){
-      this.paymentCards[0].selected = !this.paymentCards[0].selected
+      this.paymentCards[0].selected = true
       this.paymentCards[1].selected = false
     }
 
     if(card == "pse"){
-      this.paymentCards[1].selected = !this.paymentCards[1].selected
+      this.paymentCards[1].selected = true
       this.paymentCards[0].selected = false
     }
 
@@ -65,4 +72,7 @@ export class InversionComponent implements OnInit {
     this.pagoUnicoSelected = true;
   }
 
+  changeDues(event: number){
+    console.log(event);
+  }
 }

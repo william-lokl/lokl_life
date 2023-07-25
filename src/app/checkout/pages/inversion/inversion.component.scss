@@ -31,6 +31,7 @@
   border-color: #7c3aed;
   --bs-border-color: #7c3aed;
   color: #7c3aed;
+  fill: #7c3aed;
 }
 
 .pago-unico{
@@ -44,12 +45,7 @@
   height: 50px;
 }
 
-.svg-star{
-  color: black;
-  background-color: black;
-}
-
-.select-cuotas{
+app-custom-select{
   width: 47%!important;
-  cursor: pointer;
+  height: 100%;
 }

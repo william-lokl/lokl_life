@@ -35,7 +35,7 @@ import { MaterialModule } from 'src/app/material/material.module';
     CardhotelesComponent,
     FiledropComponent,
   ],
-  exports: [MinuteroComponent, FooterComponent, FiledropComponent],
+  exports: [MinuteroComponent, FooterComponent, FiledropComponent, SteperComponent],
   imports: [
     CommonModule,
     LandingmoduleRoutingModule,

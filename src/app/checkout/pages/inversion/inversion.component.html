@@ -29,12 +29,13 @@
 
       <div class="d-flex justify-content-between mt-3 container-cuotas">
 
-        <div class="select-cuotas border p-2"
-        [ngClass] = "{'pago-unico-selected': selectCuotasSelected }"
-        (click)="clickSelectCuotas()"></div>
+        <app-custom-select [data] = "opcionesSelect" (onOpcionSeleccionada)="changeDues($event)" ></app-custom-select>
+
 
         <div class="border pago-unico p-2 text-center align-items-center"
-        [ngClass] = "{'pago-unico-selected': pagoUnicoSelected }"
+        [ngClass] = "{
+          'pago-unico-selected': pagoUnicoSelected
+        }"
         (click) = "clickPagoUnico()">
           <p class = "fs-6 mb-0">Pago unico</p>
         </div>
@@ -138,5 +139,6 @@
 
 </div>
 
+<app-steper></app-steper>
 
 <app-footer></app-footer>

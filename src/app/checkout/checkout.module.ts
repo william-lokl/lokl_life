@@ -17,6 +17,7 @@ import {
 } from '@angular/material/core';
 
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
     AutentificacionComponent,
     CardComponent,
     CardPaymentComponent,
+    CustomSelectComponent,
   ],
   imports: [
     FormsModule,

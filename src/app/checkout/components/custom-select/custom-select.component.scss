@@ -1,0 +1,38 @@
+.custom-select-{
+  cursor: pointer;
+  display: grid;
+  height: 100%;
+}
+
+.opcion-desp{
+  cursor: pointer;
+  display: grid;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  z-index: 99999;
+}
+
+.svg-select{
+  justify-self: right;
+  position: absolute;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+  transform: rotate(180deg)
+}
+
+.svg-select-down{
+  justify-self: right;
+  position: absolute;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+}
+
+.select--{
+  color: #7c3aed;
+  border-color: #7c3aed;
+  fill: #7c3aed;
+  --bs-border-color: #7c3aed;
+}
+
