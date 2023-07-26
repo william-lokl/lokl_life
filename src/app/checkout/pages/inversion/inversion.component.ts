@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,12 +9,12 @@ import { PaymentCard } from '../../interfaces/paymentCard.interface';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import {
   ActivatedRoute,
-  ActivatedRouteSnapshot,
   Router,
 } from '@angular/router';
 
 import * as jwt_decode from 'jwt-decode';
 import { ApiService } from 'src/app/services/api.service';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-inversion',
@@ -27,6 +27,7 @@ export class InversionComponent implements OnInit {
   public pagoUnicoSelected: boolean = false;
   public selectCuotasSelected: boolean = false;
   public unitValue: number = 112000;
+  public resolucion_movil: boolean = false;
   public opcionesSelect: CustomSelectElement[] = [
     { name: '3 meses', value: 3, selected: true },
     { name: '6 meses', value: 6, selected: false },
@@ -34,10 +35,12 @@ export class InversionComponent implements OnInit {
   ];
   public formInversion: FormGroup = this.fb.group({
     value: [110000140, [Validators.min(11000000)]],
-    dues: [1],
-    payment: [''],
-    acceptTerms: [false],
+    dues: [1 , [Validators.required]],
+    payment: ['', [Validators.required] ],
+    acceptTerms: [false, [Validators.requiredTrue] ],
   });
+
+  public inputActivated: boolean = false;
 
   public cardData = [
     {
@@ -91,10 +94,13 @@ export class InversionComponent implements OnInit {
     other: '# meses',
   };
 
+  @ViewChild('carouselP') carousel!: Carousel;
+
   total = 0;
   subtotal = 0;
   impuestosTarifas = 0;
   valorCuota = 0;
+  currentUnits = 0;
 
   paymentCards: PaymentCard[] = [
     { name: 'visa', selected: false },
@@ -108,11 +114,42 @@ export class InversionComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    const newWidth = (event.target as Window).innerWidth;
+    const newHeight = (event.target as Window).innerHeight;
+
+
+    if (newWidth < 992) {
+      this.resolucion_movil = true;
+      console.log(this.resolucion_movil);
+    }
+
+    if (newWidth > 992) {
+      this.resolucion_movil = false;
+      console.log(this.resolucion_movil);
+    }
+  }
+
+
   ngOnInit(): void {
     this.calcularMontos();
 
+    const initialWidth = window.innerWidth;
+    const initialHeight = window.innerHeight;
+
+    if (initialWidth < 992) {
+      this.resolucion_movil = true;
+      console.log(this.resolucion_movil);
+    }
+
+    if (initialWidth > 992) {
+      this.resolucion_movil = false;
+      console.log(this.resolucion_movil);
+    }
+
     this.token = this.activatedRoute.snapshot.queryParamMap.get('token');
-    console.log(this.token);
+
     if (this.token) {
       localStorage.setItem('token', `${this.token}`);
     }
@@ -210,12 +247,52 @@ export class InversionComponent implements OnInit {
       this.total = this.valorCuota;
     }
 
+    this.currentUnits = Math.round(inversion / this.unitValue)
+
     this.impuestosTarifas = metodoPago == 'visa' ? this.valorCuota * 0.025 : 0;
 
     this.total += this.impuestosTarifas;
   }
 
-  redireTo(path: string) {
+  submit(){
+
+    if( !this.formInversion.valid ) return;
+
+    this.redirectTo('checkout/personal-data')
+
+    localStorage.setItem('reference_pay', "") //TODO: logica de referencias
+    localStorage.setItem('units', this.currentUnits.toString())
+    localStorage.setItem('investment', this.total.toString())
+    localStorage.setItem('type', "") //TODO: averiguar
+    localStorage.setItem('inversion_total', this.formInversion.value.value)
+    localStorage.setItem('meses', this.formInversion.value.dues)
+    localStorage.setItem('valor_mes', this.valorCuota.toString())
+    localStorage.setItem("impuestos", this.impuestosTarifas.toString())
+
+
+  }
+
+  proximaTarjeta(){
+
+    if( this.carousel.page < this.cardData.length - 1) this.carousel.page++
+
+  }
+
+  anteriorTarjeta(){
+
+    if( this.carousel.page > 0) this.carousel.page--
+
+  }
+
+  inputFocus(){
+    this.inputActivated = true
+  }
+
+  inputBlur(){
+    this.inputActivated = false
+  }
+
+  redirectTo(path: string) {
     this.router.navigate([`${path}`]);
   }
 }

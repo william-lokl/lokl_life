@@ -132,7 +132,7 @@ export class AutentificacionComponent implements OnInit {
     }
   }
 
-  changeDues(event: number) {
+  changeDues(event: any) {
     console.log(event);
   }
 

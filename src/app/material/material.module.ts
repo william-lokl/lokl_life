@@ -15,6 +15,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
+import { CarouselModule } from 'primeng/carousel';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -32,6 +34,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
+    CarouselModule
+
   ],
   exports: [
     CommonModule,
@@ -45,6 +49,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    CarouselModule
   ],
 })
 export class MaterialModule {}

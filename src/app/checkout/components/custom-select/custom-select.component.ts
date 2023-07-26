@@ -9,17 +9,19 @@ import { CustomSelectElement } from '../../interfaces/customSelectElement.interf
 export class CustomSelectComponent implements OnInit {
   @Input() selectSelected: boolean = false;
   @Input() data: CustomSelectElement[] = [];
-  @Input() public ssColor: string = '#7c3aed';
-  @Input() public justIzquierda: boolean = false;
+  @Input() public ssColor: string = "#7c3aed";
+  @Input() justIzquierda: boolean = false;
 
-  desplegar: boolean = false;
+  desplegar = false;
 
-  @Output('onOpcionSeleccionada') onOpcionSeleccionada: EventEmitter<any> =
-    new EventEmitter<any>();
+  @Output('onOpcionSeleccionada') onOpcionSeleccionada: EventEmitter<CustomSelectElement> = new EventEmitter<CustomSelectElement>();
+
 
   dataLength?: number;
 
   elementSelected!: CustomSelectElement;
+
+
 
   constructor() {}
 
