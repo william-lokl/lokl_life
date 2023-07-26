@@ -281,7 +281,7 @@
     </div>
 
     <div *ngIf = "step2">
-      <app-back-button link = "/checkout/invest"></app-back-button>
+      <app-back-button link = "/checkout/invest" (click) = "step1 = true; step2 = false"></app-back-button>
 
       <p class = "fw-heavy fs-4 mt-3">Selecciona tu pago</p>
 
@@ -350,7 +350,7 @@
           </div>
 
           <div class = "d-flex justify-content-center mt-3">
-            <button class = "btn btn-lg btn-dark rounded-5 w-25">Invierte</button>
+            <button class = "btn btn-lg btn-dark rounded-5 w-25" type = "submit" [ngClass] = "{'bg-dark': formInversion.valid, 'disabled': !formInversion.valid}">Invierte</button>
           </div>
 
 

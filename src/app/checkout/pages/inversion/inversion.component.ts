@@ -183,6 +183,7 @@ export class InversionComponent implements OnInit {
 
     this.step1 = false;
     this.step2 = true;
+    this.formInversion.patchValue({acceptTerms: true} )
   }
 
   getLastDayOfMonth(): Date {
