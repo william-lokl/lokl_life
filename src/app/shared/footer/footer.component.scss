@@ -1,1 +1,227 @@
+.container-footer {
+  display: flex;
+  min-height: 400px;
+  height: auto;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  justify-content: space-between;
+  position: relative;
+}
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 1450px) {
+  .container-footer {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+// Tamaño mínimo de pantalla para mostrar el div con la imagen
+@media (min-width: 1451px) {
+  .container-footer {
+    padding-left: 175px;
+    padding-right: 175px;
+  }
+}
+
+.container-footer-cell {
+  display: flex;
+  padding-left: 35px;
+  padding-right: 35px;
+  gap: 40px;
+  min-height: 400px;
+  height: auto;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.text-footer {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 20px;
+  color: white;
+  text-align: center;
+}
+
+.text-footer-large {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 20px;
+  color: white;
+  text-align: start;
+}
+.text-footer-title {
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 20px;
+  color: white;
+}
+
+.text-footer-body {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  margin-top: 3px;
+}
+.text-footer-body > a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.input-correo-footer {
+  border: none;
+  width: 80%;
+  padding: 10px 20px;
+  border-radius: 30px 0 0 30px;
+  outline: none;
+  height: 40px;
+  font-size: 14px;
+}
+
+.section-correo-footer button {
+  border: none;
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 30px 30px 0;
+  padding-right: 15px;
+  color: #000;
+}
+
+/* Ajuste de tamaño para imágenes en pantallas pequeñas */
+@media (max-width: 768px) {
+  .img-fluid {
+    max-width: 100px; /* Ajusta el tamaño de las imágenes según tu preferencia */
+    height: auto;
+  }
+}
+
+/* Ajuste de tamaño para imágenes en pantallas medianas y grandes */
+@media (min-width: 768px) {
+  .img-fluid {
+    max-width: 150px; /* Ajusta el tamaño de las imágenes según tu preferencia */
+    height: auto;
+  }
+}
+
+.divider-footer{
+  position: absolute;
+  height: 20px;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  align-items: end;
+}
+
+.footer-line{
+  width: 100%;
+  background: #7070707e;
+  height: 1px;
+}
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 1450px) {
+  .divider-footer {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+// Tamaño mínimo de pantalla para mostrar el div con la imagen
+@media (min-width: 1451px) {
+  .divider-footer {
+    padding-left: 175px;
+    padding-right: 175px;
+  }
+}
+
+.footer-reservations{
+  height: 120px;
+  background: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-bottom: 40px;
+}
+
+.footer-reservations-cell{
+  height: 180px;
+  background: black;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 40px;
+  flex-direction: column;
+}
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 1450px) {
+  .footer-reservations {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+
+// Tamaño mínimo de pantalla para mostrar el div con la imagen
+@media (min-width: 1451px) {
+  .footer-reservations {
+    padding-left: 175px;
+    padding-right: 175px;
+  }
+}
+
+.footer-banca{
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
+  align-items: center;
+}
+
+.footer-contact-news{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-right: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-contact-news .one {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 33px;
+  text-align: center;
+  color: #fff;
+}
+.footer-contact-news p {
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+.footer-contact-news .two {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  color: #fff;
+}
+
+
+@media (min-width: 1160px) {
+  .sobre-footer {
+    padding-left: 10px;
+  }
+}
+@media (min-width: 1260px) {
+  .sobre-footer {
+    padding-left: 30px;
+  }
+}
+
 
