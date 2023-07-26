@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CardDataElement } from '../../interfaces/cardDataElement.interface';
 
 @Component({
   selector: 'app-card',
@@ -10,14 +11,19 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
-  @Input() data = {
-    dues: 3,
-    pay: 11400500,
-    units: 100,
-    value: 112000,
-    annualReturn: 15
+  inputCursor: boolean = false
+
+  @Input() resolucion_movil: boolean = false;
+
+  @Input() data: CardDataElement = {
+    dues: 0,
+    pay: 0,
+    units: 0,
+    value: 0,
+    annualReturn: 0
   }
 
   duesMap = {
