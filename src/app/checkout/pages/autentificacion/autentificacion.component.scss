@@ -26,3 +26,23 @@ input:focus {
   border-color: #7c3aed;
   --bs-border-color: #7c3aed;
 }
+
+.button-reenviar:hover,
+.button-reenviar:active {
+  background-color: black !important;
+  color: white !important;
+  outline: none !important;
+  box-shadow: 0 !important;
+}
+
+.form-select:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.custom-select {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

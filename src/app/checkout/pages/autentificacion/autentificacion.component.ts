@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import {
@@ -8,6 +14,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-autentificacion',
@@ -16,7 +23,9 @@ import {
 })
 export class AutentificacionComponent implements OnInit {
   resolucion_movil: boolean = false;
-  countries: string[] = [];
+  countries: CustomSelectElement[] = [
+    { name: 'Colombia', value: 'Colombia', selected: false },
+  ];
   selectedCountry: string = 'Colombia';
   cities: string[] = [];
   paso1: boolean = true;
@@ -32,14 +41,20 @@ export class AutentificacionComponent implements OnInit {
   referral_code!: FormControl;
   phone!: FormControl;
 
+  modalRef!: NgbModalRef;
+
   public opcionesSelect: CustomSelectElement[] = [
-    //{ name: 'Cédula de Ciudadania', value: 'CC', selected: false },
-    { name: 'Cédula de Extranjeria', value: 2, selected: false },
-    { name: 'Pasaporte', value: 3, selected: false },
+    { name: 'Cédula de Ciudadania', value: 'CC', selected: true },
+    { name: 'Cédula de Extranjeria', value: 'CCE', selected: false },
+    { name: 'Pasaporte', value: 'PS', selected: false },
   ];
   inputActivated: boolean = false;
-  constructor(private http: HttpClient, public fb: FormBuilder) {}
-
+  constructor(
+    private http: HttpClient,
+    public fb: FormBuilder,
+    private modalService: NgbModal
+  ) {}
+  @ViewChild('content', { static: false }) modalContent!: TemplateRef<any>;
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
@@ -55,6 +70,9 @@ export class AutentificacionComponent implements OnInit {
 
     if (newWidth > 992) {
       this.resolucion_movil = false;
+      this.paso1 = true;
+      this.paso2 = false;
+      this.paso3 = false;
       console.log(this.resolucion_movil);
     }
   }
@@ -72,8 +90,6 @@ export class AutentificacionComponent implements OnInit {
       this.resolucion_movil = false;
       console.log(this.resolucion_movil);
     }
-    this.fetchCountries();
-    this.onSelectCountry();
 
     this.body = this.fb.group({
       first_name: ['', Validators.required],
@@ -84,10 +100,10 @@ export class AutentificacionComponent implements OnInit {
       address: ['', Validators.required],
       document_front: ['', Validators.required],
       document_back: ['', Validators.required],
-      referral_code: ['', Validators.required],
+      referral_code: [''],
       phone: ['', Validators.required],
-      reference_pay: ['', Validators.required], //juanito
 
+      reference_pay: ['', Validators.required], //juanito
       units: ['', Validators.required], // juanito
       investment: ['', Validators.required], // juanito
       type: ['', Validators.required], // tipo de pago juanito
@@ -105,6 +121,8 @@ export class AutentificacionComponent implements OnInit {
     this.phone = this.body.get('phone') as FormControl;
 
     this.patchForm();
+    //this.fetchCountries();
+    this.onSelectCountry();
   }
 
   public changeStep() {
@@ -125,7 +143,16 @@ export class AutentificacionComponent implements OnInit {
     const apiUrl = 'https://restcountries.com/v3.1/all';
     this.http.get<any[]>(apiUrl).subscribe(
       (countriesData) => {
-        this.countries = countriesData.map((country) => country.name.common);
+        countriesData.map((country) => {
+          console.log(country.name.common);
+
+          let obj = {
+            name: country?.name?.common,
+            value: country?.name?.common,
+            selected: false,
+          };
+          this.countries.push(obj);
+        });
         this.countries.sort();
       },
       (error) => {
@@ -155,6 +182,7 @@ export class AutentificacionComponent implements OnInit {
 
   changeDues(event: any) {
     console.log(event);
+    this.body.patchValue({ document_type: event.value });
   }
 
   private patchForm() {
@@ -165,9 +193,17 @@ export class AutentificacionComponent implements OnInit {
     let phone = localStorage.getItem('phone');
     let address = localStorage.getItem('address');
 
-    let obj = { name: 'Cédula de Ciudadania', value: 'CC', selected: true };
-    this.opcionesSelect.unshift(obj);
+    this.opcionesSelect.forEach((item) => {
+      if (item.value == document_type) {
+        console.log('si es igual');
 
+        item.selected = true;
+      }
+    });
+    console.log(this.opcionesSelect);
+
+    //let obj = { name: 'Cédula de Ciudadania', value: 'CC', selected: true };
+    //this.opcionesSelect.unshift(obj);
     this.body.patchValue({ first_name });
     this.body.patchValue({ last_name });
     this.body.patchValue({ document_type });
@@ -184,5 +220,50 @@ export class AutentificacionComponent implements OnInit {
 
   inputBlur() {
     this.inputActivated = false;
+  }
+
+  //abrir modal de informacion
+  public async openModal(content?: any) {
+    this.modalService.open(content, { centered: true, size: 'sm' });
+  }
+
+  public sendData() {
+    let reference_pay = localStorage.getItem('reference_pay');
+    let units = localStorage.getItem('units');
+    let investment = localStorage.getItem('investment');
+    let type = localStorage.getItem('type');
+    let inversion_total = localStorage.getItem('inversion_total');
+    let impuestos = localStorage.getItem('impuestos');
+    let meses = localStorage.getItem('meses');
+    let valor_mes = localStorage.getItem('valor_mes');
+
+    let body = {
+      first_name: this.body.get('first_name')?.value,
+      last_name: this.body.get('last_name')?.value,
+      document_type: this.body.get('document_type')?.value,
+      document_number: this.body.get('document_number')?.value,
+      document_date: '7/19/2023',
+      address: this.body.get('address')?.value,
+      document_front: '',
+      document_back: '',
+      referral_code: this.body.get('referral_code')?.value,
+      phone: this.body.get('phone')?.value,
+      reference_pay: reference_pay,
+      units: units,
+      investment: investment,
+      type: type,
+      inversion_total: inversion_total,
+      impuestos: impuestos,
+      meses: meses,
+      valor_mes: valor_mes,
+    };
+    this.modalRef = this.modalService.open(this.modalContent, {
+      centered: true,
+      size: 'sm',
+    });
+  }
+
+  public async cerrarmodal() {
+    this.modalService.dismissAll();
   }
 }
