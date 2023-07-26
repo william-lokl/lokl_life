@@ -30,6 +30,7 @@
     "bn-ng-idle": "^2.0.5",
     "bootstrap": "^5.2.0",
     "jquery": "^3.6.3",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "ng-animate": "^2.0.1",
     "ngx-file-drop": "^13.0.0",

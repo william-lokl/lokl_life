@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-9">
+        <ul class="nav">
+            <li class="nav-item mt-2">
+                <p (click)="redireTo('checkout/invest')" [ngClass]="{
+            'estilo-negrilla': rutaActual === 'invest',
+            noactive: rutaActual !== 'invest'
+          }">
+
+                    Selecciona Monto inversión
+                </p>
+            </li>
+            <li class="nav-item mt-2 ms-2">
+                <strong class=""> / </strong>
+            </li>
+            <li class="nav-item mt-2 ms-2">
+                <p (click)="redireTo('checkout/personal-data')" [ngClass]="{
+            'estilo-negrilla': rutaActual === 'personal-data',
+            noactive: rutaActual !== 'personal-data'
+          }">
+                    Autentificación y contrato
+                </p>
+            </li>
+            <li class="nav-item mt-2 ms-2">
+                <strong class=""> / </strong>
+            </li>
+            <li class="nav-item mt-2 ms-2">
+                <p [ngClass]="{
+            'estilo-negrilla': rutaActual === 'example',
+            noactive: rutaActual !== 'example'
+          }">
+                    Pago o suscripción
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
