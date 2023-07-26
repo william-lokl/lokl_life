@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-autentificacion',
@@ -19,12 +24,20 @@ export class AutentificacionComponent implements OnInit {
   paso3: boolean = false;
 
   body!: FormGroup;
+  firstNameControl!: FormControl;
+  last_name!: FormControl;
+  document_type!: FormControl;
+  document_number!: FormControl;
+  address!: FormControl;
+  referral_code!: FormControl;
+  phone!: FormControl;
 
   public opcionesSelect: CustomSelectElement[] = [
     //{ name: 'Cédula de Ciudadania', value: 'CC', selected: false },
     { name: 'Cédula de Extranjeria', value: 2, selected: false },
     { name: 'Pasaporte', value: 3, selected: false },
   ];
+  inputActivated: boolean = false;
   constructor(private http: HttpClient, public fb: FormBuilder) {}
 
   @HostListener('window:resize', ['$event'])
@@ -82,6 +95,14 @@ export class AutentificacionComponent implements OnInit {
       meses: ['', Validators.required], // juanito
       valor_mes: ['', Validators.required], // juanito
     });
+
+    this.firstNameControl = this.body.get('first_name') as FormControl;
+    this.last_name = this.body.get('last_name') as FormControl;
+    this.document_type = this.body.get('document_type') as FormControl;
+    this.document_number = this.body.get('document_number') as FormControl;
+    this.address = this.body.get('address') as FormControl;
+    this.referral_code = this.body.get('referral_code') as FormControl;
+    this.phone = this.body.get('phone') as FormControl;
 
     this.patchForm();
   }
@@ -155,5 +176,13 @@ export class AutentificacionComponent implements OnInit {
     this.body.patchValue({ address });
 
     console.log(this.body.value);
+  }
+
+  inputFocus() {
+    this.inputActivated = true;
+  }
+
+  inputBlur() {
+    this.inputActivated = false;
   }
 }

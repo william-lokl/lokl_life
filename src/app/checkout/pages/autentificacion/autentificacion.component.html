@@ -23,23 +23,16 @@
                     <div
                         class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Nombre</label>
-                        <input type="text" formControlName="first_name" class="form-control form-control-lg rounded-0"
-                            placeholder="" aria-label="Nombre" aria-describedby="basic-addon1" />
+                        <app-input [control]="firstNameControl"></app-input>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Apellido</label>
-                        <input type="text" formControlName="last_name" class="form-control form-control-lg rounded-0"
-                            placeholder="" aria-label=" Apellido" aria-describedby="basic-addon1" />
+                        <app-input [control]="last_name"></app-input>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12 col-sm-12 col-lg-8 pe-2 pe-lg-0 offset-lg-3">
                         <label for="exampleInputEmail1" class="form-label text-muted">Tipo de documento</label>
-                        <!-- <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                        <option value="1" selected>Cédula de ciudadanía</option>
-                        <option value="2">Cédula de extranjeria</option>
-                        <option value="3">Pasaporte</option>
-                    </select> -->
                         <div class="d-flex justify-content-between mt-1 container-cuotas">
                             <app-custom-select [data]="opcionesSelect" [justIzquierda]="true"
                                 (onOpcionSeleccionada)="changeDues($event)"></app-custom-select>
@@ -50,9 +43,7 @@
                 <div class="row mb-3">
                     <div class="col-12 col-sm-12 col-lg-8 pe-2 pe-lg-0 offset-lg-3">
                         <label for="exampleInputEmail1" class="form-label text-muted">Número de identificación</label>
-                        <input type="text" formControlName="document_number"
-                            class="form-control form-control-lg rounded-0" placeholder="" aria-label=" Apellido"
-                            aria-describedby="basic-addon1" />
+                        <app-input [control]="document_number"></app-input>
                     </div>
                 </div>
                 <div class="row mb-1">
@@ -72,17 +63,19 @@
                         <label for="exampleInputEmail1" class="form-label text-muted">Número de celular</label>
                         <div class="input-group">
                             <div class="input-group-prepend w-25 border-light">
-                                <select class="custom-select  border border-end-0   rounded-0" id="inputGroupSelect01"
-                                    style="height:48px;">
+                                <select class="custom-select border border-end-0 rounded-0" id="inputGroupSelect01"
+                                    style="height: 50px">
                                     <option selected>Imagen</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <input type="text" formControlName="phone"
+
+                            <!--  <input type="text" formControlName="phone"
                                 class="form-control form-control-lg border border-start-0 rounded-0 ps-0"
-                                placeholder="Digita tu celular" />
+                                placeholder="Digita tu celular" /> -->
+                            <app-input class="ps-0 w-75" [control]="document_number"></app-input>
                         </div>
                     </div>
                 </div>
@@ -90,8 +83,7 @@
                 <div class="row mb-3">
                     <div class="col-12 col-lg-8 pe-2 pe-lg-0 offset-0 offset-lg-3">
                         <label for="exampleInputEmail1" class="form-label text-muted">Dirección de domicilio</label>
-                        <input type="text" formControlName="address" class="form-control form-control-lg rounded-0"
-                            placeholder="" aria-label=" Apellido" aria-describedby="basic-addon1" />
+                        <app-input class="ps-0 w-75" [control]="address"></app-input>
                     </div>
                 </div>
 
@@ -144,9 +136,9 @@
                     <div class="col-8">
                         <p class="font-weight-light text-muted fs-6 text-justify">
                             Para continuar la compra primero deberás añadir tu documento
-                            oficial, con esto nos ayudas a verificar tu identidad. Este proceso
-                            asegura que cada miembro de la plataforma cuenta con una identidad
-                            legal válida.
+                            oficial, con esto nos ayudas a verificar tu identidad. Este
+                            proceso asegura que cada miembro de la plataforma cuenta con una
+                            identidad legal válida.
                         </p>
                     </div>
                 </div>
@@ -160,7 +152,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row mb-5">
                     <div class="col-8">
                         <p class="font-weight-light text-muted fs-6 text-justify">
                             Recuerda: Los documentos aceptados son cédula de ciudadania y
@@ -190,8 +182,8 @@
                     <div class="col-8">
                         <p class="font-weight-light text-muted text-justify fs-6">
                             Por medio del documento de intención se te entregarán los derechos
-                            de la compañía a la cual vas a invertir. Firma el documento de forma
-                            segura a través de AUCO.
+                            de la compañía a la cual vas a invertir. Firma el documento de
+                            forma segura a través de AUCO.
                         </p>
                     </div>
                 </div>
@@ -203,7 +195,8 @@
                                 id="flexCheckChecked" checked />
                             <label class="form-check-label ps-1 fs-24 text-justify" for="flexCheckChecked"
                                 style="color: #6c757d; font-size: 16px">
-                                Reconozco que toda inversión conlleva algunos riesgos inherentes.
+                                Reconozco que toda inversión conlleva algunos riesgos
+                                inherentes.
                             </label>
                         </div>
                     </div>
