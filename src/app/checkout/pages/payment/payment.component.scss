@@ -1,0 +1,66 @@
+.container-cuotas {
+  height: 50px;
+  padding-right: 15px;
+}
+.container-cuotas-city {
+  height: 50px;
+  padding-right: 15px;
+}
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 993px) {
+  .container-cuotas {
+    padding-right: 8px;
+  }
+  .container-cuotas-city {
+    padding-right: 4px;
+  }
+  .padding-container-payment{
+    padding-top: 20px;
+  }
+}
+
+.container-inputs-payment {
+  height: 50px;
+  padding-right: 15px;
+}
+
+.img-prom{
+  background-image: url('https://lokl.life/static/media/banner-complete.849487d5a200b7d7e018.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 8rem;
+  border-radius: 0.375rem!important;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  font-size: 1.35rem;
+  color: white;
+  line-height: 1.75rem;
+}
+
+.text-payment{
+  color: #7f7f7f;
+}
+
+.img-prom p {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.text-payment-title{
+  font-weight: bold;
+  font-size: 17.5px;
+}
+
+.padding-container-payment{
+  padding-top: 160px;
+}
+
+// Tamaño máximo de pantalla para ocultar el div con la imagen
+@media (max-width: 993px) {
+  .padding-container-payment{
+    padding-top: 20px;
+  }
+}
