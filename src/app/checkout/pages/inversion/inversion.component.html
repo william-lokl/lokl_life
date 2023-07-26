@@ -176,6 +176,8 @@
             <p class="fs-5 fw-bold">{{ total | currency }}</p>
           </div>
 
+          <p class = "text-muted">  El {{ getLastDayOfMonth() | date:'dd' }} de {{ getLastDayOfMonth() | date:'MMMM':'':'es-CO' }} el valor de Nido de Agua aumentará </p>
+
           <button mat-button type = "submit"
             class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3"
             [ngClass] = "{'bg-dark': formInversion.valid, 'disabled': !formInversion.valid}">

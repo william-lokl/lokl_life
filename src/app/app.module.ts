@@ -27,6 +27,12 @@ import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './jwt.interceptor';
 import { RouterModule } from '@angular/router';
 
+import LocaleEsCO from '@angular/common/locales/es-CO'
+
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(LocaleEsCO)
+
 @NgModule({
   declarations: [AppComponent, ClickOutsideDirective],
   imports: [

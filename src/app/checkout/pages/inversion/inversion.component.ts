@@ -26,6 +26,7 @@ import { CardDataElement } from '../../interfaces/cardDataElement.interface';
 export class InversionComponent implements OnInit {
   public fecha: Date = new Date();
   public fechaEnMes: Date = this.generarFecha();
+  public fechaFinMes: Date = this.getLastDayOfMonth()
   public pagoUnicoSelected: boolean = false;
   public selectCuotasSelected: boolean = false;
   public unitValue: number = 112000;
@@ -171,6 +172,18 @@ export class InversionComponent implements OnInit {
     this.formInversion.patchValue({
       acceptTerms: !this.formInversion.value.acceptTerms,
     });
+  }
+
+  getLastDayOfMonth(): Date {
+    const hoy = new Date();
+    const anio = hoy.getFullYear();
+    const mes = hoy.getMonth();
+
+    const primerDiaDelProximoMes = new Date(anio, mes + 1, 1);
+
+    const ultimoDiaDelMes = new Date(primerDiaDelProximoMes.getTime() - 1);
+
+    return ultimoDiaDelMes;
   }
 
   getIndexByCards(i: number): number{
