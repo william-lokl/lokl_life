@@ -7,6 +7,7 @@ import { CheckoutRoutingModule } from './checkout-routing.module';
 
 import { AutentificacionComponent } from './pages/autentificacion/autentificacion.component';
 import { InversionComponent } from './pages/inversion/inversion.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 import { CardComponent } from './components/card/card.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +28,7 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
   declarations: [
     InversionComponent,
     AutentificacionComponent,
+    PaymentComponent,
     CardComponent,
     CardPaymentComponent,
     CustomSelectComponent,

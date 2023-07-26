@@ -25,9 +25,9 @@
                 <strong class=""> / </strong>
             </li>
             <li class="nav-item mt-2 ms-2">
-                <p [ngClass]="{
-            'estilo-negrilla': rutaActual === 'example',
-            noactive: rutaActual !== 'example'
+                <p (click)="redireTo('checkout/confirm-payment')" [ngClass]="{
+            'estilo-negrilla': rutaActual === 'confirm-payment',
+            noactive: rutaActual !== 'confirm-payment'
           }">
                     Pago o suscripción
                 </p>
