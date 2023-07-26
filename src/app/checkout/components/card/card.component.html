@@ -30,7 +30,7 @@
 
 <div class="d-flex justify-content-center" *ngIf = "resolucion_movil">
 
-  <div class="container border col-10 rounded-1 p-0" >
+  <div class="container border col-11 rounded-1 p-0" >
 
     <div class = "bg-gray p-3 " style = "height: 150px;">
       <p class = "fs-5 fw-bold">{{data.dues|i18nPlural:monthsMap}}</p>
@@ -75,7 +75,8 @@
         <div class = "col-11">
           <button type = "button" class = "btn btn-lg border w-100 round"
            [ngClass] = "{'text-white': inputCursor, 'btn-dark': inputCursor}"
-           (mouseenter)="inputCursor = true" (mouseleave)="inputCursor = false">Continuar</button>
+           (mouseenter)="inputCursor = true" (mouseleave)="inputCursor = false"
+           (click) = "nextStep()">Continuar</button>
         </div>
       </div>
     </div>

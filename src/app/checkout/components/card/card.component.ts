@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardDataElement } from '../../interfaces/cardDataElement.interface';
 
 @Component({
@@ -15,6 +15,8 @@ export class CardComponent implements OnInit {
   }
 
   inputCursor: boolean = false
+
+  @Output() onNextStep: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() resolucion_movil: boolean = false;
 
@@ -36,5 +38,8 @@ export class CardComponent implements OnInit {
     'other': '# meses'
   }
 
+  nextStep(){
+    this.onNextStep.emit()
+  }
 
 }

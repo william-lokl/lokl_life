@@ -23,8 +23,17 @@
   line-height: 1.75rem;
 }
 
+.fs-tiny{
+  font-size: 0.75rem;
+}
+
 .col-gray{
   color : #6c757d
+}
+
+.bg-gray{
+  background-color: rgb(229, 221, 225);
+  --bs-background-color: rgb(229, 221, 225);
 }
 
 .pago-unico-selected{

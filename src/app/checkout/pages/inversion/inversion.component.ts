@@ -39,7 +39,7 @@ export class InversionComponent implements OnInit {
     { name: '9 meses', value: 9, selected: false },
   ];
   public formInversion: FormGroup = this.fb.group({
-    value: [110000140, [Validators.min(11000000)]],
+    value: [1120000, []],
     dues: [1 , [Validators.required]],
     payment: ['', [Validators.required] ],
     acceptTerms: [false, [Validators.requiredTrue] ],
@@ -51,6 +51,9 @@ export class InversionComponent implements OnInit {
   public inputActivated: boolean = false;
 
   public cardData: CardDataElement[] = [];
+
+  step1: boolean = true;
+  step2: boolean = false;
 
   mapCuotas = {
     '=1': '1 mes',
@@ -90,6 +93,7 @@ export class InversionComponent implements OnInit {
 
     if (newWidth > 992) {
       this.resolucion_movil = false;
+      this.step2 = false;
     }
 
     this.widthActual = newWidth;
@@ -172,6 +176,13 @@ export class InversionComponent implements OnInit {
     this.formInversion.patchValue({
       acceptTerms: !this.formInversion.value.acceptTerms,
     });
+  }
+
+  nextStep(){
+    if(!this.formInversion.controls['value'].valid) return
+
+    this.step1 = false;
+    this.step2 = true;
   }
 
   getLastDayOfMonth(): Date {
