@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-custom-select',
@@ -7,11 +8,12 @@ import { CustomSelectElement } from '../../interfaces/customSelectElement.interf
   styleUrls: ['./custom-select.component.scss'],
 })
 export class CustomSelectComponent implements OnInit {
-  @Input() selectSelected: boolean = false;
+  @Input() $selectSelected: Observable<boolean> = of(false);
   @Input() data: CustomSelectElement[] = [];
   @Input() public ssColor: string = "#7c3aed";
   @Input() justIzquierda: boolean = false;
 
+  selectSelected: boolean = false
   desplegar = false;
 
   @Output('onOpcionSeleccionada') onOpcionSeleccionada: EventEmitter<CustomSelectElement> = new EventEmitter<CustomSelectElement>();
@@ -26,6 +28,12 @@ export class CustomSelectComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+
+    this.$selectSelected.subscribe( (resp) => {
+      this.selectSelected = resp
+      if( !resp ) this.desplegar = false
+    } )
+
     this.dataLength = this.data.length - 1;
     for (let i = 0; i < this.data.length; i++) {
       if (this.data[i].selected == true) {
@@ -40,6 +48,7 @@ export class CustomSelectComponent implements OnInit {
 
   clickSelect() {
     this.selectSelected = true;
+    this.onOpcionSeleccionada.emit(this.elementSelected)
     this.desplegar = !this.desplegar;
   }
 

@@ -90,12 +90,21 @@ app-custom-select{
   z-index: 1;
 }
 
-.fw-heavy{
-  font-weight: 900;
-}
+
 
 input:focus {
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+.fw-heavy{
+  font-weight: 1000!important;
+}
+
+.fs-7{
+  font-size: 0.85rem!important;
+}
+
+.fs-8{
+  font-size: 0.75rem!important;
 }

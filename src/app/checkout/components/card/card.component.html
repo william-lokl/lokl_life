@@ -1,5 +1,5 @@
 
-<div class="container border p-4 rounded-1">
+<div class="container border p-4 rounded-1" *ngIf = "!resolucion_movil">
 
 
   <p class = "text-center fw-bold fs-5"> {{data.dues | i18nPlural:monthsMap}} </p>
@@ -25,4 +25,62 @@
   </div>
 
   <p class="font-weight-bold"> *Incluye Valoración y rentas </p>
+
+</div>
+
+<div class="d-flex justify-content-center" *ngIf = "resolucion_movil">
+
+  <div class="container border col-10 rounded-1 p-0" >
+
+    <div class = "bg-gray p-3 " style = "height: 150px;">
+      <p class = "fs-5 fw-bold">{{data.dues|i18nPlural:monthsMap}}</p>
+
+      <div class = "d-flex justify-content-center">
+        <div class = "d-flex flex-column text-center w-100">
+          <p class = "fs-7 text-muted"> Cuotas mensuales de: </p>
+          <p class = "fs-4 fw-heavy"> {{data.pay | currency}} </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="p-3" style = "height: 350px;">
+      <div class = "d-flex justify-content-between">
+        <p class = "text-muted fs-6">Shares:</p>
+        <p class = "fw-heavy fs-6"> 100 </p>
+      </div>
+      <div class = "d-flex justify-content-between">
+        <p class = "text-muted ">Valor de unidad</p>
+        <p class = "fw-heavy "> {{data.value | currency}} </p>
+      </div>
+      <div class = "d-flex justify-content-between">
+        <p class = "text-muted ">% de incremento</p>
+        <p class = "fw-heavy "> % </p>
+      </div>
+
+      <hr class = "mt-2 mb-2">
+
+      <p class = "fw-bold">retorno anual:</p>
+
+      <div class = "d-flex justify-content-between">
+        <p class = "text-muted ">rentabilidad estimada</p>
+        <p class = "fw-heavy "> {{data.annualReturn | percent}} </p>
+      </div>
+      <div class = "d-flex justify-content-between">
+        <p class = "text-muted ">Valoración estimada</p>
+        <p class = "fw-heavy "> % </p>
+      </div>
+
+      <div class = "d-flex justify-content-center">
+        <div class = "col-11">
+          <button type = "button" class = "btn btn-lg border w-100 round"
+           [ngClass] = "{'text-white': inputCursor, 'btn-dark': inputCursor}"
+           (mouseenter)="inputCursor = true" (mouseleave)="inputCursor = false">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>
