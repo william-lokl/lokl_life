@@ -1,0 +1,4 @@
+<div class="border rounded-0 d-block" [ngClass]="{'input-selected': inputActivated}">
+    <input type="text" [formControl]="control" class="form-control form-control-lg rounded-0 border-0"
+        (focus)="inputFocus()" (blur)="inputBlur()" placeholder="" />
+</div>

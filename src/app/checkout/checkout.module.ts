@@ -20,6 +20,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { ActualrouteComponent } from './components/actualroute/actualroute.component';
 import { OnlyNumberDirective } from './directives/only-number.directive';
+import { InputComponent } from '../shared/input/input.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { OnlyNumberDirective } from './directives/only-number.directive';
     CustomSelectComponent,
     ActualrouteComponent,
     OnlyNumberDirective,
+    InputComponent,
   ],
   imports: [
     FormsModule,
