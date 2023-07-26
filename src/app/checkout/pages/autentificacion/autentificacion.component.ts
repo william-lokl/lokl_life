@@ -15,6 +15,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-autentificacion',
@@ -23,9 +25,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AutentificacionComponent implements OnInit {
   resolucion_movil: boolean = false;
-  countries: CustomSelectElement[] = [
-    { name: 'Colombia', value: 'Colombia', selected: false },
-  ];
+  countries: any[] = [];
   selectedCountry: string = 'Colombia';
   cities: string[] = [];
   paso1: boolean = true;
@@ -35,11 +35,13 @@ export class AutentificacionComponent implements OnInit {
   body!: FormGroup;
   firstNameControl!: FormControl;
   last_name!: FormControl;
+  document_date!: FormControl;
   document_type!: FormControl;
   document_number!: FormControl;
   address!: FormControl;
   referral_code!: FormControl;
   phone!: FormControl;
+  valorCheckboxControl: FormControl = new FormControl(false);
 
   modalRef!: NgbModalRef;
 
@@ -52,14 +54,14 @@ export class AutentificacionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public fb: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private apiservice: ApiService
   ) {}
   @ViewChild('content', { static: false }) modalContent!: TemplateRef<any>;
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
     const newHeight = (event.target as Window).innerHeight;
-
     // Tu lógica para manejar el cambio de resolución
     console.log(`Nueva resolución: ${newWidth}x${newHeight}`);
 
@@ -80,6 +82,8 @@ export class AutentificacionComponent implements OnInit {
   ngOnInit(): void {
     const initialWidth = window.innerWidth;
     const initialHeight = window.innerHeight;
+    console.log(initialWidth);
+    console.log(initialHeight);
 
     if (initialWidth < 992) {
       this.resolucion_movil = true;
@@ -94,7 +98,7 @@ export class AutentificacionComponent implements OnInit {
     this.body = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-
+      document_date: ['', Validators.required],
       document_type: ['', Validators.required],
       document_number: ['', Validators.required],
       address: ['', Validators.required],
@@ -114,6 +118,7 @@ export class AutentificacionComponent implements OnInit {
 
     this.firstNameControl = this.body.get('first_name') as FormControl;
     this.last_name = this.body.get('last_name') as FormControl;
+    this.document_date = this.body.get('document_date') as FormControl;
     this.document_type = this.body.get('document_type') as FormControl;
     this.document_number = this.body.get('document_number') as FormControl;
     this.address = this.body.get('address') as FormControl;
@@ -121,8 +126,8 @@ export class AutentificacionComponent implements OnInit {
     this.phone = this.body.get('phone') as FormControl;
 
     this.patchForm();
-    //this.fetchCountries();
-    this.onSelectCountry();
+    this.fetchCountries();
+    //this.onSelectCountry();
   }
 
   public changeStep() {
@@ -144,14 +149,13 @@ export class AutentificacionComponent implements OnInit {
     this.http.get<any[]>(apiUrl).subscribe(
       (countriesData) => {
         countriesData.map((country) => {
-          console.log(country.name.common);
-
+          /* console.log(country.name.common); */
           let obj = {
             name: country?.name?.common,
             value: country?.name?.common,
             selected: false,
           };
-          this.countries.push(obj);
+          this.countries.push(country.name.common);
         });
         this.countries.sort();
       },
@@ -169,7 +173,7 @@ export class AutentificacionComponent implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
+            //console.log(res);
           },
           (error) => {
             console.error('Error al obtener las ciudades:', error);
@@ -195,23 +199,16 @@ export class AutentificacionComponent implements OnInit {
 
     this.opcionesSelect.forEach((item) => {
       if (item.value == document_type) {
-        console.log('si es igual');
-
         item.selected = true;
       }
     });
-    console.log(this.opcionesSelect);
 
-    //let obj = { name: 'Cédula de Ciudadania', value: 'CC', selected: true };
-    //this.opcionesSelect.unshift(obj);
     this.body.patchValue({ first_name });
     this.body.patchValue({ last_name });
     this.body.patchValue({ document_type });
     this.body.patchValue({ document_number });
     this.body.patchValue({ phone });
     this.body.patchValue({ address });
-
-    console.log(this.body.value);
   }
 
   inputFocus() {
@@ -228,6 +225,7 @@ export class AutentificacionComponent implements OnInit {
   }
 
   public sendData() {
+    console.log('Valor del checkbox: ' + this.valorCheckboxControl.value);
     let reference_pay = localStorage.getItem('reference_pay');
     let units = localStorage.getItem('units');
     let investment = localStorage.getItem('investment');
@@ -236,13 +234,15 @@ export class AutentificacionComponent implements OnInit {
     let impuestos = localStorage.getItem('impuestos');
     let meses = localStorage.getItem('meses');
     let valor_mes = localStorage.getItem('valor_mes');
-
+    let date = moment(this.body.get('document_date')?.value).format(
+      'MM-DD-YYYY'
+    );
     let body = {
       first_name: this.body.get('first_name')?.value,
       last_name: this.body.get('last_name')?.value,
       document_type: this.body.get('document_type')?.value,
       document_number: this.body.get('document_number')?.value,
-      document_date: '7/19/2023',
+      document_date: date,
       address: this.body.get('address')?.value,
       document_front: '',
       document_back: '',
@@ -257,10 +257,20 @@ export class AutentificacionComponent implements OnInit {
       meses: meses,
       valor_mes: valor_mes,
     };
+
     this.modalRef = this.modalService.open(this.modalContent, {
       centered: true,
       size: 'sm',
     });
+
+    this.apiservice.post(`sign-contract/1`, body).subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (error: any) => {
+        console.log('error en enviar data', error);
+      }
+    );
   }
 
   public async cerrarmodal() {
