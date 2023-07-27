@@ -117,6 +117,7 @@ export class InversionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.inputValue( {target: {value: 0}} );
     this.calcularMontos();
     this.pagoUnicoSelected = true
 
@@ -388,28 +389,28 @@ export class InversionComponent implements OnInit, OnDestroy {
         pay: this.inversionValue,
         units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(1),
-        annualReturn: 150,
+        annualReturn: 0.15,
       },
       {
         dues: 3,
         pay: this.getValueDue(3),
         units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(3),
-        annualReturn: 150 - 150 * (0.029),
+        annualReturn: (0.15 - 0.015 * (0.292)),
       },
       {
         dues: 6,
         pay: this.getValueDue(6),
         units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(6),
-        annualReturn: 150 - 150 * (0.05664),
+        annualReturn: (0.15 - 0.015 * (0.5664)),
       },
       {
         dues: 9,
         pay: this.getValueDue(9),
         units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(9),
-        annualReturn: 150 - 150 * (0.097),
+        annualReturn: (0.15 - 0.015 * (0.83)),
       },
     ];
   }

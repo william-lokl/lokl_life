@@ -13,6 +13,7 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   inputCursor: boolean = false
 
   @Output() onNextStep: EventEmitter<void> = new EventEmitter<void>();

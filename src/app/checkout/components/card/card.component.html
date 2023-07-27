@@ -12,7 +12,7 @@
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> {{data.dues| i18nPlural:duesMap}} </p>
-    <strong class = "fw-bold fs-6"> {{data.pay | currency}} </strong>
+    <strong class = "fw-bold fs-6"> {{data.pay | currency:'':'symbol-narrow':'1.0-0' }} COP </strong>
   </div>
 
   <div class = "d-flex justify-content-between mb-1">
@@ -22,12 +22,12 @@
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> Valor de unidad:</p>
-    <b class="font-weight-bold"> {{data.value | currency}} </b>
+    <b class="font-weight-bold"> {{data.value | currency:'':'symbol-narrow':'1.0-0' }} COP </b>
   </div>
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> Retorno anual promedio: </p>
-    <b> {{data.annualReturn | percent}} </b>
+    <b> {{data.annualReturn | percent:'1.2-2'}} </b>
   </div>
 
   <p class="font-weight-bold"> *Incluye Valoración y rentas </p>
@@ -50,7 +50,7 @@
       <div class = "d-flex justify-content-center">
         <div class = "d-flex flex-column text-center w-100">
           <p class = "fs-7 text-muted"> Cuotas mensuales de: </p>
-          <p class = "fs-4 fw-heavy"> {{data.pay | currency}} </p>
+          <p class = "fs-4 fw-heavy"> {{data.pay | currency:'':'symbol-narrow':'1.0-0' }} COP </p>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">Valor de unidad</p>
-        <p class = "fw-heavy "> {{data.value | currency}} </p>
+        <p class = "fw-heavy "> {{data.value | currency:'':'symbol-narrow':'1.0-0' }} COP </p>
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">% de incremento</p>
@@ -76,7 +76,7 @@
 
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">rentabilidad estimada</p>
-        <p class = "fw-heavy "> {{data.annualReturn | percent}} </p>
+        <p class = "fw-heavy "> {{data.annualReturn | percent:'1.2-2'}} </p>
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">Valoración estimada</p>
