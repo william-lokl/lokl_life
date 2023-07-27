@@ -265,7 +265,7 @@ export class InversionComponent implements OnInit, OnDestroy {
     }
 
     for (let i = 0; i < this.opcionesSelect.length; i++) {
-      this.opcionesSelect[i].value = false;
+      this.opcionesSelect[i].selected = false;
     }
 
   }
