@@ -12,6 +12,7 @@
   background-image: url('/assets/img/banner-prom.png');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   height: 8rem;
   border-radius: 0.375rem!important;
   padding-top: 1.5rem;
@@ -53,6 +54,7 @@
   width: 47%!important;
   cursor: pointer;
   display: grid;
+  fill: gray;
 }
 
 .container-cuotas{

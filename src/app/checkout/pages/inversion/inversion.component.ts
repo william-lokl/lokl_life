@@ -1,35 +1,38 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { PaymentCard } from '../../interfaces/paymentCard.interface';
-import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
 
-import * as jwt_decode from 'jwt-decode';
-import { ApiService } from 'src/app/services/api.service';
 import { Carousel } from 'primeng/carousel';
 import { Observable, Subject, delay } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
+
+import { ApiService } from 'src/app/services/api.service';
+import { PaymentCard } from '../../interfaces/paymentCard.interface';
+import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import { CardDataElement } from '../../interfaces/cardDataElement.interface';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-inversion',
   templateUrl: './inversion.component.html',
   styleUrls: ['./inversion.component.scss'],
 })
-export class InversionComponent implements OnInit {
+export class InversionComponent implements OnInit, OnDestroy {
   public fecha: Date = new Date();
   public fechaEnMes: Date = this.generarFecha();
   public fechaFinMes: Date = this.getLastDayOfMonth()
   public pagoUnicoSelected: boolean = false;
   public selectCuotasSelected: boolean = false;
-  public unitValue: number = 112000;
+  public unitValue: number = environment.unit_value;
   public resolucion_movil: boolean = false;
   public widthActual: number = 0;
   public cardsCount: number = 2;
@@ -39,11 +42,12 @@ export class InversionComponent implements OnInit {
     { name: '9 meses', value: 9, selected: false },
   ];
   public formInversion: FormGroup = this.fb.group({
-    value: [1120000, []],
+    value: ['1.120.000', []],
     dues: [1 , [Validators.required]],
     payment: ['', [Validators.required] ],
     acceptTerms: [false, [Validators.requiredTrue] ],
   });
+  inversionValue: number = 0;
 
   public subSelectSelected: Subject<boolean> = new Subject<boolean>();
   public $selectSelected: Observable<boolean> = this.subSelectSelected.asObservable()
@@ -79,6 +83,9 @@ export class InversionComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute
   ) {}
+  ngOnDestroy(): void {
+    this.subSelectSelected.unsubscribe()
+  }
 
 
   @HostListener('window:resize', ['$event'])
@@ -262,7 +269,7 @@ export class InversionComponent implements OnInit {
 
   calcularMontos() {
 
-    const inversion = this.formInversion.value.value;
+    const inversion = this.inversionValue;
 
     const cuotas = this.formInversion.value.dues;
     const metodoPago = this.formInversion.value.payment;
@@ -290,17 +297,18 @@ export class InversionComponent implements OnInit {
 
     if( !this.formInversion.valid ) return;
 
-    this.redirectTo('checkout/personal-data')
+    const payment = this.formInversion.value.payment == 'pse' ? '2' : '1'
 
     localStorage.setItem('reference_pay', "") //TODO: logica de referencias
     localStorage.setItem('units', this.currentUnits.toString())
     localStorage.setItem('investment', this.total.toString())
-    localStorage.setItem('type', "") //TODO: averiguar
-    localStorage.setItem('inversion_total', this.formInversion.value.value.toString())
+    localStorage.setItem('type', payment)
+    localStorage.setItem('inversion_total', this.inversionValue.toString())
     localStorage.setItem('meses', this.formInversion.value.dues.toString())
     localStorage.setItem('valor_mes', this.valorCuota.toString())
     localStorage.setItem("impuestos", this.impuestosTarifas.toString())
 
+    this.redirectTo('checkout/personal-data')
 
   }
 
@@ -331,7 +339,7 @@ export class InversionComponent implements OnInit {
   }
 
   getValueDue(due: number): number{
-    const inversion = Number(this.formInversion.value.value);
+    const inversion = Number(this.inversionValue);
     const interes = due * 0.01;
     const totalConInteres = inversion + (inversion * interes);
     const totalCuota = totalConInteres / due;
@@ -344,37 +352,62 @@ export class InversionComponent implements OnInit {
     return this.unitValue + (this.unitValue * (0.01 * due))
   }
 
-  inputValue(){
+  inputValue(event: any){
+    if(event.target.value > 1e15){
+
+      this.formInversion.patchValue({value: this.gStringDots(this.inversionValue)})
+      return;
+    }
+
+    const aux = this.formInversion.value.value.replace(/\./g, '');
+    this.inversionValue = Number(aux);
+
     this.calcularMontos()
+
+    this.formInversion.patchValue({value: this.gStringDots(aux)})
+  }
+
+  gStringDots( valor: number ):string{
+    const valueStr: string = valor.toString();
+    const arrayValue: string[] = valueStr.split('')
+
+
+    for (let i = arrayValue.length; i > 0; i--) {
+      if( i % 3 == 0 &&  arrayValue.length - i != 0 ){
+        arrayValue.splice(arrayValue.length - i , 0, '.' )
+      }
+    }
+
+    return arrayValue.join('');
   }
 
   generarCards(){
     this.cardData = [
       {
         dues: 1,
-        pay: this.formInversion.value.value,
-        units: Math.round(this.formInversion.value.value / this.unitValue),
+        pay: this.inversionValue,
+        units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(1),
         annualReturn: 150,
       },
       {
         dues: 3,
         pay: this.getValueDue(3),
-        units: Math.round(this.formInversion.value.value / this.unitValue),
+        units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(3),
         annualReturn: 150 - 150 * (0.029),
       },
       {
         dues: 6,
         pay: this.getValueDue(6),
-        units: Math.round(this.formInversion.value.value / this.unitValue),
+        units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(6),
         annualReturn: 150 - 150 * (0.05664),
       },
       {
         dues: 9,
         pay: this.getValueDue(9),
-        units: Math.round(this.formInversion.value.value / this.unitValue),
+        units: Math.round(this.inversionValue / this.unitValue),
         value: this.getValueUnit(9),
         annualReturn: 150 - 150 * (0.097),
       },

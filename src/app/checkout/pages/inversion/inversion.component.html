@@ -30,7 +30,7 @@
             <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
             <div class= "border input-group rounded-0" [ngClass] = "{'input-selected': inputActivated}">
               <input type="text" class="form-control form-control-lg rounded-0 border-0 col-10" formControlName="value" onlyNumber
-                (focus)="inputFocus()" (blur) = "inputBlur()" (input)="inputValue()" placeholder="$0" />
+                (focus)="inputFocus()" (blur) = "inputBlur()" (input)="inputValue($event)" placeholder="$0" />
               <div class = "d-flex justify-content-center input-group-append col-2" style = "border-left: 1px solid #f1f1f1!important">
                 <div class="d-flex flex-column input-group-text border-0 align-center p-2" style = "background-color: transparent!important; ">
                   <p class = "m-0 fw-heavy fs-7">
@@ -50,9 +50,14 @@
                 (onOpcionSeleccionada)="changeDues($event)"
                 [$selectSelected]="$selectSelected"></app-custom-select>
 
-              <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
+              <div class="border pago-unico p-2 d-flex justify-content-center align-items-center" [ngClass]="{
                   'pago-unico-selected': pagoUnicoSelected
                 }" (click)="clickPagoUnico()">
+                <svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" [ngClass]="{
+                  'pago-unico-selected': pagoUnicoSelected
+                }">
+                  <path d="M6.5493 0.914614C6.84934 -0.00524628 8.15066 -0.00524604 8.4507 0.914615L9.51761 4.18549C9.65183 4.59696 10.0355 4.87539 10.4683 4.87539H13.9126C14.8823 4.87539 15.2844 6.11698 14.4989 6.68549L11.7191 8.69731C11.3673 8.95195 11.22 9.40459 11.3547 9.81751L12.4181 13.0775C12.7184 13.9982 11.6655 14.7655 10.8811 14.1977L8.08629 12.1751C7.73644 11.9219 7.26357 11.9219 6.91371 12.1751L4.11893 14.1977C3.33446 14.7655 2.28165 13.9982 2.58194 13.0775L3.64531 9.81751C3.78 9.40459 3.63275 8.95195 3.2809 8.69731L0.501087 6.68549C-0.284439 6.11698 0.117715 4.87539 1.08738 4.87539H4.53169C4.96449 4.87539 5.34817 4.59696 5.48239 4.18549L6.5493 0.914614Z"></path>
+                </svg>
                 <p class="fs-6 mb-0">Pago unico</p>
               </div>
             </div>
@@ -112,16 +117,21 @@
         <div class="row">
           <div class="col-12 col-lg-8 offset-0 offset-lg-1">
             <div class="d-flex justify-content-between auth mb-5">
-              <mat-checkbox color="primary" class="check-auth" formControlName="acceptTerms">
-              </mat-checkbox>
 
-              <div class="ml-2" (click)="clickAuth()">
-                Al realizar el pago, apruebas el débito automático a tu medio de
-                pago y aceptas que tu suscripción será de inmediato. Aceptas
-                recibir notificaciones y aceptas las Políticas de privacidad de
-                LOKL. Además te cobraremos el cargo mensual o anual estándar de
-                forma recurrente según tu método de pago registrado.
-              </div>
+              <div class="form-check" style = "cursor: auto">
+                <input class="form-check-input" type="checkbox" formControlName="acceptTerms" style = "border: 1px solid black;">
+                <label class="form-check-label" for="flexCheckDefault" (click)="clickAuth()">
+                  <p class = "auth">
+                    Al realizar el pago, apruebas el débito automático a tu medio de
+                    pago y aceptas que tu suscripción será de inmediato. Aceptas
+                    recibir notificaciones y aceptas las Políticas de privacidad de
+                    LOKL. Además te cobraremos el cargo mensual o anual estándar de
+                    forma recurrente según tu método de pago registrado.
+                  </p>
+                </label>
+            </div>
+
+
             </div>
           </div>
         </div>
@@ -149,7 +159,7 @@
           <div class="d-flex justify-content-between">
             <p class="fs-6 col-gray">inversión total:</p>
             <p class="fs-5 fw-bold">
-              {{ formInversion.value.value | currency }}
+              {{ inversionValue | currency }}
             </p>
           </div>
 
@@ -315,7 +325,7 @@
 
           <div class = "d-flex justify-content-between">
             <p class = "text-muted">Inversion:</p>
-            <p class = "fw-bold"> {{formInversion.value.value | currency }}  </p>
+            <p class = "fw-bold"> {{inversionValue | currency }}  </p>
           </div>
           <div class = "d-flex justify-content-between">
             <p class = "text-muted">Cuotas diferidas</p>
