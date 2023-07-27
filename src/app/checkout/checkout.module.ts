@@ -26,6 +26,7 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
 import { SelectciudadComponent } from '../shared/selectciudad/selectciudad.component';
 import { SelectdepartamentoComponent } from '../shared/selectdepartamento/selectdepartamento.component';
 import { SelectpaisComponent } from '../shared/selectpais/selectpais.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SelectpaisComponent } from '../shared/selectpais/selectpais.component';
     SelectciudadComponent,
     SelectdepartamentoComponent,
     SelectpaisComponent,
+    AlertComponent,
   ],
   imports: [
     FormsModule,

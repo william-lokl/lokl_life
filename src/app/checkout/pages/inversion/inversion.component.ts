@@ -54,6 +54,8 @@ export class InversionComponent implements OnInit, OnDestroy {
 
   public inputActivated: boolean = false;
 
+  public alertaUnits: boolean = false;
+
   public cardData: CardDataElement[] = [];
 
   step1: boolean = true;
@@ -71,6 +73,8 @@ export class InversionComponent implements OnInit, OnDestroy {
   impuestosTarifas = 0;
   valorCuota = 0;
   currentUnits = 0;
+
+  alertText = `El monto mínimo para invertir es de $${this.gStringDots(this.unitValue * 100 )}`
 
   paymentCards: PaymentCard[] = [
     { name: 'visa', selected: false },
@@ -278,8 +282,6 @@ export class InversionComponent implements OnInit, OnDestroy {
     const cuotas = this.formInversion.value.dues;
     const metodoPago = this.formInversion.value.payment;
 
-    console.log(cuotas);
-
     if (cuotas == 1) {
       this.subtotal = inversion;
       this.total = inversion;
@@ -300,9 +302,22 @@ export class InversionComponent implements OnInit, OnDestroy {
   submit(){
 
     if( !this.formInversion.valid ) return;
+    if( this.currentUnits < 100 ){
+      this.alertaUnits = true;
+      setTimeout(() => {
+        this.alertaUnits = false;
+      }, 5000);
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    if( !token ) return
 
     const payment = this.formInversion.value.payment == 'pse' ? '2' : '1'
+    const reference = jwt_decode.default(token) + "_632511ecd407318f2592f945_" + (Math.random().toString().slice(-5, -1))
 
+    localStorage.setItem("reference_pay", reference.toString())
     localStorage.setItem('units', this.currentUnits.toString()) // Units totales
     localStorage.setItem('investment', this.total.toString()) // Total + impuestos
     localStorage.setItem('investment_total', this.inversionValue.toString()) // Valor ingresado por usuario
@@ -360,13 +375,19 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   inputValue(event: any){
-    if(event.target.value > 1e15){
 
+    if(event.target.value > 1e15){
       this.formInversion.patchValue({value: this.gStringDots(this.inversionValue)})
       return;
     }
 
-    const aux = this.formInversion.value.value.replace(/\./g, '');
+    this.alertaUnits = false
+
+    let aux = this.formInversion.value.value.replace(/\./g, '');
+    if(aux[0] == '0'){
+      aux = event.target.value.substring(1)
+    }
+    aux = aux.replace(/[^0-9]/g, '')
     this.inversionValue = Number(aux);
 
     this.calcularMontos()
