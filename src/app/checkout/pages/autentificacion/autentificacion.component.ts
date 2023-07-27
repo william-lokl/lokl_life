@@ -65,6 +65,7 @@ export class AutentificacionComponent implements OnInit {
   impuestos: string | null = '';
   meses: string | null = '';
   valor_mes: string | null = '';
+  token: string | null = '';
   /********/
 
   constructor(
@@ -143,8 +144,14 @@ export class AutentificacionComponent implements OnInit {
     this.meses = this.activatedRoute.snapshot.queryParamMap.get('meses');
     this.valor_mes =
       this.activatedRoute.snapshot.queryParamMap.get('valor_mes');
+    this.valor_mes =
+      this.activatedRoute.snapshot.queryParamMap.get('valor_mes');
 
-    console.log(this.code);
+    this.token = this.activatedRoute.snapshot.queryParamMap.get('token');
+
+    if (this.token) {
+      localStorage.setItem('token', `${this.token}`);
+    }
 
     this.patchForm();
   }
