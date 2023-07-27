@@ -20,6 +20,7 @@ import { CardhotelesComponent } from 'src/app/shared/cardhoteles/cardhoteles.com
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FiledropComponent } from 'src/app/shared/filedrop/filedrop.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,12 @@ import { MaterialModule } from 'src/app/material/material.module';
     CardhotelesComponent,
     FiledropComponent,
   ],
-  exports: [MinuteroComponent, FooterComponent, FiledropComponent, SteperComponent],
+  exports: [
+    MinuteroComponent,
+    FooterComponent,
+    FiledropComponent,
+    SteperComponent,
+  ],
   imports: [
     CommonModule,
     LandingmoduleRoutingModule,
@@ -44,6 +50,7 @@ import { MaterialModule } from 'src/app/material/material.module';
     MaterialModule,
     YouTubePlayerModule,
     NgxFileDropModule,
+    NgbModule,
   ],
   providers: [],
 })

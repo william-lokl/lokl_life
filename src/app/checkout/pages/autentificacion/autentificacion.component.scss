@@ -58,3 +58,7 @@ input:focus {
   overflow-y: auto;
   background: rgba(167, 166, 255, 0.75) !important;
 }
+
+.no-box-shadow {
+  box-shadow: none;
+}

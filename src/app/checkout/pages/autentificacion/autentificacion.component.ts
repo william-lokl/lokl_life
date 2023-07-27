@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
+  ElementRef,
   HostListener,
   OnInit,
   Renderer2,
@@ -18,6 +19,7 @@ import {
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ApiService } from 'src/app/services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-autentificacion',
@@ -28,10 +30,9 @@ export class AutentificacionComponent implements OnInit {
   secondsLeft = 30;
   intervalId: any;
   resolucion_movil: boolean = false;
-  countries: any[] = [];
   selectedCountry: string = 'CO';
   selectedState: string = '';
-  cities: string[] = [];
+  selectedcity: any;
   paso1: boolean = true;
   paso2: boolean = false;
   paso3: boolean = false;
@@ -48,22 +49,34 @@ export class AutentificacionComponent implements OnInit {
   valorCheckboxControl: FormControl = new FormControl(false);
 
   modalRef!: any;
-
   public opcionesSelect: CustomSelectElement[] = [
     { name: 'Cédula de Ciudadania', value: 'CC', selected: true },
     { name: 'Cédula de Extranjeria', value: 'CCE', selected: false },
     { name: 'Pasaporte', value: 'PS', selected: false },
   ];
   inputActivated: boolean = false;
-  selectedcity: any;
+
+  /*Variables recibidas por Url */
+  code: string | null = '';
+  reference: string | null = '';
+  amount: string | null = '';
+  type: string | null = '';
+  inversion_total: string | null = '';
+  impuestos: string | null = '';
+  meses: string | null = '';
+  valor_mes: string | null = '';
+  /********/
+
   constructor(
-    private http: HttpClient,
     public fb: FormBuilder,
     private modalService: NgbModal,
     private apiservice: ApiService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
   @ViewChild('content', { static: false }) modalContent!: TemplateRef<any>;
+  @ViewChild('modalfirmado', { static: false }) modalfirmado!: TemplateRef<any>;
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
@@ -101,18 +114,10 @@ export class AutentificacionComponent implements OnInit {
       document_type: ['', Validators.required],
       document_number: ['', Validators.required],
       address: ['', Validators.required],
-      document_front: ['', Validators.required],
-      document_back: ['', Validators.required],
+      document_front: [''],
+      document_back: [''],
       referral_code: [''],
       phone: ['', Validators.required],
-
-      reference_pay: ['', Validators.required], //juanito
-      units: ['', Validators.required], // juanito
-      investment: ['', Validators.required], // juanito
-      type: ['', Validators.required], // tipo de pago juanito
-      inversion_total: ['', Validators.required], // juanito
-      meses: ['', Validators.required], // juanito
-      valor_mes: ['', Validators.required], // juanito
     });
 
     this.firstNameControl = this.body.get('first_name') as FormControl;
@@ -124,9 +129,29 @@ export class AutentificacionComponent implements OnInit {
     this.referral_code = this.body.get('referral_code') as FormControl;
     this.phone = this.body.get('phone') as FormControl;
 
+    this.code = this.activatedRoute.snapshot.queryParamMap.get('code');
+    this.reference =
+      this.activatedRoute.snapshot.queryParamMap.get('reference');
+    this.amount = this.activatedRoute.snapshot.queryParamMap.get('amount');
+    this.type = this.activatedRoute.snapshot.queryParamMap.get('type');
+    this.inversion_total =
+      this.activatedRoute.snapshot.queryParamMap.get('inversion_total');
+    this.impuestos =
+      this.activatedRoute.snapshot.queryParamMap.get('impuestos');
+    this.meses = this.activatedRoute.snapshot.queryParamMap.get('meses');
+    this.valor_mes =
+      this.activatedRoute.snapshot.queryParamMap.get('valor_mes');
+
+    console.log(this.code);
+
     this.patchForm();
-    this.fetchCountries();
-    //this.onSelectCountry();
+    setTimeout(() => {
+      this.ValidateParams();
+    }, 1000);
+  }
+
+  ngAfterViewInit(): void {
+    //this.ValidateParams();
   }
 
   public changeStep() {
@@ -140,46 +165,6 @@ export class AutentificacionComponent implements OnInit {
       this.paso2 = false;
       this.paso3 = true;
       return;
-    }
-  }
-
-  fetchCountries() {
-    const apiUrl = 'https://restcountries.com/v3.1/all';
-    this.http.get<any[]>(apiUrl).subscribe(
-      (countriesData) => {
-        countriesData.map((country) => {
-          /* console.log(country.name.common); */
-          let obj = {
-            name: country?.name?.common,
-            value: country?.name?.common,
-            selected: false,
-          };
-          this.countries.push(country.name.common);
-        });
-        this.countries.sort();
-      },
-      (error) => {
-        console.error('Error al obtener los países:', error);
-      }
-    );
-  }
-
-  onSelectCountry(): void {
-    if (this.selectedCountry) {
-      this.http
-        .get<any[]>(
-          ` https://api.teleport.org/api/cities/?search=${this.selectedCountry}`
-        )
-        .subscribe(
-          (res) => {
-            //console.log(res);
-          },
-          (error) => {
-            console.error('Error al obtener las ciudades:', error);
-          }
-        );
-    } else {
-      this.cities = [];
     }
   }
 
@@ -233,22 +218,41 @@ export class AutentificacionComponent implements OnInit {
     this.modalService.open(content, {
       centered: true,
       size: 'sm',
+      backdrop: 'static',
+      keyboard: false,
       windowClass: 'custom-modal-open',
     });
-
     this.renderer.addClass(document.body, 'custom-modal-open');
   }
 
+  private ValidateParams() {
+    if (
+      this.code &&
+      this.reference &&
+      this.amount &&
+      this.type &&
+      this.impuestos &&
+      this.meses &&
+      this.valor_mes
+    ) {
+      localStorage.setItem('taxes', this.impuestos);
+      localStorage.setItem('investment', this.amount);
+      localStorage.setItem('type', this.type);
+      localStorage.setItem('months', this.meses);
+      localStorage.setItem('month_value', this.valor_mes);
+      this.openModal(this.modalfirmado);
+    }
+  }
+
   public sendData() {
-    console.log('Valor del checkbox: ' + this.valorCheckboxControl.value);
     let reference_pay = localStorage.getItem('reference_pay');
     let units = localStorage.getItem('units');
     let investment = localStorage.getItem('investment');
     let type = localStorage.getItem('type');
-    let inversion_total = localStorage.getItem('inversion_total');
+    let investment_total = localStorage.getItem('investment_total');
     let impuestos = localStorage.getItem('impuestos');
-    let meses = localStorage.getItem('meses');
-    let valor_mes = localStorage.getItem('valor_mes');
+    let months = localStorage.getItem('months');
+    let month_value = localStorage.getItem('month_value');
     let date = moment(this.body.get('document_date')?.value).format(
       'MM-DD-YYYY'
     );
@@ -267,10 +271,10 @@ export class AutentificacionComponent implements OnInit {
       units: units,
       investment: investment,
       type: type,
-      inversion_total: inversion_total,
+      inversion_total: investment_total,
       impuestos: impuestos,
-      meses: meses,
-      valor_mes: valor_mes,
+      meses: months,
+      valor_mes: month_value,
     };
     this.apiservice.post(`sign-contract/1`, body).subscribe(
       (res: any) => {
@@ -297,7 +301,10 @@ export class AutentificacionComponent implements OnInit {
   }
 
   cityChange(event: any) {
-    console.log(event);
     this.selectedcity = event.valor.name;
+  }
+  redireTo(path: string) {
+    this.router.navigate([`${path}`]);
+    this.cerrarmodal();
   }
 }
