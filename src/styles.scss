@@ -206,3 +206,12 @@ a:hover {
   overflow-y: auto;
   background: rgba(130, 236, 240, 0.75) !important;
 }
+
+.custom-modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba(130, 236, 240, 0.75) !important;
+}
+.error-modal .modal {
+  background-color: rgba(220, 38, 38, 0.75);
+}

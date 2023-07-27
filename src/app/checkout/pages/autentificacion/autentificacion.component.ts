@@ -77,6 +77,8 @@ export class AutentificacionComponent implements OnInit {
   ) {}
   @ViewChild('content', { static: false }) modalContent!: TemplateRef<any>;
   @ViewChild('modalfirmado', { static: false }) modalfirmado!: TemplateRef<any>;
+  @ViewChild('codigoinvalido', { static: false })
+  codigoinvalido!: TemplateRef<any>;
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
@@ -145,13 +147,13 @@ export class AutentificacionComponent implements OnInit {
     console.log(this.code);
 
     this.patchForm();
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.ValidateParams();
-    }, 1000);
+    }, 2000); */
   }
 
   ngAfterViewInit(): void {
-    //this.ValidateParams();
+    this.ValidateParams();
   }
 
   public changeStep() {
@@ -225,23 +227,75 @@ export class AutentificacionComponent implements OnInit {
     this.renderer.addClass(document.body, 'custom-modal-open');
   }
 
+  public async errorModal(content?: any) {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'sm',
+      windowClass: 'error-modal',
+    });
+    this.renderer.addClass(document.body, 'error-modal');
+  }
+
   private ValidateParams() {
-    if (
-      this.code &&
-      this.reference &&
-      this.amount &&
-      this.type &&
-      this.impuestos &&
-      this.meses &&
-      this.valor_mes
-    ) {
-      localStorage.setItem('taxes', this.impuestos);
-      localStorage.setItem('investment', this.amount);
-      localStorage.setItem('type', this.type);
-      localStorage.setItem('months', this.meses);
-      localStorage.setItem('month_value', this.valor_mes);
-      this.openModal(this.modalfirmado);
-    }
+    let reference_pay = localStorage.getItem('reference_pay');
+    let units = localStorage.getItem('units');
+    let investment = localStorage.getItem('investment');
+    let type = localStorage.getItem('type');
+    let investment_total = localStorage.getItem('investment_total');
+    let impuestos = localStorage.getItem('impuestos');
+    let months = localStorage.getItem('months');
+    let month_value = localStorage.getItem('month_value');
+    let date = moment(this.body.get('document_date')?.value).format(
+      'MM-DD-YYYY'
+    );
+    let body = {
+      first_name: this.body.get('first_name')?.value,
+      last_name: this.body.get('last_name')?.value,
+      document_type: this.body.get('document_type')?.value,
+      document_number: this.body.get('document_number')?.value,
+      document_date: date,
+      address: this.body.get('address')?.value,
+      document_front: '',
+      document_back: '',
+      referral_code: this.body.get('referral_code')?.value,
+      phone: this.body.get('phone')?.value,
+      reference_pay: reference_pay,
+      units: units,
+      investment: investment,
+      type: type,
+      inversion_total: investment_total,
+      impuestos: impuestos,
+      meses: months,
+      valor_mes: month_value,
+    };
+    this.apiservice.post(`sign-contract/2`, body).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.message == 'OTP Invalido o ya fue usado') {
+          this.errorModal(this.codigoinvalido);
+        } else {
+          if (
+            this.code &&
+            this.reference &&
+            this.amount &&
+            this.type &&
+            this.impuestos &&
+            this.meses &&
+            this.valor_mes
+          ) {
+            localStorage.setItem('taxes', this.impuestos);
+            localStorage.setItem('investment', this.amount);
+            localStorage.setItem('type', this.type);
+            localStorage.setItem('months', this.meses);
+            localStorage.setItem('month_value', this.valor_mes);
+            this.openModal(this.modalfirmado);
+          }
+        }
+      },
+      (error: any) => {
+        console.log('error en enviar data', error);
+      }
+    );
   }
 
   public sendData() {
