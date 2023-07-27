@@ -1,12 +1,18 @@
 
-<div class="container border p-4 rounded-1" *ngIf = "!resolucion_movil">
+<div class="container border p-4 rounded-1 border-gray-" *ngIf = "!resolucion_movil">
 
+  <div class = "position-absolute d-flex recomended align-items-center" *ngIf = "data.dues == 1">
+    <svg class="mr-2" width="13" height="13" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.5493 0.914614C6.84934 -0.00524628 8.15066 -0.00524604 8.4507 0.914615L9.51761 4.18549C9.65183 4.59696 10.0355 4.87539 10.4683 4.87539H13.9126C14.8823 4.87539 15.2844 6.11698 14.4989 6.68549L11.7191 8.69731C11.3673 8.95195 11.22 9.40459 11.3547 9.81751L12.4181 13.0775C12.7184 13.9982 11.6655 14.7655 10.8811 14.1977L8.08629 12.1751C7.73644 11.9219 7.26357 11.9219 6.91371 12.1751L4.11893 14.1977C3.33446 14.7655 2.28165 13.9982 2.58194 13.0775L3.64531 9.81751C3.78 9.40459 3.63275 8.95195 3.2809 8.69731L0.501087 6.68549C-0.284439 6.11698 0.117715 4.87539 1.08738 4.87539H4.53169C4.96449 4.87539 5.34817 4.59696 5.48239 4.18549L6.5493 0.914614Z"></path>
+    </svg>
+    <span> Recomendado </span>
+  </div>
 
   <p class = "text-center fw-bold fs-5"> {{data.dues | i18nPlural:monthsMap}} </p>
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> {{data.dues| i18nPlural:duesMap}} </p>
-    <strong class = "fw-bold fs-6"> {{data.pay | currency}} </strong>
+    <strong class = "fw-bold fs-6"> {{data.pay | currency:'':'symbol-narrow':'1.0-0' }} COP </strong>
   </div>
 
   <div class = "d-flex justify-content-between mb-1">
@@ -16,12 +22,12 @@
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> Valor de unidad:</p>
-    <b class="font-weight-bold"> {{data.value | currency}} </b>
+    <b class="font-weight-bold"> {{data.value | currency:'':'symbol-narrow':'1.0-0' }} COP </b>
   </div>
 
   <div class = "d-flex justify-content-between mb-1">
     <p class="font-weight-light fs-6"> Retorno anual promedio: </p>
-    <b> {{data.annualReturn | percent}} </b>
+    <b> {{data.annualReturn | percent:'1.2-2'}} </b>
   </div>
 
   <p class="font-weight-bold"> *Incluye Valoración y rentas </p>
@@ -30,15 +36,21 @@
 
 <div class="d-flex justify-content-center" *ngIf = "resolucion_movil">
 
-  <div class="container border col-11 rounded-1 p-0" >
+  <div class="container border col-11 rounded-1 p-0 border-gray-" >
 
-    <div class = "bg-gray p-3 " style = "height: 150px;">
+    <div class = "bg-gray p-3" style = "height: 150px; " [ngClass] = " { 'bg-violet':  data.dues == 1} " >
+      <div class = "position-absolute d-flex recomended align-items-center bg-white p-1 rounded" *ngIf = "data.dues == 1" style = "right: 1rem;">
+        <svg class="mr-2" width="13" height="13" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.5493 0.914614C6.84934 -0.00524628 8.15066 -0.00524604 8.4507 0.914615L9.51761 4.18549C9.65183 4.59696 10.0355 4.87539 10.4683 4.87539H13.9126C14.8823 4.87539 15.2844 6.11698 14.4989 6.68549L11.7191 8.69731C11.3673 8.95195 11.22 9.40459 11.3547 9.81751L12.4181 13.0775C12.7184 13.9982 11.6655 14.7655 10.8811 14.1977L8.08629 12.1751C7.73644 11.9219 7.26357 11.9219 6.91371 12.1751L4.11893 14.1977C3.33446 14.7655 2.28165 13.9982 2.58194 13.0775L3.64531 9.81751C3.78 9.40459 3.63275 8.95195 3.2809 8.69731L0.501087 6.68549C-0.284439 6.11698 0.117715 4.87539 1.08738 4.87539H4.53169C4.96449 4.87539 5.34817 4.59696 5.48239 4.18549L6.5493 0.914614Z"></path>
+        </svg>
+        <span> Recomendado </span>
+      </div>
       <p class = "fs-5 fw-bold">{{data.dues|i18nPlural:monthsMap}}</p>
 
       <div class = "d-flex justify-content-center">
         <div class = "d-flex flex-column text-center w-100">
           <p class = "fs-7 text-muted"> Cuotas mensuales de: </p>
-          <p class = "fs-4 fw-heavy"> {{data.pay | currency}} </p>
+          <p class = "fs-4 fw-heavy"> {{data.pay | currency:'':'symbol-narrow':'1.0-0' }} COP </p>
         </div>
       </div>
 
@@ -51,7 +63,7 @@
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">Valor de unidad</p>
-        <p class = "fw-heavy "> {{data.value | currency}} </p>
+        <p class = "fw-heavy "> {{data.value | currency:'':'symbol-narrow':'1.0-0' }} COP </p>
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">% de incremento</p>
@@ -64,7 +76,7 @@
 
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">rentabilidad estimada</p>
-        <p class = "fw-heavy "> {{data.annualReturn | percent}} </p>
+        <p class = "fw-heavy "> {{data.annualReturn | percent:'1.2-2'}} </p>
       </div>
       <div class = "d-flex justify-content-between">
         <p class = "text-muted ">Valoración estimada</p>
