@@ -3,6 +3,7 @@ import {
   Component,
   HostListener,
   OnInit,
+  Renderer2,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -24,6 +25,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./autentificacion.component.scss'],
 })
 export class AutentificacionComponent implements OnInit {
+  secondsLeft = 30;
+  intervalId: any;
   resolucion_movil: boolean = false;
   countries: any[] = [];
   selectedCountry: string = 'Colombia';
@@ -43,7 +46,7 @@ export class AutentificacionComponent implements OnInit {
   phone!: FormControl;
   valorCheckboxControl: FormControl = new FormControl(false);
 
-  modalRef!: NgbModalRef;
+  modalRef!: any;
 
   public opcionesSelect: CustomSelectElement[] = [
     { name: 'Cédula de Ciudadania', value: 'CC', selected: true },
@@ -55,7 +58,8 @@ export class AutentificacionComponent implements OnInit {
     private http: HttpClient,
     public fb: FormBuilder,
     private modalService: NgbModal,
-    private apiservice: ApiService
+    private apiservice: ApiService,
+    private renderer: Renderer2
   ) {}
   @ViewChild('content', { static: false }) modalContent!: TemplateRef<any>;
   @HostListener('window:resize', ['$event'])
@@ -78,7 +82,6 @@ export class AutentificacionComponent implements OnInit {
       console.log(this.resolucion_movil);
     }
   }
-
   ngOnInit(): void {
     const initialWidth = window.innerWidth;
     const initialHeight = window.innerHeight;
@@ -219,9 +222,25 @@ export class AutentificacionComponent implements OnInit {
     this.inputActivated = false;
   }
 
+  startCountdown() {
+    this.intervalId = setInterval(() => {
+      this.secondsLeft--;
+
+      if (this.secondsLeft <= 0) {
+        this.secondsLeft = 30;
+      }
+    }, 1000);
+  }
+
   //abrir modal de informacion
   public async openModal(content?: any) {
-    this.modalService.open(content, { centered: true, size: 'sm' });
+    this.modalService.open(content, {
+      centered: true,
+      size: 'sm',
+      windowClass: 'custom-modal-open',
+    });
+
+    this.renderer.addClass(document.body, 'custom-modal-open');
   }
 
   public sendData() {
@@ -257,15 +276,11 @@ export class AutentificacionComponent implements OnInit {
       meses: meses,
       valor_mes: valor_mes,
     };
-
-    this.modalRef = this.modalService.open(this.modalContent, {
-      centered: true,
-      size: 'sm',
-    });
-
     this.apiservice.post(`sign-contract/1`, body).subscribe(
       (res: any) => {
         console.log(res);
+        this.openModal(this.modalContent);
+        this.startCountdown();
       },
       (error: any) => {
         console.log('error en enviar data', error);

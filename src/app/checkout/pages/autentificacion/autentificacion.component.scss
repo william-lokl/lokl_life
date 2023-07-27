@@ -52,3 +52,9 @@ input:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+.modal-open.modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba(167, 166, 255, 0.75) !important;
+}

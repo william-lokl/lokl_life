@@ -45,8 +45,6 @@ app-footer {
   color: white !important;
 }
 
-
-
 .btn-focus:active,
 :focus,
 :active:focus {
@@ -151,7 +149,7 @@ app-footer {
 }
 
 // Agregar un 100 vh en el contenedor
-.container-heigth{
+.container-heigth {
   width: 100%;
   padding-top: 140px;
   background: white;
@@ -162,7 +160,6 @@ app-footer {
 @media (max-width: 993px) {
   .container-heigth {
     padding-top: 20px;
-
   }
 }
 @media (min-width: 993px) {
@@ -204,3 +201,8 @@ a:hover {
   background-color: transparent;
 }
 
+.custom-modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba(130, 236, 240, 0.75) !important;
+}
