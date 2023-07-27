@@ -259,9 +259,14 @@
               (onOpcionSeleccionada)="changeDues($event)"
               [$selectSelected]="$selectSelected"></app-custom-select>
 
-            <div class="border pago-unico p-2 text-center align-items-center" [ngClass]="{
+            <div class="border pago-unico p-2 d-flex justify-content-center align-items-center" [ngClass]="{
+              'pago-unico-selected': pagoUnicoSelected
+            }" (click)="clickPagoUnico()">
+              <svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" [ngClass]="{
                 'pago-unico-selected': pagoUnicoSelected
-              }" (click)="clickPagoUnico()">
+              }">
+                <path d="M6.5493 0.914614C6.84934 -0.00524628 8.15066 -0.00524604 8.4507 0.914615L9.51761 4.18549C9.65183 4.59696 10.0355 4.87539 10.4683 4.87539H13.9126C14.8823 4.87539 15.2844 6.11698 14.4989 6.68549L11.7191 8.69731C11.3673 8.95195 11.22 9.40459 11.3547 9.81751L12.4181 13.0775C12.7184 13.9982 11.6655 14.7655 10.8811 14.1977L8.08629 12.1751C7.73644 11.9219 7.26357 11.9219 6.91371 12.1751L4.11893 14.1977C3.33446 14.7655 2.28165 13.9982 2.58194 13.0775L3.64531 9.81751C3.78 9.40459 3.63275 8.95195 3.2809 8.69731L0.501087 6.68549C-0.284439 6.11698 0.117715 4.87539 1.08738 4.87539H4.53169C4.96449 4.87539 5.34817 4.59696 5.48239 4.18549L6.5493 0.914614Z"></path>
+              </svg>
               <p class="fs-6 mb-0">Pago unico</p>
             </div>
 
@@ -275,7 +280,7 @@
         <div class = "col-12">
           <p-carousel [value]="cardData" [numVisible]="cardsCount"   [circular]="false" [showIndicators]="false" [showNavigators]="false" #carouselP>
             <ng-template let-item pTemplate="item">
-               <app-card [data] = "item" [resolucion_movil] = "resolucion_movil" (onNextStep) = "nextStep()"></app-card>
+               <app-card [data] = "item" [resolucion_movil] = "resolucion_movil" (onNextStep) = "nextStep($event)"></app-card>
             </ng-template>
           </p-carousel>
 
@@ -333,7 +338,7 @@
           </div>
           <div class = "d-flex justify-content-between">
             <p class = "text-muted mb-0">Subtotal</p>
-            <p class = "fw-bold mb-0">  {{subtotal}} </p>
+            <p class = "fw-bold mb-0">  {{subtotal | currency:'':'symbol-narrow':'1.0-0' }} COP</p>
           </div>
 
           <p class="mt-0 mb-1 col-gray" *ngIf="formInversion.value.dues == 1" style = "color: rgb(37 99 235)">

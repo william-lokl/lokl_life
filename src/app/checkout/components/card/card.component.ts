@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
 
   inputCursor: boolean = false
 
-  @Output() onNextStep: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onNextStep: EventEmitter<number> = new EventEmitter<number>();
 
   @Input() resolucion_movil: boolean = false;
 
@@ -39,7 +39,7 @@ export class CardComponent implements OnInit {
   }
 
   nextStep(){
-    this.onNextStep.emit()
+    this.onNextStep.emit(this.data.dues)
   }
 
 }

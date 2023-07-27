@@ -129,12 +129,10 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     if (initialWidth < 992) {
       this.resolucion_movil = true;
-      console.log(this.resolucion_movil);
     }
 
     if (initialWidth > 992) {
       this.resolucion_movil = false;
-      console.log(this.resolucion_movil);
     }
 
     this.token = this.activatedRoute.snapshot.queryParamMap.get('token');
@@ -186,11 +184,12 @@ export class InversionComponent implements OnInit, OnDestroy {
     });
   }
 
-  nextStep(){
+  nextStep(event: number){
     if(!this.formInversion.controls['value'].valid) return
 
     this.step1 = false;
     this.step2 = true;
+    this.formInversion.patchValue({dues: event})
     this.formInversion.patchValue({acceptTerms: true} )
   }
 
@@ -260,6 +259,11 @@ export class InversionComponent implements OnInit, OnDestroy {
       this.pagoUnicoSelected = false
       this.subSelectSelected.next(true);
     }
+
+    for (let i = 0; i < this.opcionesSelect.length; i++) {
+      this.opcionesSelect[i].value = false;
+    }
+
   }
 
   changeDues(event: CustomSelectElement) {
@@ -271,23 +275,22 @@ export class InversionComponent implements OnInit, OnDestroy {
   calcularMontos() {
 
     const inversion = this.inversionValue;
-
     const cuotas = this.formInversion.value.dues;
     const metodoPago = this.formInversion.value.payment;
 
+    console.log(cuotas);
+
     if (cuotas == 1) {
       this.subtotal = inversion;
-      this.valorCuota = inversion;
       this.total = inversion;
     } else {
-      this.subtotal = (inversion + inversion * (cuotas * 0.01))/cuotas;
-      this.valorCuota = this.subtotal / cuotas;
-      this.total = this.valorCuota;
+      this.total = this.subtotal;
+      this.subtotal = (inversion + (inversion * (cuotas * 0.01)))/cuotas;
     }
 
     this.currentUnits = Math.round(inversion / this.unitValue)
 
-    this.impuestosTarifas = metodoPago == 'visa' ? this.valorCuota * 0.025 : 0;
+    this.impuestosTarifas = metodoPago == 'visa' ? (this.subtotal * 0.025)  : 0;
 
     this.total += this.impuestosTarifas;
 
@@ -300,14 +303,13 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     const payment = this.formInversion.value.payment == 'pse' ? '2' : '1'
 
-    localStorage.setItem('reference_pay', "") //TODO: logica de referencias
-    localStorage.setItem('units', this.currentUnits.toString())
-    localStorage.setItem('investment', this.total.toString())
+    localStorage.setItem('units', this.currentUnits.toString()) // Units totales
+    localStorage.setItem('investment', this.total.toString()) // Total + impuestos
+    localStorage.setItem('investment_total', this.inversionValue.toString()) // Valor ingresado por usuario
     localStorage.setItem('type', payment)
-    localStorage.setItem('inversion_total', this.inversionValue.toString())
-    localStorage.setItem('meses', this.formInversion.value.dues.toString())
-    localStorage.setItem('valor_mes', this.valorCuota.toString())
-    localStorage.setItem("impuestos", this.impuestosTarifas.toString())
+    localStorage.setItem('months', this.formInversion.value.dues.toString())
+    localStorage.setItem('month_value', this.subtotal.toString()) // valor ingresado + impuesto por meses ( +1% por cuota ) / meses
+    localStorage.setItem('taxes', this.impuestosTarifas.toString()) // sí es tarjeta +2.5%
 
     this.redirectTo('checkout/personal-data')
 
@@ -316,14 +318,18 @@ export class InversionComponent implements OnInit, OnDestroy {
   proximaTarjeta(){
 
     if( this.carousel.page < this.cardData.length - 1) this.carousel.page++
-    this.formInversion.value.dues = this.getCardByIndex(this.carousel.page)
+    this.formInversion.patchValue({dues: this.getCardByIndex(this.carousel.page)})
+    this.verificarSelected()
+    this.calcularMontos()
 
   }
 
   anteriorTarjeta(){
 
     if( this.carousel.page > 0) --this.carousel.page
-    this.formInversion.value.dues = this.getCardByIndex(this.carousel.page)
+    this.formInversion.patchValue({dues: this.getCardByIndex(this.carousel.page)})
+    this.verificarSelected()
+    this.calcularMontos()
 
   }
 
