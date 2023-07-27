@@ -1,0 +1,7 @@
+<select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example"
+    [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
+    <option value="">Seleccione Departamento</option>
+    <option *ngFor="let state of states" [ngValue]="state" style="box-shadow: 0">
+        {{ state.name }}
+    </option>
+</select>
