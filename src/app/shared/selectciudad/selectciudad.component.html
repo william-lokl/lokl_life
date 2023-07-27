@@ -1,0 +1,7 @@
+<select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example"
+    [(ngModel)]="selectedciudad" (ngModelChange)="onCiudadChange($event)">
+    <option value="" *ngIf="cities.length == 0">Seleccione Ciudad</option>
+    <option *ngFor="let ciudad of cities" [ngValue]="ciudad" style="box-shadow: 0">
+        {{ ciudad.name }}
+    </option>
+</select>

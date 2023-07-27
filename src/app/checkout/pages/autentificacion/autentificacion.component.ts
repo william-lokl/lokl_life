@@ -29,7 +29,8 @@ export class AutentificacionComponent implements OnInit {
   intervalId: any;
   resolucion_movil: boolean = false;
   countries: any[] = [];
-  selectedCountry: string = 'Colombia';
+  selectedCountry: string = 'CO';
+  selectedState: string = '';
   cities: string[] = [];
   paso1: boolean = true;
   paso2: boolean = false;
@@ -54,6 +55,7 @@ export class AutentificacionComponent implements OnInit {
     { name: 'Pasaporte', value: 'PS', selected: false },
   ];
   inputActivated: boolean = false;
+  selectedcity: any;
   constructor(
     private http: HttpClient,
     public fb: FormBuilder,
@@ -85,17 +87,11 @@ export class AutentificacionComponent implements OnInit {
   ngOnInit(): void {
     const initialWidth = window.innerWidth;
     const initialHeight = window.innerHeight;
-    console.log(initialWidth);
-    console.log(initialHeight);
-
     if (initialWidth < 992) {
       this.resolucion_movil = true;
-      console.log(this.resolucion_movil);
     }
-
     if (initialWidth > 992) {
       this.resolucion_movil = false;
-      console.log(this.resolucion_movil);
     }
 
     this.body = this.fb.group({
@@ -290,5 +286,18 @@ export class AutentificacionComponent implements OnInit {
 
   public async cerrarmodal() {
     this.modalService.dismissAll();
+  }
+
+  onValorCambiado(event: any) {
+    this.selectedCountry = event.valor.iso2;
+  }
+
+  stateChange(event: any) {
+    this.selectedState = event.valor.iso2;
+  }
+
+  cityChange(event: any) {
+    console.log(event);
+    this.selectedcity = event.valor.name;
   }
 }

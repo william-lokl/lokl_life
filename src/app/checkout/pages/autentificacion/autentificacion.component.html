@@ -87,19 +87,14 @@
                     <div
                         class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">País</label>
-                        <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                            <option *ngFor="let country of countries" [value]="country" style="box-shadow: 0">
-                                {{ country }}
-                            </option>
-                        </select>
+                        <app-selectpais (valorCambiado)="onValorCambiado($event)"></app-selectpais>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
+
                         <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
-                        <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                            <option *ngFor="let citie of cities" [value]="citie" style="box-shadow: 0">
-                                {{ citie }}
-                            </option>
-                        </select>
+                        <app-selectdepartamento [pais]="selectedCountry"
+                            (statecambiado)="stateChange($event)"></app-selectdepartamento>
+
                     </div>
                 </div>
 
@@ -107,11 +102,8 @@
                     <div
                         class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Ciudad</label>
-                        <select class="form-select form-select-lg rounded-0" style="height: 65%">
-                            <option value="1" selected>Seleccione Ciudad</option>
-                            <option value="2">Chile</option>
-                            <option value="3">España</option>
-                        </select>
+                        <app-selectciudad [pais]="selectedCountry" [state]="selectedState"
+                            (ciudadCambiada)="cityChange($event)"></app-selectciudad>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Código de referido</label>
@@ -125,6 +117,8 @@
                         <p class="fw-bold fs-3">Autentificación de identidad</p>
                     </div>
                 </div>
+
+
 
                 <div class="row mb-4">
                     <div class="col-8">
@@ -298,19 +292,12 @@
                     <div
                         class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">País</label>
-                        <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                            <option value="1" selected>Colombia</option>
-                            <option value="2">Chile</option>
-                            <option value="3">España</option>
-                        </select>
+                        <app-selectpais (valorCambiado)="onValorCambiado($event)"></app-selectpais>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Departamento / Estado</label>
-                        <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example">
-                            <option value="1" selected>Bogotá</option>
-                            <option value="2">Antioquia</option>
-                            <option value="3">Barranquilla</option>
-                        </select>
+                        <app-selectdepartamento [pais]="selectedCountry"
+                            (statecambiado)="stateChange($event)"></app-selectdepartamento>
                     </div>
                 </div>
 
@@ -318,12 +305,8 @@
                     <div
                         class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-5 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Ciudad</label>
-                        <select class="form-select form-select-lg mb-3 rounded-0" style="height: 55%"
-                            aria-label=".form-select-lg example">
-                            <option value="1" selected>Seleccione su Ciudad</option>
-                            <option value="2">Chile</option>
-                            <option value="3">España</option>
-                        </select>
+                        <app-selectciudad [pais]="selectedCountry" [state]="selectedState"
+                            (ciudadCambiada)="cityChange($event)"></app-selectciudad>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 ps-0 ps-lg-0 pe-lg-0 pe-xl-0">
                         <label for="exampleInputEmail1" class="form-label text-muted">Código de referido</label>

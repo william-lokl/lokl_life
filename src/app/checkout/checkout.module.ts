@@ -23,6 +23,9 @@ import { ActualrouteComponent } from './components/actualroute/actualroute.compo
 import { OnlyNumberDirective } from './directives/only-number.directive';
 import { InputComponent } from '../shared/input/input.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { SelectciudadComponent } from '../shared/selectciudad/selectciudad.component';
+import { SelectdepartamentoComponent } from '../shared/selectdepartamento/selectdepartamento.component';
+import { SelectpaisComponent } from '../shared/selectpais/selectpais.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
     OnlyNumberDirective,
     InputComponent,
     BackButtonComponent,
+    SelectciudadComponent,
+    SelectdepartamentoComponent,
+    SelectpaisComponent,
   ],
   imports: [
     FormsModule,
