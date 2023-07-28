@@ -10,6 +10,9 @@ export class InputComponent implements OnInit {
   inputActivated: boolean = false;
   @Input() control: FormControl = new FormControl();
   @Input() type: string = 'text';
+  @Input() onlyNumber: boolean = false;
+  @Input() max?: number;
+
 
   constructor() {}
 

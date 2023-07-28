@@ -7,7 +7,7 @@
       <div class="col-10 offset-sm-1 offset-md-1 col-lg-6 offset-lg-0">
         <div class="row mb-3">
           <div class="col-12 col-lg-9 offset-0 offset-lg-3">
-            <p class="fw-bold fs-3">Pago con PSE</p>
+            <p class="fw-bold fs-3">{{ tarjetaActiva ? 'Pago con tarjeta' : 'Pago con PSE'}}</p>
           </div>
         </div>
 
@@ -24,19 +24,21 @@
         <div class="row">
           <div class="col-12 col-lg-8 offset-0 offset-lg-3">
             <div class="mt-3 mb-4">
-              <app-card-payment
-                *ngFor="let card of paymentCards"
-                [payment]="card.name"
-                [selected]="card.selected"
+              <app-card-payment *ngIf = "!tarjetaActiva"
+                payment="pse"
+                [selected]="true"
               ></app-card-payment>
 
-              <input hidden type="checkbox" value="visa" />
-              <input hidden type="checkbox" value="pse" />
+              <app-card-payment *ngIf = "tarjetaActiva"
+                payment="visa"
+                [selected]="true"
+              ></app-card-payment>
+
             </div>
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf = "!tarjetaActiva">
           <div class="col-12 col-sm-12 col-lg-8 pe-2 pe-lg-0 offset-lg-3">
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Banco</label
@@ -58,6 +60,38 @@
                 </option>
               </select>
             </div>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf = "tarjetaActiva">
+
+          <div class = "col-12 col-lg-8 offset-lg-3 pe-2 mb-3">
+            <label for="exampleInputEmail1" class="form-label text-muted"
+              >Numero de tarjeta</label
+            >
+            <app-input type = "number"></app-input> <!-- TODO: control -->
+          </div>
+          <div class = "col-12 col-lg-8 offset-lg-3 pe-2 ">
+
+            <div class="d-flex justify-content-between">
+
+              <div class="col-6 p-0">
+
+                <label for="exampleInputEmail1" class="form-label text-muted"
+                  >Fecha de vencimiento</label
+                >
+                <app-input type = "number"></app-input> <!-- TODO: control -->
+              </div>
+
+              <div class="col-5 p-0">
+                <label for="exampleInputEmail1" class="form-label text-muted"
+                  >CVC</label
+                >
+                <app-input type = "number"></app-input> <!-- TODO: control -->
+              </div>
+
+            </div>
+
           </div>
         </div>
 

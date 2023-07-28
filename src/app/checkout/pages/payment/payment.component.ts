@@ -23,6 +23,8 @@ export class PaymentComponent implements OnInit {
 
   validatingTransaction: boolean = false;
 
+  tarjetaActiva: boolean = false;
+
   subSelectTypeDocument: Subject<boolean> = new Subject<boolean>();
   $selectTypeDocument: Observable<boolean> = this.subSelectTypeDocument.asObservable();
 
@@ -101,6 +103,25 @@ export class PaymentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    if(localStorage.getItem('type')){
+
+      if(localStorage.getItem('type')! == '0' ){
+
+      }
+      else{
+        this.tarjetaActiva = localStorage.getItem('type')! == '1'
+      }
+
+
+
+
+    }
+    else{
+      //No hay tipo en el local Storage
+    }
+
+
     this.body = this.fb.group({
       first_name: ['', Validators.required],
       address: ['', Validators.required],
