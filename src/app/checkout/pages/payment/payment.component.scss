@@ -64,3 +64,13 @@
     padding-top: 20px;
   }
 }
+
+.container-payment-flex {
+  display: flex;
+}
+
+@media (max-width: 575px) {
+  .container-payment-flex{
+    justify-content: center;
+  }
+}

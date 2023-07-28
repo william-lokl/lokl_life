@@ -3,7 +3,10 @@
   <app-actualroute></app-actualroute>
 
   <form [formGroup]="body">
-    <div class="mt-5 d-flex" style="padding-bottom: 120px">
+    <div
+      class="mt-5 d-flex container-payment-flex"
+      style="padding-bottom: 120px"
+    >
       <div class="col-10 offset-sm-1 offset-md-1 col-lg-6 offset-lg-0">
         <div class="row mb-3">
           <div class="col-12 col-lg-9 offset-0 offset-lg-3">
@@ -28,7 +31,6 @@
                 *ngFor="let card of paymentCards"
                 [payment]="card.name"
                 [selected]="card.selected"
-                (click)="activateCard(card.name)"
               ></app-card-payment>
 
               <input hidden type="checkbox" value="visa" />
@@ -43,11 +45,21 @@
               >Banco</label
             >
             <div class="container-cuotas">
-              <app-custom-select
-                [data]="opcionesSelect"
-                [justIzquierda]="true"
-                (onOpcionSeleccionada)="changeDues($event)"
-              ></app-custom-select>
+
+              <select
+                class="form-select form-select-lg mb-3 rounded-0 mr-0"
+                aria-label=".form-select-lg example"
+                [formControl]="selectedStateBank"
+              >
+                <option value="">Seleccione un banco</option>
+                <option
+                  *ngFor="let state of opcionesSelect"
+                  [ngValue]="state?.value"
+                  style="box-shadow: 0"
+                >
+                  {{ state.name }}
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -70,39 +82,32 @@
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Dirección de domicilio</label
             >
-            <app-input [control]="homeAdress"></app-input>
+            <app-input [control]="address"></app-input>
           </div>
         </div>
 
         <div class="row mb-3">
           <div
-            class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pe-0 pe-md-0 pe-lg-0 pe-xl-0"
+            class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 offset-0 offset-lg-3 pr-0"
           >
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Departamento / Estado</label
             >
-            <div style="height: 50px">
-              <app-custom-select
-                [data]="opcionesSelectState"
-                [justIzquierda]="true"
-                (onOpcionSeleccionada)="changeDues($event)"
-              ></app-custom-select>
-            </div>
+            <app-selectdepartamento
+              [pais]="selectedCountry"
+              (statecambiado)="stateChange($event)"
+            ></app-selectdepartamento>
           </div>
 
-          <div
-            class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 ps-0 ps-lg-0 pe-lg-0 pe-xl-0"
-          >
+          <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 pl-0">
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Ciudad</label
             >
-            <div class="container-cuotas-city">
-              <app-custom-select
-                [data]="opcionesSelectCity"
-                [justIzquierda]="true"
-                (onOpcionSeleccionada)="changeDues($event)"
-              ></app-custom-select>
-            </div>
+            <app-selectciudad
+              [pais]="selectedCountry"
+              [state]="selectedState"
+              (ciudadCambiada)="cityChange($event)"
+            ></app-selectciudad>
           </div>
         </div>
 
@@ -115,7 +120,7 @@
               <app-custom-select
                 [data]="opcionesSelectTypePerson"
                 [justIzquierda]="true"
-                (onOpcionSeleccionada)="changeDues($event)"
+                (onOpcionSeleccionada)="changeTypePerson($event)"
               ></app-custom-select>
             </div>
           </div>
@@ -143,7 +148,7 @@
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Número de documento</label
             >
-            <app-input [control]="numberDocument"></app-input>
+            <app-input [type]="'number'" [control]="document_number"></app-input>
           </div>
         </div>
 
@@ -154,7 +159,7 @@
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Número de télefono</label
             >
-            <app-input [control]="numberPhone"></app-input>
+            <app-input [type]="'number'"  [control]="phone"></app-input>
           </div>
         </div>
 
@@ -165,7 +170,7 @@
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Correo</label
             >
-            <app-input [control]="emailAdress"></app-input>
+            <app-input  [control]="emailAdress"></app-input>
           </div>
         </div>
 
@@ -182,9 +187,10 @@
 
         <button
           mat-button
-          type="submit"
+          (click)="sendDataInvestment()"
           class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3 d-lg-none"
           style="height: 40px"
+          [disabled]="body.invalid"
         >
           Invertir
         </button>
@@ -216,27 +222,32 @@
           <div class="d-flex justify-content-between">
             <p class="fs-6 text-payment">Inversión total:</p>
             <p class="fs-6 fw-bold">
-              $11.200.000 COP
+              {{ inversionValue | currency : "" : "symbol-narrow" : "1.0-0" }}
+              COP
             </p>
           </div>
 
           <div class="d-flex justify-content-between">
             <p class="fs-6 text-payment">Cuotas diferidas:</p>
-            <p class="fs-6 fw-bold">6 meses</p>
+            <p class="fs-6 fw-bold">
+              {{ this.formInversion.value.dues | i18nPlural : mapCuotas }}
+            </p>
           </div>
 
           <hr />
 
-          <div class="d-flex justify-content-between mb-0">
+          <div class="d-flex justify-content-between mb-2">
             <p class="text-payment-title">Subtotal:</p>
-            <p class="fs-6 fw-bold">$1.978.667 COP</p>
+            <p class="fs-6 fw-bold">
+              {{ subtotal | currency : "" : "symbol-narrow" : "1.0-0" }} COP
+            </p>
           </div>
-
-          <p class="mt-0 mb-4 text-payment">Proximo pago $1.978.667 COP</p>
 
           <div class="d-flex justify-content-between">
             <p class="text-payment-title">Impuestos y tarifas:</p>
-            <p class="fs-6 fw-bold">$0 COP</p>
+            <p class="fs-6 fw-bold">
+              {{ taxes | currency : "" : "symbol-narrow" : "1.0-0" }} COP
+            </p>
           </div>
           <p class="text-payment">Fee tarjeta de crédito 2,5%</p>
 
@@ -244,14 +255,18 @@
 
           <div class="d-flex justify-content-between">
             <p class="text-payment-title">Total:</p>
-            <p class="fs-6 fw-bold">$1.978.667 COP</p>
+            <p class="fs-6 fw-bold">
+              {{ inversionValue | currency : "" : "symbol-narrow" : "1.0-0" }}
+              COP
+            </p>
           </div>
 
           <button
             mat-button
-            type="submit"
+            (click)="sendDataInvestment()"
             class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3"
             style="height: 40px"
+            [disabled]="body.invalid"
           >
             Invertir
           </button>

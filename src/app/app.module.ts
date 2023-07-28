@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import LocaleEsCO from '@angular/common/locales/es-CO';
 
 import { registerLocaleData } from '@angular/common';
+import { ApiService } from './services/api.service';
 
 registerLocaleData(LocaleEsCO);
 
