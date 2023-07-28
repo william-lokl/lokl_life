@@ -38,6 +38,8 @@ export class InversionComponent implements OnInit, OnDestroy {
   public resolucion_movil: boolean = false;
   public widthActual: number = 0;
   public cardsCount: number = 2;
+  public currentProject: string = "Nido de Agua"
+  public currentStage: string = 'Etapa 1'
   public opcionesSelect: CustomSelectElement[] = [
     { name: '3 meses', value: 3, selected: true },
     { name: '6 meses', value: 6, selected: false },
@@ -133,6 +135,10 @@ export class InversionComponent implements OnInit, OnDestroy {
     this.calcularMontos();
     this.pagoUnicoSelected = true;
 
+
+    this.step2 = JSON.parse(localStorage.getItem('step_2') ?? '0') == '1' ? true : false;
+    if( this.step2 ) this.step1 = false;
+
     const initialWidth = window.innerWidth;
     const initialHeight = window.innerHeight;
 
@@ -198,6 +204,7 @@ export class InversionComponent implements OnInit, OnDestroy {
   nextStep(event: number) {
     if (!this.formInversion.controls['value'].valid) return;
 
+
     if (this.currentUnits < 100) {
       this.alertaUnits = true;
       setTimeout(() => {
@@ -205,6 +212,7 @@ export class InversionComponent implements OnInit, OnDestroy {
       }, 5000);
       return;
     }
+    localStorage.setItem('step_2', '1')
 
     this.step1 = false;
     this.step2 = true;
@@ -317,6 +325,7 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    console.log(this.formInversion.valid);
     if (!this.formInversion.valid) return;
     if (this.currentUnits < 100) {
       this.alertaUnits = true;
@@ -328,12 +337,12 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     const token = localStorage.getItem('token');
 
-    if (!token) return;
+    //if (!token) return;
 
     const payment = this.formInversion.value.payment == 'pse' ? '2' : '1';
-    const payload: any = jwt_decode.default(token);
+    //const payload: any = jwt_decode.default(token);
     const reference =
-      payload.id +
+      //payload.id +
       '_632511ecd407318f2592f945_' +
       Math.random().toString().slice(-5, -1);
 
@@ -380,6 +389,13 @@ export class InversionComponent implements OnInit, OnDestroy {
     });
     this.verificarSelected();
     this.calcularMontos();
+  }
+
+  cardInit(){
+    this.step1 = true;
+    this.step2 = false;
+
+    localStorage.setItem('step_2', "0")
   }
 
   inputFocus() {

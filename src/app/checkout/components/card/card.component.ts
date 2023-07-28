@@ -12,12 +12,15 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.cardInit.emit();
   }
 
 
   inputCursor: boolean = false
 
   @Output() onNextStep: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() cardInit: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() resolucion_movil: boolean = false;
 
