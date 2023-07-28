@@ -9,8 +9,10 @@ import { delay, SchedulerLike } from 'rxjs';
 export class AlertComponent implements OnInit {
 
   @Input() text: string = "";
+  @Input() bgOrange: boolean = false;
 
   constructor() { }
+
 
   ngOnInit(): void {
   }

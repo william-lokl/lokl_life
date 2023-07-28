@@ -1,6 +1,6 @@
 <select class="form-select form-select-lg mb-3 rounded-0" aria-label=".form-select-lg example"
     [(ngModel)]="selectedCountry" (ngModelChange)="onCountryChange($event)">
     <option *ngFor="let country of countries" [ngValue]="country" style="box-shadow: 0">
-        {{ country.name }}
+      {{ country.name }}
     </option>
 </select>

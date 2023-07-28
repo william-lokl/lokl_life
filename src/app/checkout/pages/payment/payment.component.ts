@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 import {
   FormBuilder,
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { PaymentCard } from '../../interfaces/paymentCard.interface';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-payment',
@@ -16,6 +17,14 @@ import { CustomSelectElement } from '../../interfaces/customSelectElement.interf
 })
 export class PaymentComponent implements OnInit {
   public fecha: Date = new Date();
+
+  validatingTransaction: boolean = false;
+
+  subSelectTypeDocument: Subject<boolean> = new Subject<boolean>();
+  $selectTypeDocument: Observable<boolean> = this.subSelectTypeDocument.asObservable();
+
+  subSelectTypePerson: Subject<boolean> = new Subject<boolean>();
+  $selectTypePerson: Observable<boolean> = this.subSelectTypeDocument.asObservable();
 
   public formInversion: FormGroup = this.fb.group({
     value: [110000140, [Validators.min(11000000)]],
@@ -68,6 +77,12 @@ export class PaymentComponent implements OnInit {
     { name: 'pse', selected: true },
   ];
 
+  onfocusSelects(){
+    this.subSelectTypeDocument.next(false)
+    this.subSelectTypePerson.next(false)
+  }
+
+
   activateCard(card: 'visa' | 'pse') {
     if (card == 'visa') {
       this.paymentCards[0].selected = true;
@@ -94,7 +109,16 @@ export class PaymentComponent implements OnInit {
     console.log(event);
   }
 
-  constructor(private fb: FormBuilder) {}
+  submit(){
+    this.validatingTransaction = true
+    setTimeout(
+      () => this.validatingTransaction = false,
+      30000
+    )
+  }
+
+  constructor(private fb: FormBuilder, private elementRef: ElementRef) {}
 
   ngOnInit(): void {}
+
 }

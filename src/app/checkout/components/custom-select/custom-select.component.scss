@@ -9,10 +9,11 @@
 
 .cont-opciones{
   display: block;
-  max-height: 300px!important;
+  max-height: 350px!important;
   overflow-y: scroll;
   border-bottom: 1px solid #7c3aed ;
 }
+
 .cont-opciones::-webkit-scrollbar {
   width: 0px;
 }

@@ -53,4 +53,6 @@ export class SelectpaisComponent implements OnInit, OnDestroy {
   onCountryChange(value: any) {
     this.valorCambiado.emit({ propiedad: 'pais', valor: value });
   }
+
+
 }

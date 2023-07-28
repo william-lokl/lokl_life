@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, ElementRef } from '@angular/core';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import { Observable, Subscription, of } from 'rxjs';
 
@@ -12,6 +12,8 @@ export class CustomSelectComponent implements OnInit {
   @Input() justIzquierda: boolean = false;
   @Input() $selectSelected: Observable<boolean> = of(false);
   @Input() $numPage?: Observable<number> = of(0);
+  @Input() sensibleAToquesFuera: boolean = false;
+
 
   subNumber?: Subscription;
   subSelected?: Subscription;
@@ -20,13 +22,24 @@ export class CustomSelectComponent implements OnInit {
   desplegar = false;
 
   @Output('onOpcionSeleccionada') onOpcionSeleccionada: EventEmitter<CustomSelectElement> = new EventEmitter<CustomSelectElement>();
+  @Output('onClickFuera') onClickFuera: EventEmitter<void> = new EventEmitter<void>();
 
+  @HostListener('document:click', ['$event'])
+  onClick(event: Event): void {
+    const element = event.target as HTMLElement;
+    const clickFuera = this.elementRef.nativeElement.contains(element);
+
+    if (!clickFuera && this.sensibleAToquesFuera) {
+      this.selectSelected = false;
+      this.desplegar = false;
+    }
+  }
 
   dataLength?: number;
 
   elementSelected!: CustomSelectElement;
 
-  constructor() {}
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
     this.subSelected = this.$numPage?.subscribe( (resp) => {
@@ -45,6 +58,8 @@ export class CustomSelectComponent implements OnInit {
         return;
       }
     }
+
+
 
     this.data[0].selected = true;
     this.elementSelected = this.data[0];

@@ -2,7 +2,7 @@
 <div class="padding-container-payment">
   <app-actualroute></app-actualroute>
 
-  <form [formGroup]="body">
+  <form [formGroup]="body" (ngSubmit)="submit()">
     <div class="mt-5 d-flex" style="padding-bottom: 120px">
       <div class="col-10 offset-sm-1 offset-md-1 col-lg-6 offset-lg-0">
         <div class="row mb-3">
@@ -116,6 +116,8 @@
                 [data]="opcionesSelectTypePerson"
                 [justIzquierda]="true"
                 (onOpcionSeleccionada)="changeDues($event)"
+                ($selectSelected) = "$selectTypePerson"
+                [sensibleAToquesFuera] = "true"
               ></app-custom-select>
             </div>
           </div>
@@ -131,6 +133,8 @@
                 [data]="opcionesSelectTypeDocument"
                 [justIzquierda]="true"
                 (onOpcionSeleccionada)="changeDues($event)"
+                ($selectSelected) = "$selectTypeDocument"
+                [sensibleAToquesFuera] = "true"
               ></app-custom-select>
             </div>
           </div>
@@ -193,13 +197,15 @@
       <div
         class="col-md-5 col-lg-4 offset-lg-2 ml-0 d-none d-sm-none d-md-none d-lg-block"
       >
-        <div class="img-prom">
+        <div class="img-prom mb-2">
           <p>
             Estás a un paso <br />
             de obtener más beneficios <br />
             invirtiendo $28.000.000
           </p>
         </div>
+
+        <app-alert [bgOrange]="true" text = "Estamos validando tu transacción" *ngIf = "validatingTransaction"></app-alert>
 
         <div class="mt-3 border border-1 rounded-1 p-4">
           <p class="fs-4 fw-bold">Resumen de inversión</p>
@@ -249,9 +255,10 @@
 
           <button
             mat-button
-            type="submit"
+            type="button"
             class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3"
             style="height: 40px"
+            (click) = "submit()"
           >
             Invertir
           </button>

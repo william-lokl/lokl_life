@@ -20,12 +20,13 @@
 
 <div class = "cont-opciones" *ngIf = "desplegar" >
   <div *ngFor = "let option of data ; let i= index"
-    class = "opcion-desp border p-2 text-center align-items-center border-top-0 select-- border-bottom-0"
+    class = "opcion-desp border p-2 text-center align-items-center border-top-0 select-- border-bottom-1"
     (click) = "onClickOption(option)"
     [ngClass]="{
       'd-none': !desplegar,
       'text-center': !justIzquierda,
-      'text-left': justIzquierda
+      'text-left': justIzquierda,
+      'border-bottom-0': i != data.length - 1
     }">
     <p class = "fs-6 mb-0"> {{option.name}} </p>
   </div>
