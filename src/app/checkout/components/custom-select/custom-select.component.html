@@ -1,3 +1,4 @@
+
 <div class="custom-select- border p-2 text-center align-items-center "
   [ngClass] = "{
     'select--': selectSelected,
@@ -17,14 +18,16 @@
     </svg>
 </div>
 
-<div *ngFor = "let option of data ; let i= index"
-  class = "opcion-desp border p-2 text-center align-items-center border-top-0 select--"
-  (click) = "onClickOption(option)"
-  [ngClass]="{
-    'border-bottom-0': !(i == dataLength),
-    'd-none': !desplegar,
-    'text-center': !justIzquierda,
-    'text-left': justIzquierda
-  }">
-  <p class = "fs-6 mb-0"> {{option.name}} </p>
+<div class = "cont-opciones" *ngIf = "desplegar" >
+  <div *ngFor = "let option of data ; let i= index"
+    class = "opcion-desp border p-2 text-center align-items-center border-top-0 select-- border-bottom-0"
+    (click) = "onClickOption(option)"
+    [ngClass]="{
+      'd-none': !desplegar,
+      'text-center': !justIzquierda,
+      'text-left': justIzquierda
+    }">
+    <p class = "fs-6 mb-0"> {{option.name}} </p>
+  </div>
 </div>
+

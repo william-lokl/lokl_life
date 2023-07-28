@@ -156,7 +156,13 @@
 
           <hr />
 
-          <p class="fs-6 mb-5 col-gray">Proyecto: Nido de Agua</p>
+          <div class = "d-flex justify-content-between mb-5" style = "height: 22px;">
+            <p class="fs-6 mb-5 col-gray">Proyecto: {{currentProject}}</p>
+
+            <div class = "mini-tarjeta px-3">
+              <p class = "m-0">{{currentStage}}</p>
+            </div>
+          </div>
 
           <p class="fs-5 fw-bold">Pago por suscripción</p>
 
@@ -198,7 +204,7 @@
             <p class="fs-5 fw-bold">{{ total | currency:'':'symbol-narrow':'1.0-0' }} COP</p>
           </div>
 
-          <p class = "text-muted">  El {{ getLastDayOfMonth() | date:'dd' }} de {{ getLastDayOfMonth() | date:'MMMM':'':'es-CO' }} el valor de Nido de Agua aumentará </p>
+          <p class = "text-muted">  El {{ getLastDayOfMonth() | date:'dd' }} de {{ getLastDayOfMonth() | date:'MMMM':'':'es-CO' }} el valor de {{currentProject}} aumentará </p>
 
           <button mat-button type = "submit"
             class="btn bg-black rounded rounded-5 w-100 text-white pb-1 pt-1 mt-3"
@@ -218,10 +224,10 @@
 </div>
 
 <div class="p-4" *ngIf = "resolucion_movil">
-  <form [formGroup]="formInversion">
+  <form [formGroup]="formInversion" (ngSubmit)="submit()">
     <div *ngIf = "step1">
 
-      <div class = "row" *ngIf = "step1">
+      <div class = "row">
         <div class="col-12">
           <p class="fw-bold fs-3 font-black font-lato text-3x1">
             Empieza hoy mismo!
@@ -243,7 +249,7 @@
           <label for="exampleInputEmail1" class="form-label text-muted">¿Cuánto quieres invertir?</label>
           <div class= "border input-group rounded-0" [ngClass] = "{'input-selected': inputActivated}">
             <input type="text" class="form-control form-control-lg rounded-0 border-0 col-10" formControlName="value" onlyNumber
-              (focus)="inputFocus()" (blur) = "inputBlur()" (input)="calcularMontos()" placeholder="$0" />
+                (focus)="inputFocus()" (blur) = "inputBlur()" (input)="inputValue($event)" placeholder="$0" />
             <div class = "d-flex justify-content-center input-group-append col-2" style = "border-left: 1px solid #f1f1f1!important">
               <div class="d-flex flex-column input-group-text border-0 align-center p-2" style = "background-color: transparent!important; ">
                 <p class = "m-0 fw-heavy fs-7">
@@ -279,16 +285,22 @@
             </div>
 
           </div>
+
+          <div class="mt-3">
+            <app-alert [text]="alertText" *ngIf = "alertaUnits" class = ""></app-alert>
+          </div>
         </div>
       </div>
 
-      <hr class = "mt-5 mb-4">
+      <hr class = "mt-3 mb-4">
 
       <div class = "row p-5">
         <div class = "col-12">
+
+
           <p-carousel [value]="cardData" [numVisible]="cardsCount"   [circular]="false" [showIndicators]="false" [showNavigators]="false" #carouselP>
             <ng-template let-item pTemplate="item">
-               <app-card [data] = "item" [resolucion_movil] = "resolucion_movil" (onNextStep) = "nextStep($event)"></app-card>
+               <app-card [data] = "item" [resolucion_movil] = "resolucion_movil" (onNextStep) = "nextStep($event)" (cardInit) = "cardInit()"></app-card>
             </ng-template>
           </p-carousel>
 
@@ -331,7 +343,7 @@
 
           <p class = "text-muted mb-1 mt-2">{{ fecha | date }}</p>
 
-          <p class = "text-muted"> P: nido de agua </p>
+          <p class = "text-muted"> P: {{currentProject}} </p>
         </div>
         <div class = "d-flex flex-column w-100 rounded-bottom p-4" style = "height: 400px;">
           <p class="fw-bold">Pago por suscripción</p>

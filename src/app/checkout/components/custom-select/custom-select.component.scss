@@ -4,6 +4,19 @@
   height: 100%;
 }
 
+
+
+
+.cont-opciones{
+  display: block;
+  max-height: 300px!important;
+  overflow-y: scroll;
+  border-bottom: 1px solid #7c3aed ;
+}
+.cont-opciones::-webkit-scrollbar {
+  width: 0px;
+}
+
 .opcion-desp{
   cursor: pointer;
   display: grid;
@@ -35,4 +48,6 @@
   fill: #7c3aed;
   --bs-border-color: #7c3aed;
 }
+
+
 

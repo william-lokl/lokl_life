@@ -38,6 +38,8 @@ export class InversionComponent implements OnInit, OnDestroy {
   public resolucion_movil: boolean = false;
   public widthActual: number = 0;
   public cardsCount: number = 2;
+  public currentProject: string = "Nido de Agua"
+  public currentStage: string = 'Etapa 1'
   public opcionesSelect: CustomSelectElement[] = [
     { name: '3 meses', value: 3, selected: true },
     { name: '6 meses', value: 6, selected: false },
@@ -104,14 +106,16 @@ export class InversionComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
-    const newHeight = (event.target as Window).innerHeight;
 
     if (newWidth < 992) {
+      if( !this.resolucion_movil ) this.calcularMontos()
       this.resolucion_movil = true;
     }
 
     if (newWidth > 992) {
+      if( !this.resolucion_movil ) this.calcularMontos()
       this.resolucion_movil = false;
+      this.step1 = true
       this.step2 = false;
     }
 
@@ -130,6 +134,10 @@ export class InversionComponent implements OnInit, OnDestroy {
     this.inputValue({ target: { value: 0 } });
     this.calcularMontos();
     this.pagoUnicoSelected = true;
+
+
+    this.step2 = JSON.parse(localStorage.getItem('step_2') ?? '0') == '1' ? true : false;
+    if( this.step2 ) this.step1 = false;
 
     const initialWidth = window.innerWidth;
     const initialHeight = window.innerHeight;
@@ -196,6 +204,16 @@ export class InversionComponent implements OnInit, OnDestroy {
   nextStep(event: number) {
     if (!this.formInversion.controls['value'].valid) return;
 
+
+    if (this.currentUnits < 100) {
+      this.alertaUnits = true;
+      setTimeout(() => {
+        this.alertaUnits = false;
+      }, 5000);
+      return;
+    }
+    localStorage.setItem('step_2', '1')
+
     this.step1 = false;
     this.step2 = true;
     this.formInversion.patchValue({ dues: event });
@@ -235,6 +253,7 @@ export class InversionComponent implements OnInit, OnDestroy {
       this.paymentCards[0].selected = true;
       this.paymentCards[1].selected = false;
       this.formInversion.patchValue({ payment: 'visa' });
+
     }
 
     if (card == 'pse') {
@@ -320,7 +339,7 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     if (!token) return;
 
-    const payment = this.formInversion.value.payment == 'pse' ? '2' : '1';
+    const payment = this.formInversion.value.payment == 'pse' ? '0' : '1';
     const payload: any = jwt_decode.default(token);
     const reference =
       payload.id +
@@ -340,6 +359,14 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   proximaTarjeta() {
+    if (this.resolucion_movil){
+      if(this.carousel.page == 0){
+        this.carousel.page++;
+      }
+      return;
+    }
+
+
     if (this.carousel.page < this.cardData.length - 1) this.carousel.page++;
     this.formInversion.patchValue({
       dues: this.getCardByIndex(this.carousel.page),
@@ -349,12 +376,26 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   anteriorTarjeta() {
+    if (this.resolucion_movil){
+      if(this.carousel.page == 1){
+        this.carousel.page--;
+      }
+      return;
+    }
+
     if (this.carousel.page > 0) --this.carousel.page;
     this.formInversion.patchValue({
       dues: this.getCardByIndex(this.carousel.page),
     });
     this.verificarSelected();
     this.calcularMontos();
+  }
+
+  cardInit(){
+    this.step1 = true;
+    this.step2 = false;
+
+    localStorage.setItem('step_2', "0")
   }
 
   inputFocus() {
