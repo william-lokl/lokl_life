@@ -109,13 +109,13 @@ export class PaymentComponent implements OnInit {
   public sendDataInvestment() {
     console.log(this.body.value);
 
-    // const token = localStorage.getItem('token');
-    // if (!token) return;
-    // const payload: any = jwt_decode.default(token);
-    // const reference =
-    //   payload.id +
-    //   '_632511ecd407318f2592f945_' +
-    //   Math.random().toString().slice(-5, -1);
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    const payload: any = jwt_decode.default(token);
+    const reference =
+      payload.id +
+      '_632511ecd407318f2592f945_' +
+      Math.random().toString().slice(-5, -1);
 
     let body = {
       bank_code: this?.selectedStateBank.value,
@@ -129,9 +129,9 @@ export class PaymentComponent implements OnInit {
       number: this.body.get('phone')?.value,
       email: this.body.get('emailAdress')?.value,
       redirect_url: 'https://lokl.life/payment/successful',
-      reference: '',
+      reference: reference,
       amount: this.inversionValue,
-      type: 0,
+      type: this.type,
       info_subcripcion: [
         {
           owner: '646fcef8c158685da367ec02',
@@ -150,59 +150,47 @@ export class PaymentComponent implements OnInit {
       (res: any) => {
         console.log(res);
 
-        if(res){
-          if(this.type === 0){
-            const id = res?.id;
-            this.redirectPse(id)
+        if (res) {
+          if (this.type === 0) {
+            const id = res?.data?.data?.id;
+            setTimeout(() => {
+              this.redirectPse(id);
+            }, 2000);
           }
         }
-        // if (res){
-        //   if(this.type === "0"){
-
-        //     let url = response?.data?.data?.payment_method?.extra?.async_payment_url;
-
-        //     if(url !== null || url !== undefined){
-        //       window.location.href = url;
-        //     }else{
-        //       window.location.href = `${origin}/payment/error`;
-        //     }
-
-        //   }else{
-
-        //     let url = response?.data?.data?.redirect_url;
-
-        //     if(url !== null || url !== undefined){
-        //       window.location.href = `${url}?id=${id}`;
-        //     }else{
-        //       window.location.href = `${origin}/payment/error`;
-        //     }
-
-        //   }
-        // }
       },
       (error: any) => {
         console.log('error en enviar data', error);
       }
     );
-  };
+  }
 
   redirectPse(id: string) {
-    this.opcionesSelect = [];
     const apiUrl = `https://sandbox.wompi.co/v1/transactions/${id}`;
 
-    this.http.get<any[]>(apiUrl).subscribe(
+    // token Bearer
+    const bearerToken = 'pub_test_srHBcxqYISn8FsYZLuSWeOmhU679yCV5';
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${bearerToken}`,
+      }),
+    };
+
+    this.http.get<any[]>(apiUrl, httpOptions).subscribe(
       (resPse: any) => {
-        if(resPse){
-          if(resPse?.data?.status === 'APPROVED'){
-              let url = resPse?.data?.payment_method?.extra?.async_payment_url;
+        console.log('resPse', resPse);
 
-              if(url !== null || url !== undefined) {
-                window.location.href = url;
-              } else {
-                window.location.href = `${origin}/payment/error`;
-              }
+        if (resPse) {
+          if (resPse?.data?.status === 'APPROVED') {
+            let url = resPse?.data?.payment_method?.extra?.async_payment_url;
 
+            if (url !== null || url !== undefined) {
+              window.location.href = url;
+            } else {
+              window.location.href = `${origin}/payment/error`;
             }
+          }
         }
       },
       (error) => {
@@ -210,8 +198,6 @@ export class PaymentComponent implements OnInit {
       }
     );
   }
-
-
 
   paymentCards: PaymentCard[] = [];
 
@@ -293,7 +279,6 @@ export class PaymentComponent implements OnInit {
         });
 
         this.opcionesSelect = [...this.opcionesSelect, ...dataOptions];
-        console.log('this.opcionesSelect', this.opcionesSelect);
       },
       (error) => {
         console.error('Error al obtener los documentos:', error);
@@ -319,13 +304,3 @@ export class PaymentComponent implements OnInit {
   }
 }
 
-// countriesData.map((country) => {
-//   // /* console.log(country.name.common); */
-//   // let obj = {
-//   //   name: country?.name?.common,
-//   //   value: country?.name?.common,
-//   //   selected: false,
-//   // };
-//   //this.countries.push(country.name.common);
-// });
-// //this.countries.sort();
