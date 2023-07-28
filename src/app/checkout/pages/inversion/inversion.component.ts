@@ -325,7 +325,6 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log(this.formInversion.valid);
     if (!this.formInversion.valid) return;
     if (this.currentUnits < 100) {
       this.alertaUnits = true;
@@ -337,12 +336,12 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     const token = localStorage.getItem('token');
 
-    //if (!token) return;
+    if (!token) return;
 
     const payment = this.formInversion.value.payment == 'pse' ? '2' : '1';
-    //const payload: any = jwt_decode.default(token);
+    const payload: any = jwt_decode.default(token);
     const reference =
-      //payload.id +
+      payload.id +
       '_632511ecd407318f2592f945_' +
       Math.random().toString().slice(-5, -1);
 
