@@ -253,6 +253,7 @@ export class InversionComponent implements OnInit, OnDestroy {
       this.paymentCards[0].selected = true;
       this.paymentCards[1].selected = false;
       this.formInversion.patchValue({ payment: 'visa' });
+
     }
 
     if (card == 'pse') {
@@ -338,7 +339,7 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     if (!token) return;
 
-    const payment = this.formInversion.value.payment == 'pse' ? '2' : '1';
+    const payment = this.formInversion.value.payment == 'pse' ? '0' : '1';
     const payload: any = jwt_decode.default(token);
     const reference =
       payload.id +
