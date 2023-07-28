@@ -46,7 +46,9 @@
         <div class="row">
           <div class="col-12 col-lg-8 offset-0 offset-lg-1">
             <div class="d-flex justify-content-between mt-3 container-cuotas">
-              <app-custom-select [data]="opcionesSelect"
+              <app-custom-select
+                [$numPage]="$numDeus"
+                [data]="opcionesSelect"
                 (onOpcionSeleccionada)="changeDues($event)"
                 [$selectSelected]="$selectSelected"></app-custom-select>
 
@@ -75,7 +77,7 @@
 
             <p-carousel [value]="cardData" [numVisible]="1"  [circular]="false" [showIndicators]="false" [showNavigators]="false" #carouselP>
               <ng-template let-item pTemplate="item">
-                 <app-card [data] = "item" ></app-card>
+                 <app-card [data] = "item"></app-card>
               </ng-template>
             </p-carousel>
 
@@ -257,9 +259,13 @@
       <div class = "row">
         <div class = "col-12">
           <div class="d-flex justify-content-between mt-3 container-cuotas">
-            <app-custom-select [data]="opcionesSelect"
+            <app-custom-select
+              [$numPage]="$numDeus"
+              [$selectSelected]="$selectSelected"
+
+              [data]="opcionesSelect"
               (onOpcionSeleccionada)="changeDues($event)"
-              [$selectSelected]="$selectSelected"></app-custom-select>
+              ></app-custom-select>
 
             <div class="border pago-unico p-2 d-flex justify-content-center align-items-center" [ngClass]="{
               'pago-unico-selected': pagoUnicoSelected

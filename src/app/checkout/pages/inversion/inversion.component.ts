@@ -14,7 +14,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Carousel } from 'primeng/carousel';
-import { Observable, Subject, delay } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, interval } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -55,6 +55,10 @@ export class InversionComponent implements OnInit, OnDestroy {
   public $selectSelected: Observable<boolean> =
     this.subSelectSelected.asObservable();
 
+  public subNumDeus: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public $numDeus: Observable<number> =
+    this.subNumDeus.asObservable();
+
   public inputActivated: boolean = false;
 
   public alertaUnits: boolean = false;
@@ -94,6 +98,7 @@ export class InversionComponent implements OnInit, OnDestroy {
   ) {}
   ngOnDestroy(): void {
     this.subSelectSelected.unsubscribe();
+    this.subNumDeus.unsubscribe();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -121,6 +126,7 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.inputValue({ target: { value: 0 } });
     this.calcularMontos();
     this.pagoUnicoSelected = true;
@@ -251,6 +257,8 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   verificarSelected() {
+
+
     if (this.formInversion.value.dues == 1) {
       this.carousel.page = 0;
       this.pagoUnicoSelected = true;
@@ -258,10 +266,12 @@ export class InversionComponent implements OnInit, OnDestroy {
     }
 
     if (this.formInversion.value.dues > 1) {
+      this.subNumDeus.next( this.getIndexByCards(this.formInversion.value.dues) )
       this.carousel.page = this.getIndexByCards(this.formInversion.value.dues);
       this.pagoUnicoSelected = false;
       this.subSelectSelected.next(true);
     }
+
 
     for (let i = 0; i < this.opcionesSelect.length; i++) {
       this.opcionesSelect[i].selected = false;

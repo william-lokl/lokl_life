@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardDataElement } from '../../interfaces/cardDataElement.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -25,7 +26,7 @@ export class CardComponent implements OnInit {
     pay: 0,
     units: 0,
     value: 0,
-    annualReturn: 0
+    annualReturn: 0,
   }
 
   duesMap = {
