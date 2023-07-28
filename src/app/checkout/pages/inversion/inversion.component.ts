@@ -104,14 +104,16 @@ export class InversionComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     const newWidth = (event.target as Window).innerWidth;
-    const newHeight = (event.target as Window).innerHeight;
 
     if (newWidth < 992) {
+      if( !this.resolucion_movil ) this.calcularMontos()
       this.resolucion_movil = true;
     }
 
     if (newWidth > 992) {
+      if( !this.resolucion_movil ) this.calcularMontos()
       this.resolucion_movil = false;
+      this.step1 = true
       this.step2 = false;
     }
 
@@ -195,6 +197,14 @@ export class InversionComponent implements OnInit, OnDestroy {
 
   nextStep(event: number) {
     if (!this.formInversion.controls['value'].valid) return;
+
+    if (this.currentUnits < 100) {
+      this.alertaUnits = true;
+      setTimeout(() => {
+        this.alertaUnits = false;
+      }, 5000);
+      return;
+    }
 
     this.step1 = false;
     this.step2 = true;
@@ -340,6 +350,14 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   proximaTarjeta() {
+    if (this.resolucion_movil){
+      if(this.carousel.page == 0){
+        this.carousel.page++;
+      }
+      return;
+    }
+
+
     if (this.carousel.page < this.cardData.length - 1) this.carousel.page++;
     this.formInversion.patchValue({
       dues: this.getCardByIndex(this.carousel.page),
@@ -349,6 +367,13 @@ export class InversionComponent implements OnInit, OnDestroy {
   }
 
   anteriorTarjeta() {
+    if (this.resolucion_movil){
+      if(this.carousel.page == 1){
+        this.carousel.page--;
+      }
+      return;
+    }
+
     if (this.carousel.page > 0) --this.carousel.page;
     this.formInversion.patchValue({
       dues: this.getCardByIndex(this.carousel.page),
