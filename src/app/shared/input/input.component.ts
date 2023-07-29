@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,11 +8,10 @@ import { FormControl } from '@angular/forms';
 })
 export class InputComponent implements OnInit {
   inputActivated: boolean = false;
+  @Output() onInput: EventEmitter<string | number> = new EventEmitter<string | number>()
   @Input() control: FormControl = new FormControl();
   @Input() type: string = 'text';
   @Input() onlyNumber: boolean = false;
-  @Input() max?: number;
-
 
   constructor() {}
 
@@ -24,5 +23,9 @@ export class InputComponent implements OnInit {
 
   inputBlur() {
     this.inputActivated = false;
+  }
+
+  $onInput(event: any){
+    this.onInput.emit(event.target.value)
   }
 }

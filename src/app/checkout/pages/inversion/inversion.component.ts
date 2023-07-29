@@ -343,10 +343,10 @@ export class InversionComponent implements OnInit, OnDestroy {
 
     const token = localStorage.getItem('token');
 
-    if (!token) return;
+    //if (!token) return;
 
     const payment = this.formInversion.value.payment == 'pse' ? '0' : '1';
-    const payload: any = jwt_decode.default(token);
+    const payload: any = "1111"//jwt_decode.default(token);
     const reference =
       payload.id +
       '_632511ecd407318f2592f945_' +

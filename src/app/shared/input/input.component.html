@@ -1,9 +1,9 @@
 <div class="border rounded-0 d-block" [ngClass]="{'input-selected': inputActivated}" *ngIf = "!onlyNumber">
     <input type="{{type}}" [formControl]="control" class="form-control form-control-lg rounded-0 border-0"
-        (focus)="inputFocus()" (blur)="inputBlur()" placeholder="" maxlength="{{max}}"/>
+        (focus)="inputFocus()" (blur)="inputBlur()" placeholder="" (input) = "$onInput($event)"/>
 </div>
 
 <div class="border rounded-0 d-block" [ngClass]="{'input-selected': inputActivated}" *ngIf = "onlyNumber">
   <input type="{{type}}" [formControl]="control" class="form-control form-control-lg rounded-0 border-0"
-      (focus)="inputFocus()" (blur)="inputBlur()" placeholder="" onlyNumber max="{{max}}"/>
+      (focus)="inputFocus()" (blur)="inputBlur()" placeholder="" onlyNumber (input) = "$onInput($event)"/>
 </div>

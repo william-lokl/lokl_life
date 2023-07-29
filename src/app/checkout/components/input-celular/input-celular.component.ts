@@ -15,6 +15,12 @@ export class InputCelularComponent implements OnInit {
   countries: Country[] = [];
   data: CustomSelectElement[] = [];
   selectListo: boolean = false;
+  selectValue = "";
+  inputValue = "";
+
+
+  finalValue: string = "";
+
 
   ngOnInit(): void {
 
@@ -36,20 +42,29 @@ export class InputCelularComponent implements OnInit {
 
           this.data.push(
             {
-              name: this.countries[i].idd.root + this.countries[i].idd.suffixes,
-              value: this.countries[i].flags.svg,
+              name:this.countries[i].flags.svg,
+              value: this.countries[i].idd.root + this.countries[i].idd.suffixes,
               selected: this.countries[i].idd.root + this.countries[i].idd.suffixes == "+57"
             }
           )
         }
         this.selectListo = true
 
-        this.data.sort(  (a, b) => a.value.localeCompare(b.value, 'en', { numeric: true }))
+        this.data.sort(  (a, b) => a.value - b.value)
 
       }, 500
     )
   }
 
+  onSelectValue( event: CustomSelectElement ){
+    this.selectValue = event.value
+    this.finalValue = this.selectValue
+  }
+
+  onInputValue( event: string | number ){
+    this.inputValue = event.toString()
+    this.finalValue = this.inputValue
+  }
 
 
 }

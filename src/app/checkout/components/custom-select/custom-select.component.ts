@@ -63,7 +63,6 @@ export class CustomSelectComponent implements OnInit {
 
     this.data[0].selected = true;
     this.elementSelected = this.data[0];
-    console.log(this.elementSelected);
   }
 
   ngOnDestroy(){

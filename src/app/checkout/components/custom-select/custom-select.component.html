@@ -44,8 +44,8 @@
       'text-left': justIzquierda
     }"
     (click)="clickSelect()">
-      <img src = "{{elementSelected.value}}" style = "height: 15px; width: 30px; position: absolute; left: 5px">
-      <p class = "fs-6 mb-0"> {{elementSelected.name}} </p>
+      <img src = "{{elementSelected.name}}" style = "height: 15px; width: 30px; position: absolute; left: 5px">
+      <p class = "fs-6 mb-0"> {{elementSelected.value}} </p>
       <svg [ngClass] = "{
         'svg-select-down': desplegar,
         'svg-select': !desplegar
@@ -66,8 +66,8 @@
         'text-left': justIzquierda,
         'border-bottom-0': i != data.length - 1
       }">
-      <img src = "{{option.value}}" class = "bandera">
-      <p class = "fs-6 mb-0"> {{option.name}} </p>
+      <img src = "{{option.name}}" class = "bandera">
+      <p class = "fs-6 mb-0"> {{option.value}} </p>
     </div>
   </div>
 </div>
