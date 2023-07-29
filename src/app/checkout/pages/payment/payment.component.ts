@@ -354,11 +354,48 @@ export class PaymentComponent implements OnInit {
   }
 
   submit(){
+    this.verControl()
     this.validatingTransaction = true
     setTimeout(
       () => this.validatingTransaction = false,
       30000
     )
+
+    const type_document = this.body.value.document_type.toString(); //TODO: enlazar valores numericos a resp
+
+    const body =
+      {
+        "name": this.body.value.firstName,
+        "address": this.body.value.address,
+        "region": "ANT", //TODO: Enlazar regiones y ciudad de los selects
+        "city": "Abejorral",
+        "type_client": "0", //TODO: enlazar tipos de persona a un valor
+        "type_document": "CC",
+        "number_document": this.body.value.document_number,
+        "number": this.body.value.phone,
+        "email": this.body.value.emailAddress,
+        "numberCard": "4242424242424242",
+        "exp_month": "01",
+        "exp_year": "27",
+        "cvc": "123",
+        "redirect_url": "https://develop-property.lokl.life/payment/successful",
+        "reference": "64a6b2e7a604a10b8f557ca8_632511ecd407318f2592f945_9852",
+        "amount": "11200000",
+        "type": "1",
+        "info_subcripcion": [
+            {
+                "owner": "64a6b2e7a604a10b8f557ca8",
+                "project": "632511ecd407318f2592f945",
+                "inversion": "11200000",
+                "impuestos": "49466.675",
+                "meses": "6",
+                "valor_mes": "1978667"
+            }
+        ],
+        "installments": "6",
+        "prepayment": 0
+    }
+
   }
 
 
@@ -441,6 +478,8 @@ export class PaymentComponent implements OnInit {
   onValorCambiado(event: any) {
     this.selectedCountry = event.valor.iso2;
   }
+
+  verControl(){console.log(this.body);}
 
   stateChange(event: any) {
     this.selectedState = event.valor.iso2;
