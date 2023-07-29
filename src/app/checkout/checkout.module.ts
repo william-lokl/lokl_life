@@ -27,6 +27,7 @@ import { SelectciudadComponent } from '../shared/selectciudad/selectciudad.compo
 import { SelectdepartamentoComponent } from '../shared/selectdepartamento/selectdepartamento.component';
 import { SelectpaisComponent } from '../shared/selectpais/selectpais.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { InputCelularComponent } from './components/input-celular/input-celular.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AlertComponent } from './components/alert/alert.component';
     SelectdepartamentoComponent,
     SelectpaisComponent,
     AlertComponent,
+    InputCelularComponent,
   ],
   imports: [
     FormsModule,

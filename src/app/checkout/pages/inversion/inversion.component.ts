@@ -4,6 +4,7 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  inject,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -22,6 +23,7 @@ import { PaymentCard } from '../../interfaces/paymentCard.interface';
 import { CustomSelectElement } from '../../interfaces/customSelectElement.interface';
 import { CardDataElement } from '../../interfaces/cardDataElement.interface';
 import { environment } from 'src/environments/environment';
+import { RestCountriesApiService } from 'src/app/services/rest-countries-api.service';
 
 @Component({
   selector: 'app-inversion',
@@ -129,7 +131,11 @@ export class InversionComponent implements OnInit, OnDestroy {
     if (widthActual < 720) this.cardsCount = 1;
   }
 
+
+
   ngOnInit(): void {
+
+
 
     this.inputValue({ target: { value: 0 } });
     this.calcularMontos();

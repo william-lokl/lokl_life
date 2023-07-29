@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { CustomSelectElement } from 'src/app/checkout/interfaces/customSelectElement.interface';
 
 @Component({
   selector: 'app-selectpais',
@@ -14,6 +15,7 @@ import {
 })
 export class SelectpaisComponent implements OnInit, OnDestroy {
   countries: any;
+  data: CustomSelectElement[] = [];
   selectedCountry: any;
   @Output() valorCambiado = new EventEmitter<any>();
 
@@ -21,6 +23,8 @@ export class SelectpaisComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getData();
+
+
   }
 
   ngOnDestroy() {
@@ -53,6 +57,4 @@ export class SelectpaisComponent implements OnInit, OnDestroy {
   onCountryChange(value: any) {
     this.valorCambiado.emit({ propiedad: 'pais', valor: value });
   }
-
-
 }

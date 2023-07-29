@@ -13,6 +13,7 @@ export class CustomSelectComponent implements OnInit {
   @Input() $selectSelected: Observable<boolean> = of(false);
   @Input() $numPage?: Observable<number> = of(0);
   @Input() sensibleAToquesFuera: boolean = false;
+  @Input() svgSelect: boolean = false;
 
 
   subNumber?: Subscription;
@@ -42,6 +43,7 @@ export class CustomSelectComponent implements OnInit {
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
+
     this.subSelected = this.$numPage?.subscribe( (resp) => {
       this.elementSelected = this.data[resp-1];
     } ) ?? new Subscription()
@@ -59,10 +61,9 @@ export class CustomSelectComponent implements OnInit {
       }
     }
 
-
-
     this.data[0].selected = true;
     this.elementSelected = this.data[0];
+    console.log(this.elementSelected);
   }
 
   ngOnDestroy(){
