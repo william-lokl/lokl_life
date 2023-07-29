@@ -1,11 +1,12 @@
-<div class = "d-flex mb-2" style = "height: 50px;">
+<div class="d-flex mb-2" style="height: 50px;">
 
-  <div class = "col-4 m-0 p-0 h-100" *ngIf = "selectListo" >
-    <app-custom-select [data] = "data" [svgSelect] = 'true' [sensibleAToquesFuera]="true" (onOpcionSeleccionada)="onSelectValue($event)"></app-custom-select>
+  <div class="col-4 m-0 p-0 h-100" *ngIf="selectListo">
+    <app-custom-select [data]="data" [svgSelect]='true' [sensibleAToquesFuera]="true"
+      (onOpcionSeleccionada)="onSelectValue($event)"></app-custom-select>
   </div>
 
   <div class="col-8 m-0 p-0">
-    <app-input type="number" (onInput)="onInputValue($event)"></app-input>
+    <app-input type="number" [control]="control" (onInput)="onInputValue($event)"></app-input>
   </div>
 
 </div>

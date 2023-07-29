@@ -62,21 +62,10 @@
                 <div class="row mb-3">
                     <div class="col-12 col-lg-8 pe-2 pe-lg-0 offset-0 offset-lg-3">
                         <label for="exampleInputEmail1" class="form-label text-muted">Número de celular</label>
-                        <div class = "row" style = "height: 48px;">
-                          <app-input-celular></app-input-celular>
+                        <div class="row" style="height: 48px;">
+                            <app-input-celular [control]="phone"></app-input-celular>
                         </div>
-                        <!-- <div class="input-group">
-                            <div class="input-group-prepend w-25 border-light">
-                                <select class="custom-select border border-end-0 rounded-0" id="inputGroupSelect01"
-                                    style="height: 100%">
-                                    <option selected>Imagen</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <app-input class="ps-0 w-75" [control]="phone"></app-input>
-                        </div> -->
+
                     </div>
                 </div>
 
@@ -205,7 +194,8 @@
 
 <div class="" *ngIf="resolucion_movil == true">
     <form [formGroup]="body">
-      <app-back-button link = "/checkout/invest" class = "position-absolute" style = "top: 50px; left: 20px"></app-back-button>
+        <app-back-button link="/checkout/invest" class="position-absolute"
+            style="top: 50px; left: 20px"></app-back-button>
         <div class="row mt-5 ms-2 me-2">
             <div class="col-12" *ngIf="paso1">
                 <div class="row mb-3">
