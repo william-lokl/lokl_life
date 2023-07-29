@@ -69,7 +69,7 @@
             <label for="exampleInputEmail1" class="form-label text-muted"
               >Numero de tarjeta</label
             >
-            <app-input type = "number"></app-input> <!-- TODO: control -->
+            <input type = "text" (input) = "inputCard($event)" #_inputCard maxlength="19" class="input-card form-control rounded-0">  <!-- TODO: control -->
           </div>
           <div class = "col-12 col-lg-8 offset-lg-3 pe-2 ">
 
@@ -80,14 +80,14 @@
                 <label for="exampleInputEmail1" class="form-label text-muted"
                   >Fecha de vencimiento</label
                 >
-                <app-input type = "number"></app-input> <!-- TODO: control -->
+                <input type = "text" (input) = "inputDueDate($event)" #_inputDueDate maxlength="5" class="input-card form-control rounded-0">  <!-- TODO: control -->
               </div>
 
               <div class="col-5 p-0">
                 <label for="exampleInputEmail1" class="form-label text-muted"
                   >CVC</label
                 >
-                <app-input type = "number"></app-input> <!-- TODO: control -->
+                <input type = "text" (input) = "inputCvc($event)" #_inputCvc maxlength="3" class="input-card form-control rounded-0">
               </div>
 
             </div>

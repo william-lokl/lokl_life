@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 import {
   FormBuilder,
@@ -25,6 +25,9 @@ export class PaymentComponent implements OnInit {
 
   tarjetaActiva: boolean = false;
 
+  @ViewChild('_inputCard') _inputCard: ElementRef = new ElementRef(HTMLInputElement)
+  @ViewChild('_inputDueDate')   _inputDueDate: ElementRef = new ElementRef(HTMLInputElement)
+  @ViewChild('_inputCvc')   _inputCvc: ElementRef = new ElementRef(HTMLInputElement)
   subSelectTypeDocument: Subject<boolean> = new Subject<boolean>();
   $selectTypeDocument: Observable<boolean> = this.subSelectTypeDocument.asObservable();
 
@@ -93,6 +96,89 @@ export class PaymentComponent implements OnInit {
     '=1': '1 mes',
     other: '# meses',
   };
+
+
+  inputCard(event: any){
+    if(event.inputType == "deleteContentBackward"){
+      return
+    }
+
+    if(/[^0-9]/g.test(event.data)){
+
+      if(event.target.value.length == 1){
+        event.target.value = ''
+        return
+      }
+
+      for (let i = 0; i < event.target.value.length; i++) {
+        if( /[^0-9]/g.test(event.target.value[i]) ){
+          event.target.value = event.target.value.replace(/[^0-9\s]/g ,'')
+        }
+      }
+
+    }
+
+    if(event.target.value.length % 5 == 0){
+      const arrayN = event.target.value.split('')
+      arrayN.splice( arrayN.length - 1, 0, " ")
+      event.target.value = arrayN.join('')
+    }
+
+
+  }
+
+  inputDueDate(event: any){
+    if(event.inputType == "deleteContentBackward"){
+      return
+    }
+
+    if(/[^0-9]/g.test(event.data)){
+
+      if(event.target.value.length == 3
+          && event.data ==  '/'
+          && event.target.value[-1] == '/'
+          ) return;
+
+      if(event.target.value.length == 1){
+        event.target.value = ''
+        return
+      }
+
+      for (let i = 0; i < event.target.value.length; i++) {
+        if( /[^0-9]/g.test(event.target.value[i]) ){
+          event.target.value = event.target.value.replace(/[^0-9\s]/g ,'')
+        }
+      }
+
+    }
+
+    if(event.target.value.length == 3){
+      const arrayN = event.target.value.split('')
+      arrayN.splice( arrayN.length - 1, 0, "/")
+      event.target.value = arrayN.join('')
+    }
+  }
+
+  inputCvc(event: any){
+    if(event.inputType == "deleteContentBackward"){
+      return
+    }
+
+    if(/[^0-9]/g.test(event.data)){
+
+      if(event.target.value.length == 1){
+        event.target.value = ''
+        return
+      }
+
+      for (let i = 0; i < event.target.value.length; i++) {
+        if( /[^0-9]/g.test(event.target.value[i]) ){
+          event.target.value = event.target.value.replace(/[^0-9\s]/g ,'')
+        }
+      }
+
+    }
+  }
 
   // ------------------ //
 
