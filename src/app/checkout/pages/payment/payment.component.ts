@@ -307,10 +307,10 @@ export class PaymentComponent implements OnInit {
   }
 
   redirectPse(id: string) {
-    const apiUrl = `https://sandbox.wompi.co/v1/transactions/${id}`;
+    const apiUrl = `https://production.wompi.co/v1/transactions/${id}`;
 
     // token Bearer
-    const bearerToken = 'pub_test_srHBcxqYISn8FsYZLuSWeOmhU679yCV5';
+    const bearerToken = 'pub_prod_zRN1PD4eVHzk7UvTCnBWL0hMQIHITjnn';
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -446,10 +446,10 @@ export class PaymentComponent implements OnInit {
 
   fetchDocumentsTypes() {
     this.opcionesSelect = [];
-    const apiUrl = 'https://sandbox.wompi.co/v1/pse/financial_institutions';
+    const apiUrl = 'https://production.wompi.co/v1/pse/financial_institutions';
 
     // token Bearer
-    const bearerToken = 'pub_test_srHBcxqYISn8FsYZLuSWeOmhU679yCV5';
+    const bearerToken = 'pub_prod_zRN1PD4eVHzk7UvTCnBWL0hMQIHITjnn';
 
     const httpOptions = {
       headers: new HttpHeaders({
